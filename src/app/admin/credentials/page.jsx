@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { formatDateDDMMYYYY } from '@/lib/date';
 
 export default function AdminCredentialsPage() {
   const [username, setUsername] = useState("");
@@ -132,7 +133,7 @@ export default function AdminCredentialsPage() {
                       <tr key={admin.id}>
                         <td>{admin.username}</td>
                         <td>
-                          {new Date(admin.createdAt).toLocaleDateString()}
+                          {formatDateDDMMYYYY(admin.createdAt)}
                         </td>
                       </tr>
                     ))}

@@ -1,20 +1,27 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { formatDateDDMMYYYY } from '@/lib/date';
+
 export default function EventsPage() {
-  const events = [
-    {
-      id: 1,
-      title: "Sample Event A",
-      description: "Short description of the event.",
-      venue: "Main Hall",
-      date: "2025-12-25",
-    },
-    {
-      id: 2,
-      title: "Sample Event B",
-      description: "Another example event to show the layout.",
-      venue: "Conference Room 2",
-      date: "2026-01-05",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const res = await fetch('/api/admin/events');
+        if (res.ok) {
+          const data = await res.json();
+          setEvents(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch events:', err);
+      }
+      setLoading(false);
+    }
+    fetchEvents();
+  }, []);
 
   return (
     <main className="page-shell">
@@ -28,14 +35,16 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {events.length === 0 ? (
+      {loading ? (
+        <p className="muted">Loading events...</p>
+      ) : events.length === 0 ? (
         <p className="muted">No events available yet.</p>
       ) : (
         <div className="card-grid">
           {events.map((event) => (
             <article key={event.id} className="card">
               <div className="chip" style={{ marginBottom: "0.6rem" }}>
-                {new Date(event.date).toDateString()}
+                {formatDateDDMMYYYY(event.date)}
               </div>
               <h3 style={{ margin: "0 0 0.4rem 0" }}>{event.title}</h3>
               <p className="muted" style={{ margin: "0 0 0.8rem 0" }}>
