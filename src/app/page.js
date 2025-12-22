@@ -49,7 +49,6 @@ export default function LandingPage() {
           className="landing-video-el"
           autoPlay
           loop
-          muted
           playsInline
           poster="/media/landing-poster.jpg"
         >
