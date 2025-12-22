@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function RegisterPage() {
   return (
@@ -18,13 +19,22 @@ export default function RegisterPage() {
             <h2>User</h2>
             <p className="muted">For attendees and participants.</p>
             <div className="pill-row" style={{ marginTop: "1rem" }}>
-              <button
-                className="btn google-btn"
-                onClick={() => signIn("google", { callbackUrl: "/home" })}
-              >
-                <span className="g-logo">G</span>
-                <span>Sign in with Google</span>
-              </button>
+              <GoogleLogin
+  onSuccess={(credentialResponse) => {
+    fetch("/api/auth/google", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: credentialResponse.credential
+      })
+    }).then(() => {
+      window.location.href = "/home";
+    });
+  }}
+  onError={() => {
+    console.log("Login Failed");
+  }}
+/>
             </div>
           </div>
 

@@ -1,54 +1,56 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { verifyAdminCredentials } from "./actions";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function AdminSignInPage() {
+export default function AdminLogin() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
 
-    const result = await verifyAdminCredentials(username, password);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-    if (result.success) {
-      // Store admin session (in production, use proper session/cookie handling)
-      localStorage.setItem("adminSession", JSON.stringify({ username }));
-      router.push("/admin");
+    const res = await fetch('/api/auth/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (res.ok) {
+      router.push('/admin/events');
     } else {
-      setError(result.error);
+      const data = await res.json();
+      setError(data.error || 'Invalid credentials');
     }
 
     setLoading(false);
-  };
+  }
 
   return (
     <main className="page-shell">
       <section className="hero">
         <p className="chip">Admin</p>
-        <h1>Sign in to Admin Portal</h1>
-        <p className="muted">Enter your credentials to continue.</p>
+        <h1>Admin Login</h1>
+        <p className="muted">Enter your credentials to access the admin portal.</p>
       </section>
 
       <section className="section">
         <div className="signin-container">
           <form className="signin-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="email">Email</label>
               <input
-                id="username"
-                type="text"
+                id="email"
+                name="email"
+                type="email"
                 className="form-input"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your email"
                 required
               />
             </div>
@@ -57,11 +59,10 @@ export default function AdminSignInPage() {
               <label htmlFor="password">Password</label>
               <input
                 id="password"
+                name="password"
                 type="password"
                 className="form-input"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -72,9 +73,9 @@ export default function AdminSignInPage() {
               type="submit"
               className="btn primary"
               disabled={loading}
-              style={{ width: "100%", marginTop: "1rem" }}
+              style={{ width: '100%', marginTop: '1rem' }}
             >
-              {loading ? "Signing in..." : "Continue"}
+              {loading ? 'Signing in...' : 'Admin Login'}
             </button>
           </form>
         </div>
