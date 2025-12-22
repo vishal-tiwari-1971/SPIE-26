@@ -13,7 +13,7 @@ export default function TeamPage() {
   const superCore = [
     { role: "President", members: ["Abhishek Bhoutkar"] },
     { role: "Vice President", members: ["Vivek Kumar Mondal", "Abhishek Pandey"] },
-    { role: "General Secretary", members: ["Prasana"] },
+    { role: "General Secretary", members: ["Prasanna Mavuri"] },
     {
       role: "Joint Secretary",
       members: ["Athrav Pratap Singh", "Amit Chaurasia", "Rohit Jauhar"],
