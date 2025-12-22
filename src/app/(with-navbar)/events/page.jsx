@@ -51,6 +51,10 @@ export default function EventsPage() {
                 {event.description}
               </p>
               <div className="muted">Venue: {event.venue}</div>
+              <div className="pill-row" style={{ marginTop: "0.8rem" }}>
+                <a className="btn secondary" href={`/events/${event.id}`}>View Details</a>
+                <a className="btn primary" href={`/events/${event.id}`}>Register</a>
+              </div>
             </article>
           ))}
         </div>

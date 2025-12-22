@@ -1,10 +1,20 @@
 "use client";
 
 import Link from "next/link";
-// import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 
 export default function RegisterPage() {
+  const [popup, setPopup] = useState(null);
+
+  const showPopup = (type, title, message) => {
+    setPopup({ type, title, message });
+  };
+
+  const closePopup = () => {
+    setPopup(null);
+  };
+
   return (
     <main className="page-shell">
       <section className="hero">
@@ -27,12 +37,20 @@ export default function RegisterPage() {
       body: JSON.stringify({
         token: credentialResponse.credential
       })
-    }).then(() => {
-      window.location.href = "/home";
+    }).then(async (res) => {
+      const data = await res.json();
+      if (data.error === "Not an official email") {
+        showPopup("warning", "Invalid Email", "This is not an official mail ID. Please use your official email to register.");
+      } else if (res.ok) {
+        showPopup("success", "Success", "Successfully signed in! Redirecting...");
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 1500);
+      }
     });
   }}
   onError={() => {
-    console.log("Login Failed");
+    showPopup("error", "Login Failed", "Failed to sign in with Google. Please try again.");
   }}
 />
             </div>
@@ -49,6 +67,20 @@ export default function RegisterPage() {
           </div>
         </div>
       </section>
+
+      {popup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className={`popup popup-${popup.type}`} onClick={(e) => e.stopPropagation()}>
+            <h3 className="popup-title">{popup.title}</h3>
+            <p className="popup-message">{popup.message}</p>
+            <div className="popup-actions">
+              <button className="btn secondary" onClick={closePopup}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

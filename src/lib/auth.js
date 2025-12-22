@@ -28,9 +28,24 @@ export function verifyJWT(token) {
 /**
  * Get logged-in user from cookies (Server-side only)
  */
-export function getUserFromRequest() {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token')?.value;
+export function getUserFromRequest(req) {
+  // Try request cookies first (available in route handlers via NextRequest)
+  let token;
+  const cookieFromReq = req?.cookies?.get?.('token');
+  if (cookieFromReq) {
+    token = typeof cookieFromReq === 'string' ? cookieFromReq : cookieFromReq.value;
+  }
+
+  // Fallback to server cookies API for server components/other contexts
+  if (!token) {
+    try {
+      const cookieStore = cookies();
+      const cookieFromStore = cookieStore?.get?.('token');
+      token = typeof cookieFromStore === 'string' ? cookieFromStore : cookieFromStore?.value;
+    } catch (err) {
+      // Not in a server context where cookies() is available
+    }
+  }
 
   if (!token) return null;
 
