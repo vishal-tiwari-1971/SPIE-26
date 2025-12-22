@@ -7,6 +7,15 @@ export default function AdminLogin() {
   const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState(null);
+
+  const showPopup = (type, title, message) => {
+    setPopup({ type, title, message });
+  };
+
+  const closePopup = () => {
+    setPopup(null);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,10 +32,14 @@ export default function AdminLogin() {
     });
 
     if (res.ok) {
-      router.push('/admin/events');
+      showPopup('success', 'Success', 'Successfully signed in! Redirecting...');
+      setTimeout(() => {
+        router.push('/admin/events');
+      }, 1500);
     } else {
       const data = await res.json();
       setError(data.error || 'Invalid credentials');
+      showPopup('error', 'Login Failed', data.error || 'Invalid credentials. Please try again.');
     }
 
     setLoading(false);
@@ -80,6 +93,20 @@ export default function AdminLogin() {
           </form>
         </div>
       </section>
+
+      {popup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className={`popup popup-${popup.type}`} onClick={(e) => e.stopPropagation()}>
+            <h3 className="popup-title">{popup.title}</h3>
+            <p className="popup-message">{popup.message}</p>
+            <div className="popup-actions">
+              <button className="btn primary" onClick={closePopup}>
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

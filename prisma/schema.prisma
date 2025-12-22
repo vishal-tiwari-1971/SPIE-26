@@ -16,6 +16,8 @@ model Event {
   date        DateTime
   venue       String
   createdAt   DateTime @default(now())
+  registrations Registration[]
+
 }
 
 
@@ -31,7 +33,20 @@ model User {
 
   role      Role     @default(USER)
   createdAt DateTime @default(now())
+  registrations Registration[]
  
+}
+
+model Registration {
+  id        String   @id @default(uuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId]) // ❗ prevents double registration
 }
 
 enum Role {
