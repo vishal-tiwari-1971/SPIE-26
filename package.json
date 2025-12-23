@@ -4,16 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+   "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@prisma/client": "^7.2.0",
+    "@prisma/client": "^5.15.0",
+    "@react-oauth/google": "^0.13.0",
     "axios": "^1.13.2",
+    "google-auth-library": "^10.5.0",
+    "jsonwebtoken": "^9.0.3",
     "next": "16.0.10",
+    "next-auth": "^4.24.13",
     "nodemailer": "^7.0.11",
-    "prisma": "^7.2.0",
+    "prisma": "^5.15.0",
     "react": "19.2.1",
     "react-dom": "19.2.1"
   },

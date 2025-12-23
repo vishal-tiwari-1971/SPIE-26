@@ -1,63 +1,71 @@
-export default function HomePage() {
-  const highlights = [
-    "Flagship tech symposium of 2026",
-    "Workshops, panels, and student showcases",
-    "Built for innovators, designers, and researchers",
-  ];
+"use client";
+
+import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
+
+export default function LandingPage() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setIsVideoLoaded(true);
+    };
+
+    const handlePlaying = () => {
+      setIsVideoLoaded(true);
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("playing", handlePlaying);
+
+    // Fallback in case video doesn't load
+    const timeout = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 5000);
+
+    return () => {
+      video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("playing", handlePlaying);
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
-    <main className="page-shell">
-      <section className="hero">
-        <p className="chip">Welcome to SPIE 2026</p>
-        <h1>Innovate, collaborate, and build what is next.</h1>
-        <p>
-          A modern branch fest festival experience featuring hands-on labs, speaker sessions,
-          and community showcases. Find your team, submit projects, and explore what our branch is
-          creating.
-        </p>
-
-        <div className="stat-row">
-          <div className="stat">
-            <div className="value">30+</div>
-            <div className="label">Events & Workshops</div>
-          </div>
-          <div className="stat">
-            <div className="value">15</div>
-            <div className="label">Sponsors</div>
-          </div>
-          <div className="stat">
-            <div className="value">2k+</div>
-            <div className="label">Expected Attendees</div>
-          </div>
+    <main className="landing-full">
+      {!isVideoLoaded && (
+        <div className="video-loader">
+          <div className="loader-spinner"></div>
+          <p>Loading experience...</p>
         </div>
+      )}
 
-        <div className="pill-row" style={{ marginTop: "1.25rem" }}>
-          <a className="btn primary" href="/events">
-            View Events
-          </a>
-          <a className="btn secondary" href="/team">
-            Meet the Team
-          </a>
-        </div>
-      </section>
+      <div className="landing-video" aria-hidden="true" style={{ opacity: isVideoLoaded ? 1 : 0 }}>
+        <video
+          ref={videoRef}
+          className="landing-video-el"
+          autoPlay
+          loop
+          playsInline
+          poster="/media/landing-poster.jpg"
+        >
+          <source src="/Prodyog bg .mp4" type="video/mp4" />
+        </video>
+        <div className="video-overlay" />
+      </div>
 
-      <section className="section">
-        <div className="section-header">
-          <div>
-            <p className="subtitle">Why join</p>
-            <h2 className="section-title">Experience the SPIE advantage</h2>
-          </div>
-        </div>
-
-        <div className="card-grid">
-          {highlights.map((text, index) => (
-            <div key={index} className="card list-item">
-              <span className="list-accent" />
-              <span>{text}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Link 
+        className="explore-btn" 
+        href="/home" 
+        aria-label="Go to the home page"
+        style={{ opacity: isVideoLoaded ? 1 : 0, pointerEvents: isVideoLoaded ? "auto" : "none" }}
+      >
+        Explore
+        <span className="right-arrow">→</span>
+      </Link>
     </main>
   );
 }

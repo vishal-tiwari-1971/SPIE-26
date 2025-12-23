@@ -1,18 +1,89 @@
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  
+  url      = env("DATABASE_URL")
 }
 
 model Event {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   title       String
+  image       String?
   description String
   date        DateTime
-  venue        String
+  venue       String
+  status      Status   @default(UPCOMING)
+  createdAt   DateTime @default(now())
+  registrations Registration[]
+  leaderboard Leaderboard[]
+
+}
+
+
+
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+
+  googleId  String?  @unique
+  password  String?  // only for admin
+
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  registrations Registration[]
+ 
+}
+
+model Registration {
+  id        String   @id @default(uuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId]) // ❗ prevents double registration
+}
+
+model Leaderboard {
+  id        String   @id @default(uuid())
+  eventId   String
+  rank      Int
+  name      String
+  registrationNumber String?
+  score     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+
+}
+
+model TeamMember {
+  id              String   @id @default(uuid())
+  name            String
+  position        String
+  email           String
+  linkedinProfile String?
+  photograph      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  UPCOMING
+  ONGOING
+  COMPLETED
 }

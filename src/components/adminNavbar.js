@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Navbar() {
+export default function AdminNavbar() {
   return (
     <nav className="nav-bar">
       <div className="nav-inner">
@@ -13,23 +13,20 @@ export default function Navbar() {
         </Link>
 
         <div className="nav-links">
-          <Link className="nav-link" href="/home">
-            Home
-          </Link>
-          <Link className="nav-link" href="/events">
+          <Link className="nav-link" href="/admin/events">
             Events
           </Link>
-          <Link className="nav-link" href="/team">
+          <Link className="nav-link" href="/admin/team">
             Team
           </Link>
         </div>
 
         <div className="nav-actions">
-          <Link className="btn secondary small" href="/events">
+          <Link className="btn secondary small" href="">
             View Schedule
           </Link>
-          <Link className="btn primary small" href="/register">
-            Register
+          <Link className="btn primary small" href="/home">
+            Logout
           </Link>
         </div>
       </div>
