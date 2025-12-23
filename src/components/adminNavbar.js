@@ -16,6 +16,9 @@ export default function AdminNavbar() {
           <Link className="nav-link" href="/admin/events">
             Events
           </Link>
+          <Link className="nav-link" href="/admin/team">
+            Team
+          </Link>
         </div>
 
         <div className="nav-actions">

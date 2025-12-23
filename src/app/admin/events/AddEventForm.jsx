@@ -21,7 +21,8 @@ export default function AddEventForm({ onAdd }) {
           title: form.title.value,
           description: form.description.value,
           date: form.date.value,
-          venue: form.venue.value
+          venue: form.venue.value,
+          status: form.status.value
         })
       });
 
@@ -82,6 +83,21 @@ export default function AddEventForm({ onAdd }) {
           className="form-input"
           placeholder="Enter venue"
         />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="status">Status</label>
+        <select
+          id="status"
+          name="status"
+          className="form-input"
+          defaultValue="UPCOMING"
+          required
+        >
+          <option value="UPCOMING">Upcoming</option>
+          <option value="ONGOING">Ongoing</option>
+          <option value="COMPLETED">Completed</option>
+        </select>
       </div>
 
       {error && <div className="form-error">{error}</div>}

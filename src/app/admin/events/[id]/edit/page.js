@@ -38,7 +38,8 @@ export default function EditEventPage() {
       title: e.target.title.value,
       description: e.target.description.value,
       date: e.target.date.value,
-      venue: e.target.venue.value
+      venue: e.target.venue.value,
+      status: e.target.status.value
     };
 
     const res = await fetch(`/api/admin/events/${id}`, {
@@ -116,6 +117,21 @@ export default function EditEventPage() {
                 defaultValue={event.venue}
                 placeholder="Venue"
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="status">Status</label>
+              <select
+                id="status"
+                name="status"
+                className="form-input"
+                defaultValue={event.status}
+                required
+              >
+                <option value="UPCOMING">Upcoming</option>
+                <option value="ONGOING">Ongoing</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
             </div>
 
             {error && <div className="form-error">{error}</div>}

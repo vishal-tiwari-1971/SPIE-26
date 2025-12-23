@@ -6,6 +6,7 @@ import { formatDateDDMMYYYY } from '@/lib/date';
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState('ALL');
 
   useEffect(() => {
     async function fetchEvents() {
@@ -23,6 +24,10 @@ export default function EventsPage() {
     fetchEvents();
   }, []);
 
+  const filteredEvents = statusFilter === 'ALL' 
+    ? events 
+    : events.filter(event => event.status === statusFilter);
+
   return (
     <main className="page-shell">
       <section className="section-header" style={{ marginBottom: "1.5rem" }}>
@@ -35,16 +40,52 @@ export default function EventsPage() {
         </div>
       </section>
 
+      <section style={{ marginBottom: "1.5rem" }}>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          <button
+            onClick={() => setStatusFilter('ALL')}
+            className={`btn ${statusFilter === 'ALL' ? 'primary' : 'secondary'}`}
+          >
+            All Events
+          </button>
+          <button
+            onClick={() => setStatusFilter('UPCOMING')}
+            className={`btn ${statusFilter === 'UPCOMING' ? 'primary' : 'secondary'}`}
+          >
+            Upcoming
+          </button>
+          <button
+            onClick={() => setStatusFilter('ONGOING')}
+            className={`btn ${statusFilter === 'ONGOING' ? 'primary' : 'secondary'}`}
+          >
+            Ongoing
+          </button>
+          <button
+            onClick={() => setStatusFilter('COMPLETED')}
+            className={`btn ${statusFilter === 'COMPLETED' ? 'primary' : 'secondary'}`}
+          >
+            Completed
+          </button>
+        </div>
+      </section>
+
       {loading ? (
         <p className="muted">Loading events...</p>
-      ) : events.length === 0 ? (
-        <p className="muted">No events available yet.</p>
+      ) : filteredEvents.length === 0 ? (
+        <p className="muted">No events available for the selected filter.</p>
       ) : (
         <div className="card-grid">
-          {events.map((event) => (
+          {filteredEvents.map((event) => (
             <article key={event.id} className="card">
-              <div className="chip" style={{ marginBottom: "0.6rem" }}>
-                {formatDateDDMMYYYY(event.date)}
+              <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem" }}>
+                <div className="chip">
+                  {formatDateDDMMYYYY(event.date)}
+                </div>
+                <div className="chip" style={{ 
+                  backgroundColor: event.status === 'UPCOMING' ? '#4CAF50' : event.status === 'ONGOING' ? '#FF9800' : '#9E9E9E'
+                }}>
+                  {event.status}
+                </div>
               </div>
               <h3 style={{ margin: "0 0 0.4rem 0" }}>{event.title}</h3>
               <p className="muted" style={{ margin: "0 0 0.8rem 0" }}>
