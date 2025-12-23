@@ -100,6 +100,7 @@ export default function EventDetailPage() {
           >
             {registerSuccess ? "Registered" : registering ? "Registering..." : "Register"}
           </button>
+          <Link className="btn secondary" href={`/events/${id}/leaderboard`}>View Leaderboard</Link>
           <Link className="btn secondary" href="/events">Back to Events</Link>
           <Link className="btn secondary" href="/register">Sign in</Link>
         </div>
