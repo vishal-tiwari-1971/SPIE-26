@@ -15,8 +15,10 @@ model Event {
   description String
   date        DateTime
   venue       String
+  status      Status   @default(UPCOMING)
   createdAt   DateTime @default(now())
   registrations Registration[]
+  leaderboard Leaderboard[]
 
 }
 
@@ -49,7 +51,39 @@ model Registration {
   @@unique([userId, eventId]) // ❗ prevents double registration
 }
 
+model Leaderboard {
+  id        String   @id @default(uuid())
+  eventId   String
+  rank      Int
+  name      String
+  registrationNumber String?
+  score     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+
+}
+
+model TeamMember {
+  id              String   @id @default(uuid())
+  name            String
+  position        String
+  email           String
+  linkedinProfile String?
+  photograph      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 enum Role {
   USER
   ADMIN
+}
+
+enum Status {
+  UPCOMING
+  ONGOING
+  COMPLETED
 }
