@@ -283,3 +283,100 @@ a {
   color: var(--muted);
   margin: 0 0 0.5rem 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+.section-title {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* EVENTS GRID */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* EVENT CARD */
+.event-card {
+  background: radial-gradient(
+    circle at top,
+    rgba(255, 255, 255, 0.04),
+    rgba(0, 0, 0, 0.9)
+  );
+  border-radius: 18px;
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.event-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* HOVER (very subtle) */
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 0 1px rgba(100, 180, 255, 0.25),
+              0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* KNOW MORE BUTTON */
+.know-more-btn {
+  display: inline-block;
+  padding: 0.6rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+.know-more-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(100, 180, 255, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CONTAINER – this stops full-width stretching */
+.events-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
