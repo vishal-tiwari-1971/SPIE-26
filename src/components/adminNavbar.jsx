@@ -30,6 +30,12 @@ export default function AdminNavbar() {
           >
             Events
           </Link>
+          <Link 
+            href="/admin/team" 
+            className={`nav-link ${pathname.startsWith("/admin/team") ? "active" : ""}`}
+          >
+            Team
+          </Link>
         </div>
 
         <div className="nav-actions">

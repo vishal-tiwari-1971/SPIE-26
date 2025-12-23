@@ -97,6 +97,12 @@ export default function AdminEvents() {
                         >
                           Edit
                         </Link>
+                        <Link
+                          className="btn secondary small"
+                          href={`/admin/events/${event.id}/leaderboard`}
+                        >
+                          Leaderboard
+                        </Link>
                       <button
                         className="btn secondary small"
                         onClick={() => deleteEvent(event.id)}

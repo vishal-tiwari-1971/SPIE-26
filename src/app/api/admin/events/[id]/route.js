@@ -28,7 +28,8 @@ export async function PUT(req, { params }) {
       title: data.title,
       description: data.description,
       date: new Date(data.date),
-      venue: data.venue
+      venue: data.venue,
+      status: data.status
     }
   });
 
