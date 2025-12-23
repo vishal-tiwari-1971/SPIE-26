@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-screen flex flex-col bg-[#0b1220]">
         
         {/* Navbar at top */}
-        <Navbar />
+        // <Navbar />
 
         {/* Main content grows and pushes footer down */}
         <main className="flex-1">
