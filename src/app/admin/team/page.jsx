@@ -14,10 +14,14 @@ export default function AdminTeamPage() {
   const [formData, setFormData] = useState({
     name: '',
     position: '',
+    batch: '',
+    domain: '',
     email: '',
     linkedinProfile: '',
     photograph: ''
   });
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoUploading, setPhotoUploading] = useState(false);
 
   useEffect(() => {
     fetchTeamMembers();
@@ -41,11 +45,35 @@ export default function AdminTeamPage() {
     setSaving(true);
     setError('');
 
+    // If a file is chosen in the file input, upload it first
+    const fileInput = document.getElementById('photographFile');
+    const file = fileInput?.files?.[0] || null;
+    let photoUrl = formData.photograph || null;
+    if (file) {
+      try {
+        setPhotoUploading(true);
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('folder', 'spie/team');
+        const uploadRes = await fetch('/api/uploads/image', { method: 'POST', body: fd });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.error || 'Image upload failed');
+        photoUrl = uploadData.url;
+      } catch (err) {
+        setError(err.message || 'Image upload failed');
+        setSaving(false);
+        setPhotoUploading(false);
+        return;
+      } finally {
+        setPhotoUploading(false);
+      }
+    }
+
     try {
       const res = await fetch('/api/team', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, photograph: photoUrl })
       });
 
       if (!res.ok) {
@@ -56,6 +84,8 @@ export default function AdminTeamPage() {
       const newMember = await res.json();
       setTeamMembers([newMember, ...teamMembers]);
       resetForm();
+      setPhotoPreview(null);
+      if (fileInput) fileInput.value = '';
     } catch (err) {
       setError(err.message || 'Failed to add team member');
     }
@@ -66,11 +96,34 @@ export default function AdminTeamPage() {
     setSaving(true);
     setError('');
 
+    const fileInput = document.getElementById('photographFile');
+    const file = fileInput?.files?.[0] || null;
+    let photoUrl = formData.photograph || null;
+    if (file) {
+      try {
+        setPhotoUploading(true);
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('folder', 'spie/team');
+        const uploadRes = await fetch('/api/uploads/image', { method: 'POST', body: fd });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.error || 'Image upload failed');
+        photoUrl = uploadData.url;
+      } catch (err) {
+        setError(err.message || 'Image upload failed');
+        setSaving(false);
+        setPhotoUploading(false);
+        return;
+      } finally {
+        setPhotoUploading(false);
+      }
+    }
+
     try {
       const res = await fetch(`/api/team/${memberId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, photograph: photoUrl })
       });
 
       if (!res.ok) throw new Error('Failed to update team member');
@@ -78,6 +131,8 @@ export default function AdminTeamPage() {
       const updated = await res.json();
       setTeamMembers(teamMembers.map(m => m.id === memberId ? updated : m));
       resetForm();
+      setPhotoPreview(null);
+      if (fileInput) fileInput.value = '';
     } catch (err) {
       setError(err.message || 'Failed to update team member');
     }
@@ -102,6 +157,8 @@ export default function AdminTeamPage() {
     setFormData({
       name: member.name,
       position: member.position,
+      batch: member.batch || '',
+      domain: member.domain || '',
       email: member.email,
       linkedinProfile: member.linkedinProfile || '',
       photograph: member.photograph || ''
@@ -113,11 +170,14 @@ export default function AdminTeamPage() {
     setFormData({
       name: '',
       position: '',
+      batch: '',
+      domain: '',
       email: '',
       linkedinProfile: '',
       photograph: ''
     });
-  }
+    };
+  
 
   return (
     <main className="page-shell">
@@ -179,6 +239,28 @@ export default function AdminTeamPage() {
               </div>
 
               <div className="form-group">
+                <label htmlFor="batch">Batch</label>
+                <input
+                  id="batch"
+                  className="form-input"
+                  placeholder="e.g., 2024, 2025"
+                  value={formData.batch}
+                  onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="domain">Domain</label>
+                <input
+                  id="domain"
+                  className="form-input"
+                  placeholder="e.g., Design, Development, Marketing"
+                  value={formData.domain}
+                  onChange={(e) => setFormData({ ...formData, domain: e.target.value })}
+                />
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="linkedinProfile">LinkedIn Profile</label>
                 <input
                   id="linkedinProfile"
@@ -191,15 +273,38 @@ export default function AdminTeamPage() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="photograph">Photograph URL</label>
+                <label htmlFor="photograph">Photograph</label>
+                <input
+                  id="photographFile"
+                  type="file"
+                  accept="image/*"
+                  className="form-input"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) {
+                      const reader = new FileReader();
+                      reader.onload = () => setPhotoPreview(reader.result);
+                      reader.readAsDataURL(f);
+                    } else {
+                      setPhotoPreview(null);
+                    }
+                  }}
+                />
                 <input
                   id="photograph"
                   type="url"
                   className="form-input"
-                  placeholder="Image URL"
+                  placeholder="Or paste an image URL"
                   value={formData.photograph}
                   onChange={(e) => setFormData({ ...formData, photograph: e.target.value })}
+                  style={{ marginTop: '0.5rem' }}
                 />
+                {photoPreview && (
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <img src={photoPreview} alt="Preview" style={{ width: '100%', maxHeight: 200, objectFit: 'cover', borderRadius: 8 }} />
+                  </div>
+                )}
+                {photoUploading && <p className="muted" style={{ marginTop: '0.5rem' }}>Uploading image...</p>}
               </div>
 
               {error && <div className="form-error">{error}</div>}

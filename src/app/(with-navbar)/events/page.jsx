@@ -77,6 +77,15 @@ export default function EventsPage() {
         <div className="card-grid">
           {filteredEvents.map((event) => (
             <article key={event.id} className="card">
+              {event.image && (
+                <div style={{ marginBottom: '0.8rem', overflow: 'hidden', borderRadius: 8 }}>
+                  <img 
+                    src={event.image} 
+                    alt={event.title} 
+                    style={{ width: '100%', height: 200, objectFit: 'cover' }} 
+                  />
+                </div>
+              )}
               <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem" }}>
                 <div className="chip">
                   {formatDateDDMMYYYY(event.date)}

@@ -80,6 +80,15 @@ export default function AdminEvents() {
               <div className="card-grid" style={{ marginTop: '1rem' }}>
                 {events.map((event) => (
                   <article key={event.id} className="card">
+                    {event.image && (
+                      <div style={{ marginBottom: '0.8rem', overflow: 'hidden', borderRadius: 8 }}>
+                        <img 
+                          src={event.image} 
+                          alt={event.title} 
+                          style={{ width: '100%', height: 200, objectFit: 'cover' }} 
+                        />
+                      </div>
+                    )}
                     <div className="chip" style={{ marginBottom: '0.6rem' }}>
                       {event.date ? formatDateDDMMYYYY(event.date) : 'No date'}
                     </div>

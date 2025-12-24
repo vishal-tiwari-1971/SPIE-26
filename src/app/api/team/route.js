@@ -15,6 +15,8 @@ export async function POST(req) {
     data: {
       name: data.name,
       position: data.position,
+      batch: data.batch || null,
+      domain: data.domain || null,
       email: data.email,
       linkedinProfile: data.linkedinProfile || null,
       photograph: data.photograph || null

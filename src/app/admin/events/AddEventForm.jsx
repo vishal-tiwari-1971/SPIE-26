@@ -1,10 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function AddEventForm({ onAdd }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageUploading, setImageUploading] = useState(false);
+  const imageFileRef = useRef(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -12,6 +15,29 @@ export default function AddEventForm({ onAdd }) {
     setLoading(true);
 
     const form = e.target;
+
+    // Upload image first if provided
+    let imageUrl = null;
+    const file = imageFileRef.current?.files?.[0] || null;
+    if (file) {
+      try {
+        setImageUploading(true);
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('folder', 'spie/events');
+        const uploadRes = await fetch('/api/uploads/image', { method: 'POST', body: fd });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.error || 'Image upload failed');
+        imageUrl = uploadData.url;
+      } catch (err) {
+        setError(err.message || 'Image upload failed');
+        setLoading(false);
+        setImageUploading(false);
+        return;
+      } finally {
+        setImageUploading(false);
+      }
+    }
 
     try {
       const res = await fetch('/api/admin/events', {
@@ -22,7 +48,8 @@ export default function AddEventForm({ onAdd }) {
           description: form.description.value,
           date: form.date.value,
           venue: form.venue.value,
-          status: form.status.value
+          status: form.status.value,
+          image: imageUrl
         })
       });
 
@@ -32,6 +59,8 @@ export default function AddEventForm({ onAdd }) {
       }
 
       form.reset();
+      setImagePreview(null);
+      if (imageFileRef.current) imageFileRef.current.value = '';
       onAdd();
     } catch (err) {
       setError(err.message || 'Failed to add event');
@@ -62,6 +91,34 @@ export default function AddEventForm({ onAdd }) {
           placeholder="Add a short description"
           rows={3}
         />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="image">Event Image</label>
+        <input
+          id="image"
+          name="image"
+          type="file"
+          accept="image/*"
+          className="form-input"
+          ref={imageFileRef}
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) {
+              const reader = new FileReader();
+              reader.onload = () => setImagePreview(reader.result);
+              reader.readAsDataURL(f);
+            } else {
+              setImagePreview(null);
+            }
+          }}
+        />
+        {imagePreview && (
+          <div style={{ marginTop: '0.5rem' }}>
+            <img src={imagePreview} alt="Preview" style={{ width: '100%', maxHeight: 200, objectFit: 'cover', borderRadius: 8 }} />
+          </div>
+        )}
+        {imageUploading && <p className="muted" style={{ marginTop: '0.5rem' }}>Uploading image...</p>}
       </div>
 
       <div className="form-group">

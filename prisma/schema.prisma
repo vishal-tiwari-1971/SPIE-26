@@ -70,6 +70,8 @@ model TeamMember {
   id              String   @id @default(uuid())
   name            String
   position        String
+  batch           String?
+  domain          String?
   email           String
   linkedinProfile String?
   photograph      String?

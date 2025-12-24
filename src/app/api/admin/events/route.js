@@ -17,7 +17,8 @@ export async function POST(req) {
       description: data.description,
       date: new Date(data.date),
       venue: data.venue,
-      status: data.status || 'UPCOMING'
+      status: data.status || 'UPCOMING',
+      image: data.image || null
     }
   });
 
