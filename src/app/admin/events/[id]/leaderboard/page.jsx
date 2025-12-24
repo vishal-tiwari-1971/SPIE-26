@@ -198,7 +198,6 @@ export default function LeaderboardManagementPage() {
                 placeholder="Registration Number"
                 value={formData.registrationNumber}
                 onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
-                required
               />
             </div>
 
@@ -223,79 +222,66 @@ export default function LeaderboardManagementPage() {
                 className="btn primary"
                 disabled={saving}
               >
-                {saving ? 'Saving...' : (editingId ? 'Update Entry' : 'Add Entry')}
+                {saving ? 'Saving...' : editingId ? 'Update Entry' : 'Add Entry'}
               </button>
               {editingId && (
                 <button
                   type="button"
                   className="btn secondary"
                   onClick={cancelEdit}
-                  disabled={saving}
                 >
-                  Cancel
+                  Cancel Edit
                 </button>
               )}
+              <button
+                type="button"
+                className="btn secondary"
+                onClick={() => router.push('/admin/events')}
+              >
+                Back to Events
+              </button>
             </div>
           </form>
         </div>
-      </section>
 
-      <section className="section">
-        <h2 style={{ marginBottom: '1rem' }}>Leaderboard Entries</h2>
-        {leaderboard.length === 0 ? (
-          <p className="muted">No entries yet. Add one to get started.</p>
-        ) : (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
-                  <th style={{ padding: '0.75rem', textAlign: 'left' }}>Rank</th>
-                  <th style={{ padding: '0.75rem', textAlign: 'left' }}>Name</th>
-                  <th style={{ padding: '0.75rem', textAlign: 'left' }}>Registration #</th>
-                  <th style={{ padding: '0.75rem', textAlign: 'left' }}>Score</th>
-                  <th style={{ padding: '0.75rem', textAlign: 'left' }}>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leaderboard.map((entry) => (
-                  <tr key={entry.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '0.75rem' }}>{entry.rank}</td>
-                    <td style={{ padding: '0.75rem' }}>{entry.name}</td>
-                    <td style={{ padding: '0.75rem' }}>{entry.registrationNumber || '—'}</td>
-                    <td style={{ padding: '0.75rem' }}>{entry.score}</td>
-                    <td style={{ padding: '0.75rem' }}>
-                      <div className="pill-row">
-                        <button
-                          className="btn secondary"
-                          onClick={() => startEdit(entry)}
-                          style={{ fontSize: '0.875rem', padding: '0.4rem 0.8rem' }}
-                        >
+        <div className="admins-list" style={{ marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+            <div>
+              <h3 style={{ margin: 0 }}>Current Leaderboard</h3>
+              <p className="muted" style={{ margin: 0 }}>Edit or delete entries.</p>
+            </div>
+            <span className="chip">{leaderboard.length} entries</span>
+          </div>
+
+          {leaderboard.length === 0 ? (
+            <p className="muted" style={{ marginTop: '1rem' }}>No entries yet.</p>
+          ) : (
+            <div className="card-grid" style={{ marginTop: '1rem' }}>
+              {leaderboard
+                .sort((a, b) => a.rank - b.rank)
+                .map((entry) => (
+                  <article key={entry.id} className="card">
+                    <div className="pill-row" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span className="chip">Rank {entry.rank}</span>
+                      <div className="pill-row" style={{ gap: '0.6rem' }}>
+                        <button className="btn secondary small" onClick={() => startEdit(entry)}>
                           Edit
                         </button>
-                        <button
-                          className="btn secondary"
-                          onClick={() => handleDeleteEntry(entry.id)}
-                          style={{ fontSize: '0.875rem', padding: '0.4rem 0.8rem', color: 'var(--color-error)' }}
-                        >
+                        <button className="btn secondary small" onClick={() => handleDeleteEntry(entry.id)}>
                           Delete
                         </button>
                       </div>
-                    </td>
-                  </tr>
+                    </div>
+                    <h3 style={{ margin: '0.4rem 0' }}>{entry.name}</h3>
+                    <p className="muted" style={{ margin: '0 0 0.6rem 0' }}>
+                      {entry.registrationNumber || 'No registration number'}
+                    </p>
+                    <div className="muted">Score: {entry.score}</div>
+                  </article>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
-
-      <section className="section">
-        <button
-          className="btn secondary"
-          onClick={() => router.back()}
-        >
-          Back
-        </button>
+            </div>
+          )}
+        </div>
       </section>
     </main>
   );

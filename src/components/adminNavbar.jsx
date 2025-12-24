@@ -1,10 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function AdminNavbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.push('/signin');
+    } catch (err) {
+      console.error('Logout failed:', err);
+      setLoggingOut(false);
+    }
+  }
 
   return (
     <nav className="nav-bar">
@@ -40,8 +54,15 @@ export default function AdminNavbar() {
 
         <div className="nav-actions">
           <Link href="/home" className="btn secondary">
-            Exit Admin
+            Exit to Site
           </Link>
+          <button 
+            onClick={handleLogout} 
+            className="btn primary"
+            disabled={loggingOut}
+          >
+            {loggingOut ? 'Logging out...' : 'Logout'}
+          </button>
         </div>
       </div>
     </nav>

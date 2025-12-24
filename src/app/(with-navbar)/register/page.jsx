@@ -60,7 +60,7 @@ export default function RegisterPage() {
             <h2>Admin</h2>
             <p className="muted">For organizers and staff.</p>
             <div className="pill-row" style={{ marginTop: "1rem" }}>
-              <Link className="btn secondary" href="/admin/signin">
+              <Link className="btn secondary" href="/signin">
                 Continue as Admin
               </Link>
             </div>

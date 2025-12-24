@@ -34,7 +34,7 @@ export default function AdminLogin() {
     if (res.ok) {
       showPopup('success', 'Success', 'Successfully signed in! Redirecting...');
       setTimeout(() => {
-        router.push('/admin/events');
+        router.push('/admin/dashboard');
       }, 1500);
     } else {
       const data = await res.json();
