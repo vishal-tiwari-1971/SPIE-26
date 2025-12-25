@@ -36,12 +36,11 @@ export default function AdminDashboard() {
       return;
     }
 
-    // Create CSV content
-    const headers = ['Name', 'Email', 'Registered At'];
+    // Create CSV content - Only Name and Registration Number
+    const headers = ['Name', 'Registration Number'];
     const rows = event.registeredUsers.map(user => [
       user.name,
-      user.email,
-      new Date(user.registeredAt).toLocaleString()
+      user.registrationNumber // Email is used as registration number
     ]);
 
     let csvContent = headers.join(',') + '\n';
@@ -143,16 +142,14 @@ export default function AdminDashboard() {
                         <thead>
                           <tr>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Registered At</th>
+                            <th>Registration Number</th>
                           </tr>
                         </thead>
                         <tbody>
                           {event.registeredUsers.map((user) => (
                             <tr key={user.id}>
                               <td>{user.name}</td>
-                              <td>{user.email}</td>
-                              <td>{new Date(user.registeredAt).toLocaleDateString()}</td>
+                              <td>{user.registrationNumber}</td>
                             </tr>
                           ))}
                         </tbody>

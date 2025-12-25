@@ -8,6 +8,7 @@ export default function AdminNavbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -20,6 +21,14 @@ export default function AdminNavbar() {
     }
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="nav-bar">
       <div className="nav-inner">
@@ -31,39 +40,64 @@ export default function AdminNavbar() {
           </div>
         </div>
 
-        <div className="nav-links">
-          <Link 
-            href="/admin/dashboard" 
-            className={`nav-link ${pathname === "/admin/dashboard" ? "active" : ""}`}
-          >
-            Dashboard
-          </Link>
-          <Link 
-            href="/admin/events" 
-            className={`nav-link ${pathname.startsWith("/admin/events") ? "active" : ""}`}
-          >
-            Events
-          </Link>
-          <Link 
-            href="/admin/team" 
-            className={`nav-link ${pathname.startsWith("/admin/team") ? "active" : ""}`}
-          >
-            Team
-          </Link>
+        {/* Hamburger Menu Button */}
+        <button 
+          className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* Navigation Menu */}
+        <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          <div className="nav-links">
+            <Link 
+              href="/admin/dashboard" 
+              className={`nav-link ${pathname === "/admin/dashboard" ? "active" : ""}`}
+              onClick={closeMenu}
+            >
+              Dashboard
+            </Link>
+            <Link 
+              href="/admin/events" 
+              className={`nav-link ${pathname.startsWith("/admin/events") ? "active" : ""}`}
+              onClick={closeMenu}
+            >
+              Events
+            </Link>
+            <Link 
+              href="/admin/team" 
+              className={`nav-link ${pathname.startsWith("/admin/team") ? "active" : ""}`}
+              onClick={closeMenu}
+            >
+              Team
+            </Link>
+          </div>
+
+          <div className="nav-actions">
+            <Link href="/home" className="btn secondary" onClick={closeMenu}>
+              Exit to Site
+            </Link>
+            <button 
+              onClick={() => {
+                closeMenu();
+                handleLogout();
+              }} 
+              className="btn primary"
+              disabled={loggingOut}
+            >
+              {loggingOut ? 'Logging out...' : 'Logout'}
+            </button>
+          </div>
         </div>
 
-        <div className="nav-actions">
-          <Link href="/home" className="btn secondary">
-            Exit to Site
-          </Link>
-          <button 
-            onClick={handleLogout} 
-            className="btn primary"
-            disabled={loggingOut}
-          >
-            {loggingOut ? 'Logging out...' : 'Logout'}
-          </button>
-        </div>
+        {/* Overlay for mobile menu */}
+        {isMenuOpen && (
+          <div className="nav-overlay" onClick={closeMenu}></div>
+        )}
       </div>
     </nav>
   );
