@@ -44,7 +44,7 @@ export async function GET() {
       registeredUsers: event.registrations.map((reg) => ({
         id: reg.user.id,
         name: reg.user.name,
-        email: reg.user.email,
+        registrationNumber: reg.user.email, // Use email as registration number
         registeredAt: reg.createdAt,
       })),
     }));
