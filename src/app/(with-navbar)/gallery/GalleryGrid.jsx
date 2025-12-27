@@ -6,10 +6,6 @@ import Lightbox from "./Lightbox";
 
 const imageSets = {
   "prodyog-25": [
-    // "/gallery/prodyog-25/IMG-12.jpg",
-    // "/gallery/prodyog-25/IMG-24.jpg",
-    // "/gallery/prodyog-25/IMG-14.jpg",
-    // "/gallery/prodyog-25/IMG-18.jpg",
     "/gallery/prodyog-25/IMG_1402.JPG",
     "/gallery/prodyog-25/IMG_1369 (1).JPG",
     "/gallery/prodyog-25/IMG_1328.JPG",
