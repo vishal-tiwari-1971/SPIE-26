@@ -87,6 +87,12 @@ export default function GalleryGrid() {
 
   const images = imageSets[selectedEvent];
 
+  // Generate random timestamp for security footage effect
+  const generateTimestamp = () => {
+    const now = new Date();
+    return `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+  };
+
   return (
     <>
       {/* 🔽 DROPDOWN */}
@@ -94,43 +100,52 @@ export default function GalleryGrid() {
         <select
           value={selectedEvent}
           onChange={(e) => setSelectedEvent(e.target.value)}
-          className="
-            bg-[#0b1220]
-            text-white
-            px-4 py-2
-            rounded-lg
-            border border-white/10
-            shadow-md
-            focus:outline-none
-            focus:ring-2 focus:ring-purple-500/60
-            hover:bg-[#101a30]
-            transition
-          "
+          style={{
+            background: '#161315',
+            color: '#F5F3F4',
+            padding: '0.75rem 1.25rem',
+            borderRadius: '4px',
+            border: '2px solid #D90429',
+            fontFamily: 'Courier Prime, monospace',
+            fontWeight: 'bold',
+            boxShadow: '0 4px 15px rgba(217, 4, 41, 0.3)'
+          }}
         >
-          <option value="prodyog-25" className="bg-[#0b1220] text-white">
-            Prodyog-25
+          <option value="prodyog-25" style={{ background: '#0B090A' }}>
+            OPERATION: PRODYOG-25
           </option>
-          <option value="prodyog-24" className="bg-[#0b1220] text-white">
-            Prodyog-24
+          <option value="prodyog-24" style={{ background: '#0B090A' }}>
+            OPERATION: PRODYOG-24
           </option>
         </select>
 
       </div>
 
-      {/* 🖼 IMAGE GRID */}
+      {/* 🖼 IMAGE GRID WITH CRT EFFECT */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {images.map((src, index) => (
           <div
             key={index}
-            className="overflow-hidden rounded-xl cursor-pointer"
+            className="crt-overlay overflow-hidden rounded cursor-pointer"
+            style={{ 
+              border: '2px solid #D90429',
+              background: '#000',
+              position: 'relative'
+            }}
             onClick={() => setActiveIndex(index)}
           >
+            <div className="security-timestamp">
+              CAM-{String(index + 1).padStart(2, '0')} {generateTimestamp()}
+            </div>
             <Image
               src={src}
-              alt=""
+              alt={`Surveillance footage ${index + 1}`}
               width={500}
               height={350}
-              className="w-full h-full object-cover"
+              className="crt-image w-full h-full object-cover"
+              style={{ 
+                filter: 'grayscale(30%) contrast(1.2) brightness(0.9)',
+              }}
             />
           </div>
         ))}

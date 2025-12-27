@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,25 +41,42 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
           <div className="nav-links">
-            <Link className="nav-link" href="/home" onClick={closeMenu}>
-              Home
+            <Link
+              className={`nav-link ${pathname.startsWith("/home") || pathname === "/" ? "active" : ""}`}
+              href="/home"
+              onClick={closeMenu}
+            >
+              The Plan
             </Link>
-            <Link className="nav-link" href="/events" onClick={closeMenu}>
-              Events
+            <Link
+              className={`nav-link ${pathname.startsWith("/events") ? "active" : ""}`}
+              href="/events"
+              onClick={closeMenu}
+            >
+              The Targets
             </Link>
-            <Link className="nav-link" href="/team" onClick={closeMenu}>
-              Team
+            <Link
+              className={`nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
+              href="/team"
+              onClick={closeMenu}
+            >
+              The Crew
             </Link>
-            <Link className="nav-link" href="/gallery" onClick={closeMenu}>Gallery
+            <Link
+              className={`nav-link ${pathname.startsWith("/gallery") ? "active" : ""}`}
+              href="/gallery"
+              onClick={closeMenu}
+            >
+              Surveillance
             </Link>  
           </div>
 
           <div className="nav-actions">
             <Link className="btn secondary small" href="/events" onClick={closeMenu}>
-              View Schedule
+              View Targets
             </Link>
-            <Link className="btn primary small" href="/register" onClick={closeMenu}>
-              Register
+            <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
+              Join the Heist
             </Link>
           </div>
         </div>
