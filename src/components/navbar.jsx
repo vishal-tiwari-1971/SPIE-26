@@ -20,8 +20,8 @@ export default function Navbar() {
         <Link href="/" className="nav-brand" onClick={closeMenu}>
           <span className="nav-logo">SPIE</span>
           <div className="nav-brand-text">
-            <span className="nav-title">SPIE 2026</span>
-            <span className="nav-sub">Prodyog</span>
+            <span className="nav-title">Prodyog 2026</span>
+            {/* <span className="nav-sub">Prodyog</span> */}
           </div>
         </Link>
 
@@ -48,6 +48,8 @@ export default function Navbar() {
             <Link className="nav-link" href="/team" onClick={closeMenu}>
               Team
             </Link>
+            <Link className="nav-link" href="/gallery" onClick={closeMenu}>Gallery
+            </Link>  
           </div>
 
           <div className="nav-actions">
