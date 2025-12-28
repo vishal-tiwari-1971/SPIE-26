@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap");
+
 @import "tailwindcss";
 
 html {
@@ -2147,6 +2149,158 @@ section {
 .footer-socials a:hover img {
   opacity: 1;
 }
+
+
+
+
+
+
+
+/* ================= PRODYOG PAGE ================= */
+
+.prodyog-page {
+  background: radial-gradient(circle at top, #0b1220, #020617);
+  color: #e5e7eb;
+}
+
+/* ---------- HERO ---------- */
+.prodyog-hero {
+  padding: 120px 20px 80px;
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.prodyog-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#38bdf8,#a78bfa);
+  color: #020617;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.prodyog-title {
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 900;
+  letter-spacing: 6px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(90deg,#22d3ee,#a78bfa,#facc15);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(99,102,241,0.3);
+}
+
+.prodyog-tagline {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #c7d2fe;
+}
+
+.prodyog-desc {
+  max-width: 800px;
+  margin: 20px auto 0;
+  color: #9ca3af;
+  line-height: 1.8;
+}
+
+/* ---------- SECTION HEADING ---------- */
+.section-heading {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 50px;
+  background: linear-gradient(90deg,#facc15,#f59e0b);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ---------- GALLERY ---------- */
+.prodyog-gallery {
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 30px;
+  animation: scroll 25s linear infinite;
+}
+
+.gallery-item img {
+  width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 2px solid rgba(250,204,21,0.4);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- EVENTS ---------- */
+.prodyog-events {
+  padding: 80px 20px 120px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.event-card {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.event-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.event-card img {
+  width: 45%;
+  border-radius: 18px;
+  border: 2px solid rgba(250,204,21,0.4);
+}
+
+.event-info h3 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #fde68a;
+}
+
+.event-info p {
+  color: #9ca3af;
+  line-height: 1.8;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+  .prodyog-title {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .event-card,
+  .event-card.reverse {
+    flex-direction: column;
+  }
+
+  .event-card img {
+    width: 100%;
+  }
+
+  .gallery-item img {
+    width: 260px;
+    height: 180px;
+  }
+}
+
+
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {

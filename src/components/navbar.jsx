@@ -42,6 +42,10 @@ export default function Navbar() {
             <Link className="nav-link" href="/home" onClick={closeMenu}>
               Home
             </Link>
+            {/*  NEW PRODYOG OPTION */}
+           <Link className="nav-link" href="/prodyog" onClick={closeMenu}>
+             Prodyog
+            </Link>
             <Link className="nav-link" href="/events" onClick={closeMenu}>
               Events
             </Link>
@@ -68,3 +72,7 @@ export default function Navbar() {
     </nav>
   );
 }
+
+
+
+
