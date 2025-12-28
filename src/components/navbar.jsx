@@ -48,6 +48,15 @@ export default function Navbar() {
             >
               The Plan
             </Link>
+
+            {/*  NEW PRODYOG OPTION */}
+           <Link className={`nav-link ${pathname.startsWith("/prodyog") ? "active" : ""}`}
+              href="/prodyog"
+              onClick={closeMenu}
+            >
+            OP Prodyog
+            </Link>
+          
             <Link
               className={`nav-link ${pathname.startsWith("/events") ? "active" : ""}`}
               href="/events"
@@ -89,3 +98,7 @@ export default function Navbar() {
     </nav>
   );
 }
+
+
+
+
