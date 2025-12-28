@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap');
+
+/* ============================================ */
+/* MONEY HEIST TECHNICAL THEME STYLES */
+/* ============================================ */
+
+/* Typography Override */
+h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
+  font-family: 'Bebas Neue', 'Impact', sans-serif !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* REC Blinking Indicator */
+.rec-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(11, 9, 10, 0.9);
+  border: 1px solid #D90429;
+  border-radius: 4px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #F5F3F4;
+}
+
+.rec-dot {
+  width: 12px;
+  height: 12px;
+  background: #D90429;
+  border-radius: 50%;
+  animation: pulse-rec 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(217, 4, 41, 0.8);
+}
+
+@keyframes pulse-rec {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* Pulsing Glow for Join the Heist Button */
+.btn-heist {
+  animation: pulse-glow 2s ease-in-out infinite;
+  position: relative;
+}
+
+.btn-heist::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #D90429, #FFB703);
+  z-index: -1;
+  opacity: 0;
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(217, 4, 41, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(217, 4, 41, 0.9), 0 0 60px rgba(255, 183, 3, 0.3);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.6; }
+}
+
+/* Confidential Dossier Cards */
+.dossier-card {
+  position: relative;
+  background: #161315;
+  border: 2px solid #D90429;
+  box-shadow: 
+    0 4px 20px rgba(217, 4, 41, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  font-family: 'Courier Prime', monospace;
+}
+
+.dossier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(217, 4, 41, 0.1) 10px,
+    rgba(217, 4, 41, 0.1) 20px
+  );
+  pointer-events: none;
+}
+
+.dossier-header {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #FFB703;
+  font-size: 0.75rem;
+  border-bottom: 1px dashed #D90429;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Rubber Stamp Effects */
+.stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  border: 3px solid;
+  border-radius: 4px;
+  transform: rotate(-12deg);
+  opacity: 0.85;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.stamp-infiltration {
+  color: #D90429;
+  border-color: #D90429;
+  background: rgba(217, 4, 41, 0.1);
+  box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.2);
+}
+
+.stamp-acquired {
+  color: #FFB703;
+  border-color: #FFB703;
+  background: rgba(255, 183, 3, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.2);
+  transform: rotate(8deg);
+}
+
+.stamp-classified {
+  color: #666;
+  border-color: #666;
+  background: rgba(102, 102, 102, 0.1);
+  box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.2);
+}
+
+/* Team Member Grayscale */
+.team-member-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.team-member-image {
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+}
+
+.team-member-card:hover .team-member-image {
+  filter: grayscale(0%);
+}
+
+.codename {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(217, 4, 41, 0.95), transparent);
+  padding: 1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  color: #FFB703;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  text-transform: uppercase;
+}
+
+.team-member-card:hover .codename {
+  transform: translateY(0);
+}
+
+/* CRT/Scanline Effect for Gallery */
+.crt-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanline 8s linear infinite;
+}
+
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+.crt-image {
+  filter: contrast(1.1) brightness(0.95);
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+}
+
+/* Security Timestamp */
+.security-timestamp {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #D90429;
+  background: rgba(11, 9, 10, 0.8);
+  padding: 4px 8px;
+  border: 1px solid #D90429;
+  z-index: 3;
+  letter-spacing: 0.05em;
+}
+
+/* Dali Mask Icon Style */
+.dali-mask {
+  position: relative;
+  display: inline-block;
+}
+
+.dali-mask svg {
+  filter: drop-shadow(0 0 10px rgba(217, 4, 41, 0.6));
+}
+
+/* Technical Grid Overlay */
+.tech-grid {
+  background-image: 
+    linear-gradient(rgba(217, 4, 41, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 4, 41, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Typewriter Effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #D90429;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #D90429; }
+}
+
+/* Confidential Banner */
+.confidential-banner {
+  background: repeating-linear-gradient(
+    45deg,
+    #D90429,
+    #D90429 10px,
+    #BA0423 10px,
+    #BA0423 20px
+  );
+  color: #0B090A;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  padding: 8px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Mission Objective List */
+.mission-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mission-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0.75rem;
+  font-family: 'Courier Prime', monospace;
+}
+
+.mission-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #D90429;
+  font-size: 1.2rem;
+}
+
+/* Target Marker */
+.target-marker {
+  position: relative;
+  display: inline-block;
+}
+
+.target-marker::before,
+.target-marker::after {
+  content: '';
+  position: absolute;
+  border: 2px solid #D90429;
+}
+
+.target-marker::before {
+  top: -5px;
+  left: -5px;
+  width: 15px;
+  height: 15px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.target-marker::after {
+  bottom: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Heist Alert */
+.heist-alert {
+  background: rgba(217, 4, 41, 0.1);
+  border-left: 4px solid #D90429;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: 'Courier Prime', monospace;
+}
+
+.heist-alert::before {
+  content: '⚠ ALERT: ';
+  color: #D90429;
+  font-weight: bold;
+}
+
+/* Update existing button styles */
+.btn.primary, .btn-primary {
+  background: linear-gradient(135deg, #D90429, #FFB703) !important;
+  color: #0B090A !important;
+  font-family: 'Bebas Neue', sans-serif !important;
+  letter-spacing: 0.1em !important;
+  box-shadow: 0 4px 20px rgba(217, 4, 41, 0.5) !important;
+}
+
+/* Nav logo update */
+.nav-logo {
+  background: linear-gradient(135deg, #D90429, #FFB703) !important;
+  box-shadow: 0 0 20px rgba(217, 4, 41, 0.6) !important;
+}
+
+/* Card hover effects */
+.card:hover {
+  border-color: #D90429 !important;
+  box-shadow: 0 8px 30px rgba(217, 4, 41, 0.4) !important;
+}
+
+/* Hero Visual Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(-10px) rotate(-5deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

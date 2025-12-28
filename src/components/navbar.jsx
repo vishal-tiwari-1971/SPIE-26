@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,8 +22,8 @@ export default function Navbar() {
         <Link href="/" className="nav-brand" onClick={closeMenu}>
           <span className="nav-logo">SPIE</span>
           <div className="nav-brand-text">
-            <span className="nav-title">SPIE 2026</span>
-            <span className="nav-sub">Prodyog</span>
+            <span className="nav-title">Prodyog 2026</span>
+            {/* <span className="nav-sub">Prodyog</span> */}
           </div>
         </Link>
 
@@ -39,27 +41,51 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
           <div className="nav-links">
-            <Link className="nav-link" href="/home" onClick={closeMenu}>
-              Home
+            <Link
+              className={`nav-link ${pathname.startsWith("/home") || pathname === "/" ? "active" : ""}`}
+              href="/home"
+              onClick={closeMenu}
+            >
+              The Plan
             </Link>
+
             {/*  NEW PRODYOG OPTION */}
-           <Link className="nav-link" href="/prodyog" onClick={closeMenu}>
-             Prodyog
+           <Link className={`nav-link ${pathname.startsWith("/prodyog") ? "active" : ""}`}
+              href="/prodyog"
+              onClick={closeMenu}
+            >
+            OP Prodyog
             </Link>
-            <Link className="nav-link" href="/events" onClick={closeMenu}>
-              Events
+          
+            <Link
+              className={`nav-link ${pathname.startsWith("/events") ? "active" : ""}`}
+              href="/events"
+              onClick={closeMenu}
+            >
+              The Targets
             </Link>
-            <Link className="nav-link" href="/team" onClick={closeMenu}>
-              Team
+            <Link
+              className={`nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
+              href="/team"
+              onClick={closeMenu}
+            >
+              The Crew
             </Link>
+            <Link
+              className={`nav-link ${pathname.startsWith("/gallery") ? "active" : ""}`}
+              href="/gallery"
+              onClick={closeMenu}
+            >
+              Surveillance
+            </Link>  
           </div>
 
           <div className="nav-actions">
             <Link className="btn secondary small" href="/events" onClick={closeMenu}>
-              View Schedule
+              View Targets
             </Link>
-            <Link className="btn primary small" href="/register" onClick={closeMenu}>
-              Register
+            <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
+              Join the Heist
             </Link>
           </div>
         </div>

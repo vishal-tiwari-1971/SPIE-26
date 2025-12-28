@@ -43,12 +43,16 @@
 
 
 import "./globals.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import AppWrapper from "@/components/AppWrapper";
+import "./heist-theme.css";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 export const metadata = {
-  title: "SPIE-2026",
-  description: "Event registration and dashboard",
+  title: "OPERATION SPIE-2026",
+  description: "Classified heist operation dashboard",
+  other: {
+    // This is a workaround - Google Fonts import handled via CSS
+  },
 };
 
 export default function RootLayout({ children }) {
