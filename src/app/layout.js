@@ -44,6 +44,7 @@
 
 import "./globals.css";
 import AppWrapper from "@/components/AppWrapper";
+import SiteShell from "@/components/SiteShell";
 import "./heist-theme.css";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
@@ -61,7 +62,7 @@ export default function RootLayout({ children }) {
       <body>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
           <AppWrapper>
-            {children}
+            <SiteShell>{children}</SiteShell>
           </AppWrapper>
         </GoogleOAuthProvider>
       </body>
