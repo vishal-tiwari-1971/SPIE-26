@@ -7,10 +7,8 @@ import Lightbox from "./Lightbox";
 const imageSets = {
   "prodyog-25": [
     "/gallery/prodyog-25/IMG_1402.JPG",
-    "/gallery/prodyog-25/IMG_1369 (1).JPG",
     "/gallery/prodyog-25/IMG_1328.JPG",
     "/gallery/prodyog-25/IMG_1369.JPG",
-    "/gallery/prodyog-25/IMG_1423.JPG",
     "/gallery/prodyog-25/IMG_1424.JPG",
     "/gallery/prodyog-25/IMG_1455.JPG",
     "/gallery/prodyog-25/IMG_1194.JPG",
@@ -121,35 +119,51 @@ export default function GalleryGrid() {
 
       </div>
 
-      {/* 🖼 IMAGE GRID WITH CRT EFFECT */}
+            {/* 🖼 IMAGE GRID WITH CRT EFFECT + HOVER POP */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {images.map((src, index) => (
           <div
             key={index}
-            className="crt-overlay overflow-hidden rounded cursor-pointer"
+            onClick={() => setActiveIndex(index)}
+            className="
+              crt-overlay group cursor-pointer
+              overflow-hidden rounded
+              transition-all duration-300 ease-out
+              hover:scale-[1.05]
+              hover:-translate-y-1
+              hover:shadow-[0_0_25px_rgba(217,4,41,0.35)]
+            "
             style={{ 
               border: '2px solid #D90429',
               background: '#000',
-              position: 'relative'
+              position: 'relative',
             }}
-            onClick={() => setActiveIndex(index)}
           >
-            <div className="security-timestamp">
+            {/* 🕒 SECURITY TIMESTAMP */}
+            <div className="security-timestamp pointer-events-none">
               CAM-{String(index + 1).padStart(2, '0')} {generateTimestamp()}
             </div>
+
+            {/* 📸 IMAGE */}
             <Image
               src={src}
               alt={`Surveillance footage ${index + 1}`}
               width={500}
               height={350}
-              className="crt-image w-full h-full object-cover"
-              style={{ 
+              className="
+                crt-image w-full h-full object-cover
+                transition duration-300
+                group-hover:brightness-110
+              "
+              style={{
                 filter: 'grayscale(30%) contrast(1.2) brightness(0.9)',
               }}
+              priority={index < 3}
             />
           </div>
         ))}
       </div>
+
 
       {/* 🔍 LIGHTBOX */}
       {activeIndex !== null && (
