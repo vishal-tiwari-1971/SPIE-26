@@ -14,6 +14,7 @@ export default function HomePage() {
       <Prodyog />
       <Events />
       <Gallery />
+      {/* Command Center moved to dedicated page at /command-center */}
     </>
   );
 }

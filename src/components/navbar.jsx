@@ -20,11 +20,13 @@ export default function Navbar() {
     <nav className="nav-bar">
       <div className="nav-inner">
         <Link href="/" className="nav-brand" onClick={closeMenu}>
-          <span className="nav-logo">SPIE</span>
-          <div className="nav-brand-text">
+          <span className="nav-logo">
+            <img src="	https://i.postimg.cc/QxMBprrW/logo.png" alt="SPIE" className="nav-logo-img" />
+          </span>
+          {/* <div className="nav-brand-text">
             <span className="nav-title">Prodyog 2026</span>
-            {/* <span className="nav-sub">Prodyog</span> */}
-          </div>
+            <span className="nav-sub">Prodyog</span>
+          </div> */}
         </Link>
 
         {/* Hamburger Menu Button */}
@@ -46,7 +48,7 @@ export default function Navbar() {
               href="/"
               onClick={closeMenu}
             >
-              The Plan
+              Plan
             </Link>
 
             {/*  NEW PRODYOG OPTION */}
@@ -62,14 +64,14 @@ export default function Navbar() {
               href="/events"
               onClick={closeMenu}
             >
-              The Targets
+              Targets
             </Link>
             <Link
               className={`nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
               href="/team"
               onClick={closeMenu}
             >
-              The Crew
+             Crew
             </Link>
             <Link
               className={`nav-link ${pathname.startsWith("/gallery") ? "active" : ""}`}
@@ -78,12 +80,21 @@ export default function Navbar() {
             >
               Surveillance
             </Link>  
+
+              {/* Command Center */}
+              <Link
+                className={`nav-link ${pathname.startsWith("/command-center") ? "active" : ""}`}
+                href="/command-center"
+                onClick={closeMenu}
+              >
+                Command Center
+              </Link>
           </div>
 
           <div className="nav-actions">
-            <Link className="btn secondary small" href="/events" onClick={closeMenu}>
+            {/* <Link className="btn secondary small" href="/events" onClick={closeMenu}>
               View Targets
-            </Link>
+            </Link> */}
             <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
               Join the Heist
             </Link>
