@@ -43,7 +43,7 @@ export default function Navbar() {
           <div className="nav-links">
             <Link
               className={`nav-link ${pathname.startsWith("/home") || pathname === "/" ? "active" : ""}`}
-              href="/home"
+              href="/"
               onClick={closeMenu}
             >
               The Plan

@@ -78,7 +78,7 @@ export default function AdminNavbar() {
           </div>
 
           <div className="nav-actions">
-            <Link href="/home" className="btn secondary" onClick={closeMenu}>
+            <Link href="/" className="btn secondary" onClick={closeMenu}>
               Exit to Site
             </Link>
             <button 
