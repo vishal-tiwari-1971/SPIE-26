@@ -561,3 +561,39 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
 .additional-info .muted {
   margin-bottom: 0.5rem;
 }
+/* ===== Surveillance Default State ===== */
+.crt-image {
+  filter: grayscale(30%) contrast(1.2) brightness(0.9) blur(2px);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+/* Hide timestamp smoothly */
+.security-timestamp {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: "Courier Prime", monospace;
+  font-size: 0.75rem;
+  color: #ff2e2e;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 4px 8px;
+  border: 1px solid #d90429;
+  letter-spacing: 0.08em;
+  transition: opacity 0.25s ease;
+}
+
+/* ===== ON HOVER: CLEAR FOOTAGE ===== */
+.group:hover .crt-image {
+  filter: none; /* removes blur + CRT effect */
+}
+
+/* Hide CAM text on hover */
+.group:hover .security-timestamp {
+  opacity: 0;
+}
+/* 🔓 Remove CRT scanlines ONLY on hovered image */
+.group:hover::before,
+.group:hover::after {
+  opacity: 0;
+}
+
