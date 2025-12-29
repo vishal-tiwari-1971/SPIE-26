@@ -89,7 +89,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="hero-stats" style={{
+        {/* <div className="hero-stats" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '2rem',
@@ -128,8 +128,8 @@ export default function Hero() {
               YEARS UNDERGROUND
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       
       <div className="hero-visual" style={{
         position: 'absolute',
