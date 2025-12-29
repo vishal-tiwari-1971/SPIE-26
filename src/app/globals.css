@@ -143,16 +143,37 @@ body {
 }
 
 .nav-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary-strong), var(--accent));
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  /* background: radial-gradient(circle, #1A1A1B 0%, #0E0E0F 100%); */
+  border: 2px solid rgba(217, 4, 41, 0.35);
   display: grid;
   place-items: center;
-  color: #0b1021;
-  font-weight: 800;
-  box-shadow: 0 14px 36px rgba(14, 165, 233, 0.35);
-  font-size: 0.9rem;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 0 24px rgba(255, 183, 3, 0.2), 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle Dali mask silhouette behind logo */
+.nav-logo::before {
+  content: '🎭';
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.15;
+  filter: hue-rotate(-20deg) saturate(1.8);
+  z-index: 0;
+  pointer-events: none;
+  transform: rotate(-12deg) translateY(2px);
+}
+
+.nav-logo-img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 3px rgba(255, 183, 3, 0.6)) brightness(1.15);
 }
 
 .nav-brand-text {
@@ -169,6 +190,38 @@ body {
   font-size: 0.85rem;
   color: var(--muted);
 }
+
+/* ==== Heist Glitch Hover (subtle) ==== */
+.heist-glitch:hover {
+  animation: heist-glitch-keyframes 650ms linear both;
+}
+
+@keyframes heist-glitch-keyframes {
+  0% { transform: translate(0, 0); filter: none; }
+  20% { transform: translate(0.5px, -0.5px); filter: drop-shadow(0 0 6px rgba(217,4,41,0.35)); }
+  40% { transform: translate(-0.75px, 0.25px); filter: drop-shadow(0 0 8px rgba(255,183,3,0.35)); }
+  60% { transform: translate(0.3px, 0.6px); filter: drop-shadow(0 0 6px rgba(217,4,41,0.35)); }
+  80% { transform: translate(-0.4px, -0.2px); filter: drop-shadow(0 0 8px rgba(255,183,3,0.35)); }
+  100% { transform: translate(0, 0); filter: none; }
+}
+
+/* Watermark for Dossier */
+.confidential-watermark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 800;
+  font-size: 8rem;
+  letter-spacing: 0.15em;
+  color: #F5F3F4;
+  opacity: 0.05;
+  transform: rotate(-14deg);
+  user-select: none;
+}
+
+/* Wireframe icon hover → gold */
+.wire-icon { stroke: #D90429; transition: stroke 200ms ease, transform 200ms ease; }
+.freq-label { transition: color 200ms ease; }
+.group:hover .wire-icon { stroke: #FFB703; transform: translateY(-1px); }
+.group:hover .freq-label { color: #FFB703; }
 
 /* Hamburger Menu Button */
 .hamburger {
@@ -234,6 +287,29 @@ body {
   background: rgba(56, 189, 248, 0.1);
 }
 
+.sparkle-hover:hover {
+  position: relative;
+  color: var(--accent);
+}
+
+.sparkle-hover:hover::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #D90429, #FFB703, #D90429);
+  border-radius: inherit;
+  z-index: -1;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
 .nav-actions {
   display: flex;
   gap: 0.5rem;
@@ -250,9 +326,10 @@ body {
   }
 
   .nav-menu {
+    display: none; /* hidden by default on mobile */
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 280px;
     height: 100vh;
     background: rgba(11, 16, 33, 0.98);
@@ -261,7 +338,6 @@ body {
     align-items: stretch;
     padding: 5rem 2rem 2rem;
     gap: 2rem;
-    transition: right 0.3s ease;
     border-left: 1px solid var(--panel-strong);
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     z-index: 51;
@@ -269,7 +345,7 @@ body {
   }
 
   .nav-menu.active {
-    right: 0;
+    display: flex; /* only show when active */
   }
 
   .nav-links {

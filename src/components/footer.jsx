@@ -12,7 +12,8 @@ export default function Footer() {
         <div className="footer-top">
           <div className="footer-brand">
             <div className="brand-logo">
-              <img src="/logo.png" alt="SPIE Logo" className="logo-img" />
+              {/* Fallback to existing public asset to avoid 404 */}
+              <img src="/globe.svg" alt="SPIE Logo" className="logo-img" />
             </div>
             <div className="brand-info">
               <h3 className="brand-title">SPIE</h3>
