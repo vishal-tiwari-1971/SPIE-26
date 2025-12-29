@@ -108,6 +108,12 @@ export default function AdminEvents() {
                         </Link>
                         <Link
                           className="btn secondary small"
+                          href={`/admin/events/${event.id}/rules`}
+                        >
+                          Rules
+                        </Link>
+                        <Link
+                          className="btn secondary small"
                           href={`/admin/events/${event.id}/leaderboard`}
                         >
                           Leaderboard

@@ -129,7 +129,7 @@ export default function Hero() {
             </div>
           </div>
         </div> */}
-      {/* </div> */}
+      </div>
       
       <div className="hero-visual" style={{
         position: 'absolute',
