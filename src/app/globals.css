@@ -287,6 +287,29 @@ body {
   background: rgba(56, 189, 248, 0.1);
 }
 
+.sparkle-hover:hover {
+  position: relative;
+  color: var(--accent);
+}
+
+.sparkle-hover:hover::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #D90429, #FFB703, #D90429);
+  border-radius: inherit;
+  z-index: -1;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
 .nav-actions {
   display: flex;
   gap: 0.5rem;
