@@ -18,11 +18,33 @@ model Event {
   status      Status   @default(UPCOMING)
   createdAt   DateTime @default(now())
   registrations Registration[]
+   rules       EventRule[]
   leaderboard Leaderboard[]
 
 }
 
+model EventRule {
+  id        String   @id @default(uuid())
+  eventId   String
+  section   RuleSection
+  content   String   // markdown or plain text
+  order     Int
 
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, section])
+}
+
+enum RuleSection {
+  OVERVIEW
+  ELIGIBILITY
+  TEAM_COMPOSITION
+  EVENT_FLOW
+  JUDGING_CRITERIA
+  DURATION 
+  PRIZE
+  PRECAUTION
+}
 
 
 model User {

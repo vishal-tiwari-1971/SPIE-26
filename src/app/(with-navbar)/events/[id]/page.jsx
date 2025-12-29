@@ -3,16 +3,31 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { GoogleLogin } from "@react-oauth/google";
 import { formatDateDDMMYYYY } from "@/lib/date";
+
+const SECTION_LABELS = {
+  OVERVIEW: 'Overview',
+  ELIGIBILITY: 'Eligibility',
+  TEAM_COMPOSITION: 'Team Composition',
+  EVENT_FLOW: 'Event Flow',
+  JUDGING_CRITERIA: 'Judging Criteria',
+  DURATION: 'Duration',
+  PRIZE: 'Prize',
+  PRECAUTION: 'Precaution'
+};
 
 export default function EventDetailPage() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
+  const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [registering, setRegistering] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [popup, setPopup] = useState(null);
+  const [openSection, setOpenSection] = useState(null);
+  const [showGoogleLogin, setShowGoogleLogin] = useState(false);
 
   const showPopup = (type, title, message) => {
     setPopup({ type, title, message });
@@ -39,7 +54,23 @@ export default function EventDetailPage() {
         setLoading(false);
       }
     }
-    if (id) fetchEvent();
+
+    async function fetchRules() {
+      try {
+        const res = await fetch(`/api/admin/events/${id}/rules`);
+        if (res.ok) {
+          const data = await res.json();
+          setRules(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch rules:', err);
+      }
+    }
+
+    if (id) {
+      fetchEvent();
+      fetchRules();
+    }
   }, [id]);
 
   async function handleRegister() {
@@ -52,7 +83,7 @@ export default function EventDetailPage() {
       });
       if (res.status === 401) {
         setRegisterError("Please sign in to register.");
-        showPopup("error", "Unauthorized", "Please sign in to register for this event.");
+        setShowGoogleLogin(true);
       } else if (res.status === 409) {
         setRegisterError("You are already registered for this event.");
         showPopup("warning", "Already Registered", "You are already registered for this event.");
@@ -73,6 +104,10 @@ export default function EventDetailPage() {
 
   if (loading) return <p className="muted page-shell">Loading event...</p>;
   if (!event) return <p className="muted page-shell">Event not found.</p>;
+
+  const toggleSection = (section) => {
+    setOpenSection(openSection === section ? null : section);
+  };
 
   return (
     <main className="page-shell">
@@ -101,8 +136,6 @@ export default function EventDetailPage() {
             {registerSuccess ? "Registered" : registering ? "Registering..." : "Register"}
           </button>
           <Link className="btn secondary" href={`/events/${id}/leaderboard`}>View Leaderboard</Link>
-          <Link className="btn secondary" href="/events">Back to Events</Link>
-          <Link className="btn secondary" href="/register">Sign in</Link>
         </div>
 
         {registerError && (
@@ -114,6 +147,96 @@ export default function EventDetailPage() {
           </div>
         )}
       </section>
+
+      {/* Rulebook Section */}
+      {rules.length > 0 && (
+        <section className="card" style={{ padding: "1rem", marginTop: "1.5rem" }}>
+          <h3 style={{ margin: "0 0 1rem 0" }}>📖 Event Rulebook</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            {rules.map((rule) => (
+              <div key={rule.id} className="card" style={{ padding: "0.8rem" }}>
+                <button
+                  onClick={() => toggleSection(rule.section)}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    color: "inherit",
+                    fontSize: "1rem",
+                    fontWeight: "600"
+                  }}
+                >
+                  <span>{SECTION_LABELS[rule.section] || rule.section}</span>
+                  <span style={{ fontSize: "1.2rem" }}>
+                    {openSection === rule.section ? "▲" : "▼"}
+                  </span>
+                </button>
+                {openSection === rule.section && (
+                  <div 
+                    className="muted" 
+                    style={{ 
+                      marginTop: "0.8rem", 
+                      paddingTop: "0.8rem", 
+                      borderTop: "1px solid rgba(255,255,255,0.1)",
+                      whiteSpace: "pre-wrap",
+                      lineHeight: "1.6"
+                    }}
+                  >
+                    {rule.content}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Google Login Modal */}
+      {showGoogleLogin && (
+        <div className="popup-overlay" onClick={() => setShowGoogleLogin(false)}>
+          <div className="popup popup-warning" onClick={(e) => e.stopPropagation()}>
+            <h3 className="popup-title">Sign In Required</h3>
+            <p className="popup-message">Please sign in with your official email to register for this event.</p>
+            <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  setShowGoogleLogin(false);
+                  fetch("/api/auth/google", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      token: credentialResponse.credential
+                    })
+                  }).then(async (res) => {
+                    const data = await res.json();
+                    if (data.error === "Not an official email") {
+                      showPopup("warning", "Invalid Email", "This is not an official mail ID. Please use your official email to register.");
+                    } else if (res.ok) {
+                      showPopup("success", "Success", "Successfully signed in! Registering for event...");
+                      setTimeout(() => {
+                        handleRegister();
+                      }, 1000);
+                    }
+                  });
+                }}
+                onError={() => {
+                  showPopup("error", "Login Failed", "Failed to sign in with Google. Please try again.");
+                }}
+              />
+            </div>
+            <div className="popup-actions">
+              <button className="btn secondary" onClick={() => setShowGoogleLogin(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {popup && (
         <div className="popup-overlay" onClick={closePopup}>
