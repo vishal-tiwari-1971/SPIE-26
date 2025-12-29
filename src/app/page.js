@@ -10,10 +10,10 @@ export default function HomePage() {
     <>
       <Hero />
       <Authority />
-      <Bridge />
+      {/* <Bridge /> */}
       <Prodyog />
       <Events />
-      <Gallery />
+      {/* <Gallery /> */}
     </>
   );
 }

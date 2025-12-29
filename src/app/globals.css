@@ -2717,3 +2717,187 @@ section {
 .hamburger {
   display: none;
 }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* LEFT */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* CENTER */
+.nav-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+/* RIGHT */
+.nav-actions {
+  display: flex;
+  gap: 14px;
+}
+
+/* HAMBURGER stays right on mobile */
+.hamburger {
+  display: none;
+}
+
+
+/* === SQUARE SPIE LOGO (ROUNDED, CLEAN) === */
+.nav-logo {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: #0B090A;
+
+  background: linear-gradient(135deg, #D90429, #FFB703);
+  border-radius: 10px;
+
+  box-shadow:
+    0 0 12px rgba(217, 4, 41, 0.8),
+    0 0 28px rgba(255, 183, 3, 0.4);
+
+  text-transform: uppercase;
+}
+/* === Vision + Mission Combined Block === */
+.vision-mission-combined {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 9, 10, 0.85),
+    rgba(22, 19, 21, 0.85)
+  );
+  border: 1px solid rgba(217, 4, 41, 0.5);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto 4rem auto;
+  box-shadow: 0 0 30px rgba(217, 4, 41, 0.25);
+}
+
+.vm-header {
+  text-align: center;
+}
+
+.vm-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.15em;
+  font-size: 1.8rem;
+  color: #FFB703;
+  margin-bottom: 0.6rem;
+}
+
+.vm-header p {
+  font-family: 'Courier Prime', monospace;
+  color: #B1A7A6;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.vm-icon {
+  font-size: 2.2rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 0px rgba(255, 183, 3, 0.6));
+}
+
+.vm-divider {
+  height: 1px;
+  margin: 2rem 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #D90429,
+    transparent
+  );
+}
+.testimonials {
+  margin-top: 6rem;
+}
+
+.testimonials-title {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 4rem;
+}
+
+.testimonial-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.testimonial-row.reverse {
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.testimonial-image {
+  display: flex;
+  justify-content: center;
+}
+
+.testimonial-image img {
+  width: 260px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid var(--primary);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.testimonial-content {
+  font-family: 'Courier Prime', monospace;
+}
+
+.testimonial-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--foreground);
+  margin-bottom: 1.8rem;
+}
+
+.testimonial-author-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 999px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.08em;
+  color: #0B090A;
+}
+
+.author-name {
+  font-size: 1rem;
+}
+
+.author-role {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
