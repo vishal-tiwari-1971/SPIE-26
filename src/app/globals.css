@@ -2603,3 +2603,41 @@ section {
   }
 }
 
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* LEFT */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* CENTER */
+.nav-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+/* RIGHT */
+.nav-actions {
+  display: flex;
+  gap: 14px;
+}
+
+/* HAMBURGER stays right on mobile */
+.hamburger {
+  display: none;
+}

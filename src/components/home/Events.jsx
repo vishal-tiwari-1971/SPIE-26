@@ -58,9 +58,9 @@
               </div>
               <h3 className="event-title">{event.title}</h3>
               <p className="event-description">{event.desc}</p>
-              <div className="event-footer">
+              {/* <div className="event-footer">
                 <a href="/events" className="event-link">Learn More →</a>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
