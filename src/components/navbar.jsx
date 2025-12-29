@@ -70,14 +70,21 @@ export default function Navbar() {
         >
           Surveillance
         </Link>
+         <Link
+                className={`nav-link sparkle-hover ${pathname.startsWith("/contact") ? "active" : ""}`}
+                href="/contact"
+                onClick={closeMenu}
+              >
+                Contact Us
+              </Link>
       </div>
     </div>
 
     {/* RIGHT: ACTION BUTTONS */}
     <div className="nav-actions">
-      <Link className="btn secondary small" href="/events" onClick={closeMenu}>
+      {/* <Link className="btn secondary small" href="/events" onClick={closeMenu}>
         View Targets
-      </Link>
+      </Link> */}
       <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
         Join the Heist
       </Link>
