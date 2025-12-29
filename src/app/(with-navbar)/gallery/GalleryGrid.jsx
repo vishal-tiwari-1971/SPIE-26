@@ -140,26 +140,32 @@ export default function GalleryGrid() {
             }}
           >
             {/* 🕒 SECURITY TIMESTAMP */}
-            <div className="security-timestamp pointer-events-none">
+            <div className="
+              security-timestamp pointer-events-none
+              transition-opacity duration-300
+              group-hover:opacity-0
+            ">
               CAM-{String(index + 1).padStart(2, '0')} {generateTimestamp()}
             </div>
 
+
             {/* 📸 IMAGE */}
-            <Image
-              src={src}
-              alt={`Surveillance footage ${index + 1}`}
-              width={500}
-              height={350}
-              className="
-                crt-image w-full h-full object-cover
-                transition duration-300
-                group-hover:brightness-110
-              "
-              style={{
-                filter: 'grayscale(30%) contrast(1.2) brightness(0.9)',
-              }}
-              priority={index < 3}
-            />
+              <Image
+                src={src}
+                alt={`Surveillance footage ${index + 1}`}
+                width={500}
+                height={350}
+                className="
+                  crt-image w-full h-full object-cover
+                  transition-all duration-300
+                  group-hover:filter-none
+                "
+                style={{
+                  filter: 'grayscale(30%) contrast(1.2) brightness(0.9)',
+                }}
+                priority={index < 3}
+              />
+
           </div>
         ))}
       </div>
