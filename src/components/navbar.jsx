@@ -89,15 +89,6 @@ export default function Navbar() {
               >
                 Contact Us
               </Link>
-
-              {/* Command Center */}
-              <Link
-                className={`nav-link ${pathname.startsWith("/command-center") ? "active" : ""}`}
-                href="/command-center"
-                onClick={closeMenu}
-              >
-                Command Center
-              </Link>
           </div>
 
           <div className="nav-actions">
