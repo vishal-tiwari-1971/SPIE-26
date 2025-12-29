@@ -81,6 +81,15 @@ export default function Navbar() {
               Surveillance
             </Link>  
 
+              {/* Contact Us */}
+              <Link
+                className={`nav-link sparkle-hover ${pathname.startsWith("/contact") ? "active" : ""}`}
+                href="/contact"
+                onClick={closeMenu}
+              >
+                Contact Us
+              </Link>
+
               {/* Command Center */}
               <Link
                 className={`nav-link ${pathname.startsWith("/command-center") ? "active" : ""}`}
