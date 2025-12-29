@@ -52,15 +52,15 @@
         <div className="events-grid">
           {events.map((event, idx) => (
             <div key={idx} className="event-card">
-              <div className="event-header">
+              {/* <div className="event-header">
                 <div className="event-icon">{event.icon}</div>
                 <span className="event-category">{event.category}</span>
-              </div>
+              </div> */}
               <h3 className="event-title">{event.title}</h3>
               <p className="event-description">{event.desc}</p>
-              <div className="event-footer">
+              {/* <div className="event-footer">
                 <a href="/events" className="event-link">Learn More →</a>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

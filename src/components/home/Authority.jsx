@@ -17,25 +17,31 @@
           </p>
         </div>
 
-        <div className="vision-mission-grid">
-          <div className="vision-card">
-            <div className="card-icon">🎯</div>
+        <div className="vision-mission-combined">
+          <div className="vm-header">
+            <span className="vm-icon">🎯</span>
             <h3>Our Vision</h3>
             <p>
-              To develop technically sound, industry-ready engineers with exceptional leadership, ethical values, and innovative mindset.
+              To develop technically sound, industry-ready engineers with exceptional
+              leadership, ethical values, and innovative mindset.
             </p>
           </div>
 
-          <div className="mission-card">
-            <div className="card-icon">🚀</div>
+          <div className="vm-divider"></div>
+
+          <div className="vm-header">
+            <span className="vm-icon">🚀</span>
             <h3>Our Mission</h3>
             <p>
-              Foster technical excellence, bridge the gap between academia and industry, and cultivate future leaders through experiential learning and professional development.
+              Foster technical excellence, bridge the gap between academia and industry,
+              and cultivate future leaders through experiential learning and professional
+              development.
             </p>
           </div>
         </div>
 
-        <div className="missions-grid">
+
+        {/* <div className="missions-grid">
           {missions.map((mission, idx) => (
             <div key={idx} className="mission-item">
               <div className="mission-icon">{mission.icon}</div>
@@ -43,28 +49,54 @@
               <p>{mission.desc}</p>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="testimonials">
           <h3 className="testimonials-title">What They Say</h3>
-          <div className="testimonials-grid">
-            <div className="testimonial-card">
-              <div className="testimonial-quote">"</div>
-              <p className="testimonial-text">
-                SPIE plays a critical role in strengthening the academic and professional ecosystem of the PIE department.
-              </p>
-              <div className="testimonial-author">— Head of Department, PIE</div>
+
+          <div className="testimonial-row">
+            {/* LEFT IMAGE */}
+            <div className="testimonial-image">
+              <img src="/gallery/leader-image/hod.png" alt="Head of Department" />
             </div>
 
-            <div className="testimonial-card">
-              <div className="testimonial-quote">"</div>
+            {/* RIGHT CONTENT */}
+            <div className="testimonial-content">
               <p className="testimonial-text">
-                Our objective is to build competence, character, and contribution in every engineer we nurture.
+                “Welcome to the Society of Production and Industrial Engineering, NIT Jamshedpur,
+                where excellence meets innovation. With expert faculty and accomplished alumni,
+                we foster cutting-edge research and transformative education.”
               </p>
-              <div className="testimonial-author">— Faculty In-Charge, SPIE</div>
+
+              <div className="testimonial-author-pill">
+                <span className="author-name">Prof. Raj Ballav</span>
+                <span className="author-role">Head of Department</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="testimonial-row reverse">
+            {/* LEFT CONTENT */}
+            <div className="testimonial-content">
+              <p className="testimonial-text">
+                “Join the Society of Production and Industrial Engineering at NIT Jamshedpur to gain
+                skills, industry exposure, and a vibrant community. Engage in events, competitions,
+                and activities from B.Tech to Ph.D. levels.”
+              </p>
+
+              <div className="testimonial-author-pill">
+                <span className="author-name">Dr. Shubham Tripathi</span>
+                <span className="author-role">Vice Chairman</span>
+              </div>
+            </div>
+
+            {/* RIGHT IMAGE */}
+            <div className="testimonial-image">
+              <img src="/gallery/leader-image/vice-chairman.png" alt="Vice Chairman" />
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
