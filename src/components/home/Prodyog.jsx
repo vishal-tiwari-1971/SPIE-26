@@ -12,20 +12,10 @@
           <div className="prodyog-info">
             <div className="info-section">
               <h3>Annual Technical Fest of SPIE</h3>
-              <p>
-                Organised by the Society of Production & Industrial Engineering, NIT Jamshedpur, PRODYOG is the premier platform where innovation meets competition, ideas transform into reality, and students showcase their technical excellence.
-              </p>
+              
             </div>
 
-            <div className="info-section">
-              <h3>What Awaits You</h3>
-              <ul className="prodyog-features">
-                <li>🏆 Challenging technical competitions</li>
-                <li>💼 Industry mentorship and networking</li>
-                <li>🎓 Expert-led workshops and panels</li>
-                <li>🚀 Innovation showcase platform</li>
-              </ul>
-            </div>
+            
 
             <div className="prodyog-actions">
               <a href="/prodyog" className="btn-primary">

@@ -36,7 +36,7 @@ export default function Navbar() {
           href="/"
           onClick={closeMenu}
         >
-          The Plan
+          Home
         </Link>
 
         <Link
@@ -44,7 +44,7 @@ export default function Navbar() {
           href="/prodyog"
           onClick={closeMenu}
         >
-          OP Prodyog
+          Prodyog
         </Link>
 
         <Link
@@ -52,7 +52,7 @@ export default function Navbar() {
           href="/events"
           onClick={closeMenu}
         >
-          The Targets
+          Events
         </Link>
 
         <Link
@@ -60,7 +60,7 @@ export default function Navbar() {
           href="/team"
           onClick={closeMenu}
         >
-          The Crew
+          Team
         </Link>
 
         <Link
@@ -68,7 +68,7 @@ export default function Navbar() {
           href="/gallery"
           onClick={closeMenu}
         >
-          Surveillance
+          Gallery
         </Link>
          <Link
                 className={`nav-link sparkle-hover ${pathname.startsWith("/contact") ? "active" : ""}`}
@@ -86,7 +86,7 @@ export default function Navbar() {
         View Targets
       </Link> */}
       <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
-        Join the Heist
+        Register
       </Link>
     </div>
 

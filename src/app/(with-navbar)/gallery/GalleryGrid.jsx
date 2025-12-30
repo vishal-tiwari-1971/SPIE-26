@@ -139,14 +139,7 @@ export default function GalleryGrid() {
               position: 'relative',
             }}
           >
-            {/* 🕒 SECURITY TIMESTAMP */}
-            <div className="
-              security-timestamp pointer-events-none
-              transition-opacity duration-300
-              group-hover:opacity-0
-            ">
-              CAM-{String(index + 1).padStart(2, '0')} {generateTimestamp()}
-            </div>
+            {/* Timestamp overlay removed to keep images clean (no labels) */}
 
 
             {/* 📸 IMAGE */}
