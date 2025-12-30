@@ -79,59 +79,107 @@ export default function ProdyogPage() {
 
      
 {/* ================= GALLERY : PRODYOG ================= */}
+
 <section className="prodyog-gallery">
-  <div className="gallery-wrapper">
 
-    <div className="gallery-header">
-      <span className="gallery-tag">OPERATION ARCHIVE</span>
-      <h2 className="gallery-title">Gallery</h2>
-      <p className="gallery-subtitle">
-        Moments captured from the execution floor — precision, chaos, brilliance.
-      </p>
-    </div>
-
-    <div className="gallery-track">
-      <div className="gallery-marquee">
-
-        {[
-          "gallery1.jpg",
-          "gallery2.jpg",
-          "gallery3.jpg",
-          "gallery4.jpg",
-          "gallery5.jpg",
-          "gallery6.jpg",
-          "gallery7.jpg",
-          "gallery8.jpg",
-          "gallery9.jpg",
-          "gallery10.jpg",
-          "gallery11.jpg",
-    
-
-          /* 🔁 DUPLICATE SAME IMAGES */
-          "gallery1.jpg",
-          "gallery2.jpg",
-          "gallery3.jpg",
-          "gallery4.jpg",
-          "gallery5.jpg",
-          "gallery6.jpg",
-          "gallery7.jpg",
-          "gallery8.jpg",
-          "gallery9.jpg",
-          "gallery10.jpg",
-          "gallery11.jpg",
-          
-        ].map((img, index) => (
-          <div className="gallery-card" key={index}>
-            <img src={`/gallery/${img}`} alt={`Gallery ${index + 1}`} />
-            <span className="laser"></span>
-          </div>
-        ))}
-
-      </div>
-    </div>
-
+  <div className="gallery-header">
+    <span className="gallery-tag">OPERATION ARCHIVE</span>
+    <h2 className="gallery-title">Gallery</h2>
+    <p className="gallery-subtitle">
+      Classified surveillance footage from ongoing operations.
+    </p>
   </div>
+
+  <div className="gallery-snap-wrapper">
+    <div className="gallery-snap-track">
+
+      {[
+        "gallery1.jpg",
+        "gallery2.jpg",
+        "gallery3.jpg",
+        "gallery4.jpg",
+        "gallery5.jpg",
+        "gallery6.jpg",
+        "gallery7.jpg",
+        "gallery8.jpg",
+        "gallery9.jpg",
+        "gallery10.jpg",
+        "gallery11.jpg",
+        "gallery12.jpg",
+        "gallery13.jpg",
+        "gallery14.jpg",
+
+        /* 🔁 DUPLICATE FOR INFINITE FEEL */
+        "gallery1.jpg",
+        "gallery2.jpg",
+        "gallery3.jpg",
+        "gallery4.jpg",
+        "gallery5.jpg",
+        "gallery6.jpg",
+        "gallery7.jpg",
+        "gallery8.jpg",
+        "gallery9.jpg",
+        "gallery10.jpg",
+        "gallery11.jpg",
+        "gallery12.jpg",
+        "gallery13.jpg",
+        "gallery14.jpg",
+
+
+         "gallery1.jpg",
+        "gallery2.jpg",
+        "gallery3.jpg",
+        "gallery4.jpg",
+        "gallery5.jpg",
+        "gallery6.jpg",
+        "gallery7.jpg",
+        "gallery8.jpg",
+        "gallery9.jpg",
+        "gallery10.jpg",
+        "gallery11.jpg",
+        "gallery12.jpg",
+        "gallery13.jpg",
+        "gallery14.jpg",
+
+
+         "gallery1.jpg",
+        "gallery2.jpg",
+        "gallery3.jpg",
+        "gallery4.jpg",
+        "gallery5.jpg",
+        "gallery6.jpg",
+        "gallery7.jpg",
+        "gallery8.jpg",
+        "gallery9.jpg",
+        "gallery10.jpg",
+        "gallery11.jpg",
+        "gallery12.jpg",
+        "gallery13.jpg",
+        "gallery14.jpg",
+
+      ].map((img, index) => (
+        <div className="gallery-snap-card" key={index}>
+          <img src={`/gallery/${img}`} alt="Prodyog Gallery" />
+
+          <div className="snap-overlay">
+            <span className="snap-label">
+              ACCESS GRANTED · LIVE FEED
+            </span>
+          </div>
+
+          <span className="laser"></span>
+        </div>
+      ))}
+
+    </div>
+  </div>
+
+  <div className="gallery-hint">
+    ← Swipe to browse mission footage →
+  </div>
+
 </section>
+
 
 
 
@@ -338,6 +386,38 @@ export default function ProdyogPage() {
 
     </div>
 
+
+    <div className="event-card">
+      <div className="event-index">07</div>
+
+      <div className="event-content">
+        <span className="event-type">SIDE OPERATION</span>
+        <h3 className="event-name">Fun Events</h3>
+        <p className="event-desc">
+          A high-energy zone where strategy takes a backseat and spontaneity
+          takes control. These events are designed to refresh minds, ignite
+          laughter, and bring teams together through interactive games and
+          challenges.
+        </p>
+
+        <ul className="event-points">
+          <li>Team-based interactive games</li>
+          <li>Fast-paced & laughter-driven challenges</li>
+          <li>Perfect break between intense events</li>
+        </ul>
+      </div>
+
+      <div className="event-image">
+  <img
+    src="/gallery/fun-events.jpg"
+    alt="Metal Masterpiece Event"
+    className="event-img"
+  />
+  <span className="event-laser"></span>
+</div>
+
+    </div>
+
   </div>
 </section>
 
@@ -357,6 +437,162 @@ export default function ProdyogPage() {
         }
 
 
+
+
+
+
+
+/* = GLOBAL RESPONSIVE ======= */
+
+@media (max-width: 1024px) {
+  .prodyog-page {
+    overflow-x: hidden;
+  }
+}
+
+/*====== HERO ===== */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(3.2rem, 12vw, 5rem);
+    letter-spacing: 0.12em;
+  }
+
+  .hero-tagline {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
+  .hero-pill {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
+}
+
+/* ==== ABOUT ========*/
+
+@media (max-width: 768px) {
+  .about-prodyog {
+    padding: 100px 16px;
+  }
+
+  .about-content {
+    padding: 26px 20px;
+  }
+
+  .about-title {
+    font-size: 2.2rem;
+  }
+
+  .about-text {
+    font-size: 16px;
+  }
+
+  .about-points li {
+    font-size: 15px;
+  }
+}
+
+/* ====== GALLERY ==== */
+
+@media (max-width: 768px) {
+  .gallery-snap-track {
+    padding: 0 16px;
+    gap: 20px;
+  }
+
+  .gallery-snap-card {
+    flex: 0 0 88vw;
+    height: 42vh;
+    max-height: 360px;
+    border-radius: 20px;
+  }
+
+  .gallery-title {
+    font-size: 2.4rem;
+  }
+
+  .gallery-subtitle {
+    font-size: 15px;
+    padding: 0 12px;
+  }
+
+  .snap-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    padding: 6px 14px;
+  }
+}
+
+/* ===== EVENTS ===*/
+
+@media (max-width: 1024px) {
+  .event-card {
+    width: 100%;
+    height: auto;
+    padding: 50px 40px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .events-container {
+    gap: 120px;
+  }
+
+  .event-card,
+  .event-card.reverse {
+    flex-direction: column;
+    width: 100%;
+    padding: 32px 20px;
+    gap: 28px;
+  }
+
+  .event-index {
+    font-size: 72px;
+    top: -32px;
+  }
+
+  .event-name {
+    font-size: 2.4rem;
+  }
+
+  .event-type {
+    font-size: 12px;
+  }
+
+  .event-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .event-points li {
+    font-size: 15px;
+  }
+
+  .event-image {
+    width: 100%;
+    height: 240px;
+    border-radius: 20px;
+  }
+}
+
+/*  SMALL PHONES */
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .gallery-snap-card {
+    height: 36vh;
+  }
+
+  .event-name {
+    font-size: 2rem;
+  }
+}
 
 
 
@@ -764,193 +1000,228 @@ export default function ProdyogPage() {
 
 
 
+
 /* ================= PRODYOG GALLERY ================= */
-
-
 
 .prodyog-gallery {
   padding: 120px 0 140px;
-  background: linear-gradient(to bottom, #020617, #020617);
+  background: radial-gradient(circle at top, #020617, #020617);
+  position: relative;
   overflow: hidden;
 }
 
-/* Header */
+/* Red fog ambience */
+.prodyog-gallery::before {
+  content: "";
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(220,38,38,0.35),
+    transparent 70%
+  );
+  filter: blur(180px);
+  pointer-events: none;
+}
+
+/* ================= HEADER ================= */
+
 .gallery-header {
   text-align: center;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 
 .gallery-tag {
   display: inline-block;
-  padding: 8px 22px;
+  padding: 8px 26px;
   font-size: 12px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   color: #fecaca;
-  background: rgba(220,38,38,0.15);
-  border: 1px solid rgba(220,38,38,0.5);
+  background: rgba(220,38,38,0.18);
+  border: 1px solid rgba(220,38,38,0.55);
   border-radius: 999px;
 }
 
 .gallery-title {
-  margin-top: 18px;
-  font-size: clamp(3.2rem, 6vw, 4.5rem);
-  font-weight: 800;
+  margin-top: 22px;
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  font-weight: 900;
   background: linear-gradient(135deg, #f87171, #fde68a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(239,68,68,0.7);
 }
 
 .gallery-subtitle {
-  margin-top: 16px;
+  margin-top: 18px;
   font-size: 18px;
   color: #cbd5f5;
-  max-width: 720px;
+  max-width: 760px;
   margin-inline: auto;
 }
 
-/* Track */
-.gallery-track {
-  width: 100%;
-  overflow: hidden;
+/* ================= SNAP SCROLL ================= */
+
+.gallery-snap-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-/* Marquee */
-.gallery-marquee {
+.gallery-snap-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-snap-track {
   display: flex;
-  gap: 36px;
-  animation: gallery-scroll 60s linear infinite;
+  gap: 56px;
+  padding: 0 12vw;
+  width: max-content; 
 }
 
-/* Card */
-.gallery-card {
-  flex-shrink: 0;
-  width: 420px;
-  height: 520px; /* 🔥 IMAGE HEIGHT INCREASED */
-  border-radius: 22px;
-  overflow: hidden;
+/* ================= CARD ================= */
+
+.gallery-snap-card {
+  scroll-snap-align: center;
+  flex: 0 0 62vw;
+  max-width: 780px;
+  height: 65vh;
+  max-height: 520px;
+
   position: relative;
-  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 26px;
+  overflow: hidden;
+
+  background: #020617;
+
+  border: 2px solid rgba(239,68,68,0.6);
+
   box-shadow:
-    0 0 25px rgba(0,0,0,0.6),
-    0 0 40px rgba(239,68,68,0.25);
+    0 0 35px rgba(239,68,68,0.45),
+    0 0 90px rgba(239,68,68,0.35),
+    inset 0 0 50px rgba(0,0,0,0.8);
+
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-.gallery-card img {
+.gallery-snap-card:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 55px rgba(239,68,68,0.8),
+    0 0 120px rgba(239,68,68,0.5),
+    inset 0 0 60px rgba(0,0,0,0.85);
+}
+
+.gallery-snap-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: contrast(1.1) saturate(1.08);
 }
 
-/* Laser */
-.gallery-card .laser {
+/* ================= OVERLAY ================= */
+
+.snap-overlay {
   position: absolute;
-  top: -60%;
-  left: -50%;
-  width: 200%;
-  height: 3px;
+  bottom: 30px;
+  left: 30px;
+  z-index: 4;
+}
+
+.snap-label {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: #fecaca;
+  background: rgba(0,0,0,0.65);
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(239,68,68,0.45);
+}
+
+/* ================= LASER ================= */
+
+.gallery-snap-card .laser {
+  position: absolute;
+  top: -70%;
+  left: -40%;
+  width: 220%;
+  height: 4px;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(239,68,68,0.9),
+    rgba(255, 0, 0, 1),
+    rgba(255, 120, 120, 0.9),
+    rgba(255, 0, 0, 1),
     transparent
   );
-  transform: rotate(-10deg);
-  animation: laser-scan 4.8s infinite ease-in-out;
-}
-
-/* Animations */
-@keyframes gallery-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  transform: rotate(-12deg);
+  animation: laser-scan 4s infinite ease-in-out;
+  z-index: 6;
 }
 
 @keyframes laser-scan {
   0% {
-    transform: translateX(-120%) rotate(-10deg);
+    transform: translateX(-120%) rotate(-12deg);
     opacity: 0;
   }
-  25% {
+  20% {
     opacity: 1;
   }
   100% {
-    transform: translateX(120%) rotate(-10deg);
+    transform: translateX(120%) rotate(-12deg);
     opacity: 0;
   }
 }
 
-/* Hover pause */
-.gallery-track:hover .gallery-marquee {
-  animation-play-state: paused;
+/* ================= HINT ================= */
+
+.gallery-hint {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: #9ca3af;
+  opacity: 0.85;
 }
 
-/* Mobile */
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
-  .gallery-card {
-    width: 300px;
-    height: 400px;
+  .gallery-snap-track {
+    gap: 24px;
+    padding: 0 24px;
   }
 
-  .gallery-marquee {
-    gap: 20px;
-    animation-duration: 75s;
+  .gallery-snap-card {
+    flex: 0 0 85vw;
+    height: 45vh;
+    border-radius: 22px;
+  }
+
+  .snap-overlay {
+    bottom: 18px;
+    left: 18px;
+  }
+
+  .snap-label {
+    font-size: 11px;
   }
 }
 
 
 
-
-
-        /* EVENTS */
-        .prodyog-events {
-          padding: 160px 20px;
-          max-width: 1400px;
-          margin: auto;
-        }
-
-        .prodyog-events h2 {
-          text-align: center;
-          font-size: 64px;
-          margin-bottom: 100px;
-          color: #facc15;
-        }
-
-        .event-box {
-          margin-bottom: 140px;
-        }
-
-        .event-box img {
-          width: 100%;
-          height: 75vh;
-          object-fit: cover;
-          border-radius: 32px;
-          border: 2px solid rgba(220,38,38,0.4);
-        }
-
-        .event-text {
-          margin-top: 36px;
-        }
-
-        .event-text h3 {
-          font-size: 46px;
-          margin-bottom: 18px;
-          color: #ef4444;
-        }
-
-        .event-text p {
-          font-size: 24px;
-          line-height: 1.8;
-          color: #e5e7eb;
-        }
           /* ================= PRODYOG EVENTS ================= */
 
 .prodyog-events {
-  padding: 140px 6vw;
+  padding: 140px 1.5vw;
   background: radial-gradient(circle at top, #020617, #000000);
   position: relative;
+   width: 100%;
 }
 
 /* red ambient glow */
@@ -1006,20 +1277,50 @@ export default function ProdyogPage() {
   margin-inline: auto;
 }
 
-/* Event container */
+
+
+
 .events-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+
   display: flex;
   flex-direction: column;
   gap: 160px;
 }
 
-/* Event card */
+
+
+
 .event-card {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 7px;
+  height: 60vw;
+  width: 90vw;
+  max-width: none;      
+  margin: 0;            
+
+  padding: 0px 90px;
+
+  border-radius: 36px;
+  border: 2px solid rgba(96,165,250,0.45);
+
+  background: linear-gradient(
+    145deg,
+    rgba(2,6,23,0.96),
+    rgba(8,15,40,0.92)
+  );
+
+  box-shadow:
+    0 0 60px rgba(59,130,246,0.25),
+    0 0 160px rgba(37,99,235,0.18);
 }
+
+
 
 /* Reverse layout */
 .event-card.reverse {
@@ -1045,37 +1346,39 @@ export default function ProdyogPage() {
 .event-type {
   display: inline-block;
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: 17px;
   letter-spacing: 0.25em;
   color: #fca5a5;
 }
 
 .event-name {
-  font-size: clamp(2.8rem, 5vw, 3.6rem);
+  font-size: clamp(4rem, 7vw, 5rem); //2.8rem, 5vw, 3.6rem
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   color: #f8fafc;
 }
 
 .event-desc {
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.8;
   color: #cbd5f5;
-  max-width: 600px;
+  max-width: 720px;
 }
 
 /* Points */
 .event-points {
-  margin-top: 26px;
+  margin-top: 22px;
   list-style: none;
   padding: 0;
 }
 
 .event-points li {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   position: relative;
   padding-left: 20px;
   color: #e5e7eb;
+  
+  font-size: 20px;
 }
 
 .event-points li::before {
@@ -1085,18 +1388,22 @@ export default function ProdyogPage() {
   color: #ef4444;
 }
 
-/* Image */
+
+
 .event-image {
   position: relative;
-  width: 520px;
-  height: 360px;
-  border-radius: 26px;
+  width: 640px;
+  height: 550px;
+
+  border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
+
+  border: 2px solid rgba(239,68,68,0.45);
   box-shadow:
-    0 0 30px rgba(0,0,0,0.6),
-    0 0 45px rgba(239,68,68,0.35);
+    0 0 40px rgba(239,68,68,0.45),
+    0 0 90px rgba(239,68,68,0.25);
 }
+
 
 .event-image img {
   width: 100%;
@@ -1128,39 +1435,92 @@ export default function ProdyogPage() {
   100% { top: 120%; }
 }
 
-/* Mobile */
-@media (max-width: 900px) {
+
+
+
+/* ================= MOBILE FIX : PRODYOG EVENTS ================= */
+@media (max-width: 768px) {
+
+  /* Section padding */
+  .prodyog-events {
+    padding: 90px 4vw;
+  }
+
+  /* Event container spacing */
+  .events-container {
+    gap: 90px;
+  }
+
+  
   .event-card,
   .event-card.reverse {
     flex-direction: column;
-    gap: 40px;
+    width: 100%;
+    height: auto;
+
+    padding: 28px 20px;
+    gap: 26px;
+
+    margin: 0 auto;
+    border-radius: 26px;
   }
 
+  /* REMOVE DESKTOP HEIGHT LOGIC */
+  .event-card {
+    height: auto;
+  }
+
+  /* EVENT IMAGE — MOBILE FRIENDLY */
   .event-image {
     width: 100%;
-    height: 260px;
+    height: 220px;
+    border-radius: 20px;
   }
 
+  .event-image img {
+    object-fit: cover;
+  }
+
+  /* TEXT BLOCK */
+  .event-content {
+    width: 100%;
+    text-align: left;
+  }
+
+  .event-type {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+  }
+
+  .event-name {
+    font-size: 2.1rem;
+    line-height: 1.2;
+  }
+
+  .event-desc {
+    font-size: 15.5px;
+    line-height: 1.65;
+    max-width: 100%;
+  }
+
+  /* POINTS */
+  .event-points li {
+    font-size: 15px;
+  }
+
+  /* BIG INDEX — SOFT & SAFE */
   .event-index {
-    font-size: 90px;
-    top: -40px;
+    font-size: 70px;
+    top: -30px;
+    left: 12px;
+  }
+
+  /* LASER — SLOWER ON MOBILE */
+  .event-laser {
+    height: 6px;
+    animation-duration: 8s;
   }
 }
-
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-          .gallery-track img {
-            width: 320px;
-            height: 220px;
-          }
-
-          .event-box img {
-            height: 40vh;
-          }
-
-
-
 
 
 

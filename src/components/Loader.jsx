@@ -8,9 +8,7 @@ import { LineChart, Line, ResponsiveContainer } from "recharts";
 export default function Loader({ onFinish }) {
   const [count, setCount] = useState(1);
 
-
-  // PERCENTAGE COUNTER LOGIC
- 
+  /* ================= COUNTER ================= */
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((c) => {
@@ -26,9 +24,7 @@ export default function Loader({ onFinish }) {
     return () => clearInterval(interval);
   }, [onFinish]);
 
-  
-  // SYNC CURVE WITH PERCENTAGE
-  
+  /* ================= CHART SYNC ================= */
   const TOTAL_POINTS = 40;
 
   const fullData = Array.from({ length: TOTAL_POINTS }, (_, i) => ({
@@ -45,12 +41,12 @@ export default function Loader({ onFinish }) {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 1.1, y: -120 }}
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0, scale: 1.05, y: -80 }}
         transition={{ duration: 1.2, ease: "easeInOut" }}
         style={styles.wrapper}
       >
-        {/* Background grid */}
+        {/* Grid */}
         <div style={styles.grid} />
 
         {/* Header */}
@@ -59,7 +55,7 @@ export default function Loader({ onFinish }) {
           <span style={styles.headerAccent}>INITIALIZING 🚨</span>
         </div>
 
-        {/* Center content */}
+        {/* Center */}
         <div style={styles.center}>
           <motion.h1
             initial={{ y: 40, opacity: 0 }}
@@ -70,13 +66,11 @@ export default function Loader({ onFinish }) {
               ...(count === 100 ? styles.titleGlow : {}),
             }}
           >
-            THE HEIST OF SOCIETY<br />
-            OF PRODUCTION & INDUSTRIAL ENGINEERING 
-           
-           
+            THE HEIST OF<br />
+            PRODUCTION & INDUSTRIAL<br />
+            ENGINEERING
           </motion.h1>
 
-          {/* Percentage Counter */}
           <div
             style={{
               ...styles.counter,
@@ -86,12 +80,11 @@ export default function Loader({ onFinish }) {
             {count}%
           </div>
 
-          {/* FINAL STATUS */}
           <AnimatePresence>
             {count === 100 && (
               <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 style={styles.systemReady}
               >
@@ -101,7 +94,7 @@ export default function Loader({ onFinish }) {
           </AnimatePresence>
         </div>
 
-        {/* Data dashboard */}
+        {/* Dashboard */}
         <div style={styles.dashboard}>
           <div>
             <p style={styles.label}>Manufacturing Efficiency</p>
@@ -109,19 +102,21 @@ export default function Loader({ onFinish }) {
               {Math.min(100, Math.floor(count * 1.02))}%
             </strong>
           </div>
+
           <div>
-            <p style={styles.label}>Production Line Status</p>
+            <p style={styles.label}>Production Line</p>
             <strong style={styles.value}>CONTROLLED</strong>
           </div>
+
           <div>
             <p style={styles.label}>Money Flow</p>
             <strong style={styles.value}>OPTIMIZED 💰</strong>
           </div>
         </div>
 
-        {/* Synced Chart */}
+        {/* Chart */}
         <div style={styles.chart}>
-          <ResponsiveContainer width="100%" height={100}>
+          <ResponsiveContainer width="100%" height={90}>
             <LineChart data={syncedData}>
               <Line
                 type="monotone"
@@ -139,15 +134,13 @@ export default function Loader({ onFinish }) {
   );
 }
 
-
-// MONEY HEIST THEME STYLES
+/* ================= RESPONSIVE MONEY HEIST STYLES ================= */
 
 const styles = {
   wrapper: {
     position: "fixed",
     inset: 0,
-    background:
-      "radial-gradient(circle at top, #2b0f0f, #050505)",
+    background: "radial-gradient(circle at top, #2b0f0f, #050505)",
     color: "#F8FAFC",
     fontFamily: "'Inter', sans-serif",
     overflow: "hidden",
@@ -158,19 +151,20 @@ const styles = {
     position: "absolute",
     inset: 0,
     backgroundImage:
-      "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
-    backgroundSize: "80px 80px",
+      "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+    backgroundSize: "70px 70px",
   },
 
   header: {
     position: "absolute",
-    top: 32,
-    left: 40,
+    top: 20,
+    left: 20,
+    right: 20,
     display: "flex",
-    gap: 12,
+    justifyContent: "space-between",
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 12,
-    letterSpacing: "0.3em",
+    fontSize: "clamp(10px, 2.5vw, 12px)",
+    letterSpacing: "0.25em",
     color: "#9CA3AF",
   },
 
@@ -180,86 +174,83 @@ const styles = {
 
   center: {
     position: "absolute",
-    top: "45%",
+    top: "46%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center",
+    width: "90%",
   },
 
   title: {
     fontFamily: "'Space Grotesk', sans-serif",
-    fontSize: "72px",
+    fontSize: "clamp(28px, 8vw, 72px)",
     fontWeight: 800,
     lineHeight: 1.05,
     background:
       "linear-gradient(180deg, #ffffff 0%, #fecaca 45%, #dc2626 100%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    textShadow: "0 10px 40px rgba(220,38,38,0.4)",
+    textShadow: "0 8px 30px rgba(220,38,38,0.4)",
   },
 
   titleGlow: {
-    textShadow: `
-      0 0 40px rgba(220,38,38,0.7),
-      0 0 80px rgba(220,38,38,0.5)
-    `,
+    textShadow:
+      "0 0 40px rgba(220,38,38,0.7), 0 0 80px rgba(220,38,38,0.5)",
   },
 
   counter: {
-    marginTop: 26,
+    marginTop: 20,
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 28,
+    fontSize: "clamp(18px, 4vw, 28px)",
     letterSpacing: "0.3em",
     color: "#F87171",
   },
 
   counterGlow: {
-    color: "#F87171",
-    textShadow: `
-      0 0 10px rgba(248,113,113,0.9),
-      0 0 25px rgba(248,113,113,0.6)
-    `,
+    textShadow:
+      "0 0 10px rgba(248,113,113,0.9), 0 0 25px rgba(248,113,113,0.6)",
   },
 
   systemReady: {
-    marginTop: 18,
+    marginTop: 14,
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 14,
-    letterSpacing: "0.4em",
+    fontSize: "clamp(10px, 2.8vw, 14px)",
+    letterSpacing: "0.35em",
     color: "#FCA5A5",
-    textShadow: `
-      0 0 12px rgba(220,38,38,0.8),
-      0 0 30px rgba(220,38,38,0.6)
-    `,
+    textShadow:
+      "0 0 12px rgba(220,38,38,0.8), 0 0 30px rgba(220,38,38,0.6)",
   },
 
   dashboard: {
     position: "absolute",
-    bottom: 120,
-    left: 40,
-    right: 40,
-    display: "flex",
-    justifyContent: "space-between",
+    bottom: 110,
+    left: 20,
+    right: 20,
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+    gap: 16,
     fontFamily: "'JetBrains Mono', monospace",
+    textAlign: "center",
   },
 
   label: {
-    fontSize: 12,
+    fontSize: "clamp(10px, 2.5vw, 12px)",
     letterSpacing: "0.15em",
     color: "#9CA3AF",
     marginBottom: 6,
   },
 
   value: {
-    fontSize: 14,
+    fontSize: "clamp(12px, 3vw, 14px)",
     letterSpacing: "0.1em",
     color: "#F8FAFC",
   },
 
   chart: {
     position: "absolute",
-    bottom: 40,
-    left: 40,
-    right: 40,
+    bottom: 28,
+    left: 20,
+    right: 20,
   },
 };
+
