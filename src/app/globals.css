@@ -1757,42 +1757,69 @@ section {
 
 .prodyog-badge {
   display: inline-block;
-  padding: 0.5rem 1.2rem;
+  padding: 0.2rem 1.2rem;
   background: rgba(192, 132, 252, 0.15);
   border: 1px solid rgba(192, 132, 252, 0.3);
   border-radius: 50px;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--accent);
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .prodyog-title {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-size: clamp(1.6rem, 3.5vw, 3.2rem);
+  font-weight: 600;
   letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem; /* tightened */
   color: var(--foreground);
 }
 
 .prodyog-subtitle {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--muted);
   font-weight: 500;
+  margin-bottom: 1.2rem; /* controlled gap before image */
+  opacity: 0.75; /* improves hierarchy */
+}
+
+.prodyog-hero-image {
+  text-align: center;
+  margin: 1.6rem 0 2rem 0; /* reduced vertical spacing */
+}
+
+.prodyog-hero-image img {
+  width: 55vw;
+  max-width: 1100px;
+  max-height: 420px;
+  height: auto;
+  object-fit: cover; /* IMPORTANT */
+  display: block;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.prodyog-hero-buttons {
+  display: flex;
+  gap: 1.6rem; /* reduced */
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.6rem; /* reduced */
 }
 
 .prodyog-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2.4rem; /* slightly tighter */
   align-items: center;
 }
 
 .prodyog-info {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.4rem; /* was too loose */
 }
+
 
 .info-section h3 {
   font-size: 1.3rem;
