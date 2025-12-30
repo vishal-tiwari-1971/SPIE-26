@@ -24,9 +24,19 @@ export async function verifyGoogleToken(idToken) {
     sub
   } = payload;
 
-  // Optional: restrict to college email
-  if (!email.endsWith('@gmail.com')) {
-    throw new Error('Only college email allowed');
+  // Restrict to college email
+  if (!email.endsWith('@nitjsr.ac.in')) {
+    const error = new Error('Please use your official college email ID');
+    error.code = 'INVALID_EMAIL_DOMAIN';
+    throw error;
+  }
+
+  // Check if user has SPIE membership (PI members don't qualify)
+  if (email.includes('PI')) {
+    const error = new Error('You are not a SPIE member');
+    error.code = 'NOT_SPIE_MEMBER';
+    error.redirectUrl = process.env.SPIE_REGISTRATION_FORM_URL;
+    throw error;
   }
 
   return {

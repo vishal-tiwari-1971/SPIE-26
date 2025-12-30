@@ -66,7 +66,7 @@ export default function Loader({ onFinish }) {
               ...(count === 100 ? styles.titleGlow : {}),
             }}
           >
-            THE HEIST OF<br />
+            THE Society OF<br />
             PRODUCTION & INDUSTRIAL<br />
             ENGINEERING
           </motion.h1>

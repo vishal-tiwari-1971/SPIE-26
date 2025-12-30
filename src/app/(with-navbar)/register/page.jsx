@@ -28,6 +28,7 @@ export default function RegisterPage() {
           <div className="card">
             <h2>User</h2>
             <p className="muted">For attendees and participants.</p>
+             <p className="muted">Only use official college email</p>
             <div className="pill-row" style={{ marginTop: "1rem" }}>
               <GoogleLogin
   onSuccess={(credentialResponse) => {
@@ -44,9 +45,11 @@ export default function RegisterPage() {
       } else if (res.ok) {
         showPopup("success", "Success", "Successfully signed in! Redirecting...");
         setTimeout(() => {
-          window.location.href = "/home";
+          window.location.href = "/events";
         }, 1500);
       }
+    }).catch((error) => {
+      showPopup("error", "Google Auth Error", error.message);
     });
   }}
   onError={() => {

@@ -21,7 +21,9 @@ export default function Navbar() {
   <div className="nav-inner">
 
     {/* LEFT: BRAND */}
-    <Link href="/" className="nav-brand" onClick={closeMenu}>
+    <Link href="/" className="nav-brand" onClick={() => {
+      closeMenu();
+    }}>
       <span className="nav-logo">SPIE</span>
       <div className="nav-brand-text">
         <span className="nav-title">Prodyog 2026</span>
@@ -34,7 +36,9 @@ export default function Navbar() {
         <Link
           className={`nav-link ${pathname === "/" ? "active" : ""}`}
           href="/"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+          }}
         >
           The Plan
         </Link>
@@ -42,7 +46,9 @@ export default function Navbar() {
         <Link
           className={`nav-link ${pathname.startsWith("/prodyog") ? "active" : ""}`}
           href="/prodyog"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+          }}
         >
           OP Prodyog
         </Link>
@@ -50,7 +56,9 @@ export default function Navbar() {
         <Link
           className={`nav-link ${pathname.startsWith("/events") ? "active" : ""}`}
           href="/events"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+          }}
         >
           The Targets
         </Link>
@@ -58,7 +66,9 @@ export default function Navbar() {
         <Link
           className={`nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
           href="/team"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+          }}
         >
           The Crew
         </Link>
@@ -66,14 +76,18 @@ export default function Navbar() {
         <Link
           className={`nav-link ${pathname.startsWith("/gallery") ? "active" : ""}`}
           href="/gallery"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+          }}
         >
           Surveillance
         </Link>
          <Link
                 className={`nav-link sparkle-hover ${pathname.startsWith("/contact") ? "active" : ""}`}
                 href="/contact"
-                onClick={closeMenu}
+                onClick={() => {
+                  closeMenu();
+                }}
               >
                 Contact Us
               </Link>
@@ -82,10 +96,12 @@ export default function Navbar() {
 
     {/* RIGHT: ACTION BUTTONS */}
     <div className="nav-actions">
-      {/* <Link className="btn secondary small" href="/events" onClick={closeMenu}>
+      {/* <Link className="btn secondary small" href="/events" onClick={() => { closeMenu(); }}>
         View Targets
       </Link> */}
-      <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
+      <Link className="btn primary small btn-heist" href="/register" onClick={() => {
+        closeMenu();
+      }}>
         Join the Heist
       </Link>
     </div>
@@ -101,7 +117,9 @@ export default function Navbar() {
       <span></span>
     </button>
 
-    {isMenuOpen && <div className="nav-overlay" onClick={closeMenu} />}
+    {isMenuOpen && <div className="nav-overlay" onClick={() => {
+      closeMenu();
+    }} />}
   </div>
 </nav>
 
