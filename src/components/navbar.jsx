@@ -32,22 +32,22 @@ export default function Navbar() {
         {/* NAV MENU */}
         <div className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <Link href="/" className="nav-link" onClick={handleNavClick}>
-            Home
+           Home Base
           </Link>
           <Link href="/prodyog" className="nav-link" onClick={handleNavClick}>
-            Prodyog
+            Prodyog HQ
           </Link>
           <Link href="/events" className="nav-link" onClick={handleNavClick}>
-            Events
+            Missions
           </Link>
           <Link href="/team" className="nav-link" onClick={handleNavClick}>
-            Team
+            The Architects
           </Link>
           <Link href="/gallery" className="nav-link" onClick={handleNavClick}>
-            Gallery
+            Visuals
           </Link>
           <Link href="/contact" className="nav-link sparkle-hover" onClick={handleNavClick}>
-            Contact Us
+            Get in Touch
           </Link>
           
           {/* MOBILE: Join Button */}
