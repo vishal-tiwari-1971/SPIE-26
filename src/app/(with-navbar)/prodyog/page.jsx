@@ -1,9 +1,12 @@
 
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ProdyogPage() {
+  const [paused, setPaused] = useState(false);
+
   return (
     <main className="prodyog-page">
 
@@ -90,7 +93,13 @@ export default function ProdyogPage() {
     </p>
   </div>
 
-  <div className="gallery-snap-wrapper w-full flex justify-center">
+  <div
+    className={`gallery-snap-wrapper w-full flex justify-center ${paused ? "gallery-paused" : ""}`}
+    onMouseEnter={() => setPaused(true)}
+    onMouseLeave={() => setPaused(false)}
+    onTouchStart={() => setPaused(true)}
+    onTouchEnd={() => setPaused(false)}
+  >
     <div className="gallery-snap-track">
 
       {[
@@ -1082,6 +1091,13 @@ export default function ProdyogPage() {
   gap: 56px;
   padding: 0 12vw;
   width: max-content; 
+  animation: gallery-auto-slide 70s linear infinite;
+  will-change: transform;
+}
+
+.gallery-snap-wrapper:hover .gallery-snap-track,
+.gallery-snap-wrapper.gallery-paused .gallery-snap-track {
+  animation-play-state: paused;
 }
 
 /* ================= CARD ================= */
@@ -1162,6 +1178,15 @@ export default function ProdyogPage() {
   transform: rotate(-12deg);
   animation: laser-scan 4s infinite ease-in-out;
   z-index: 6;
+}
+
+@keyframes gallery-auto-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes laser-scan {
