@@ -10,7 +10,7 @@ export function createJWT(userId) {
   return jwt.sign(
     { userId },
     JWT_SECRET,
-    { expiresIn: '7d' }
+    { expiresIn: '14d' }
   );
 }
 

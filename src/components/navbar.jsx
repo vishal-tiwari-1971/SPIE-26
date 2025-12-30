@@ -1,109 +1,86 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // Close menu when pathname changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
-  const closeMenu = () => {
+  const handleNavClick = () => {
     setIsMenuOpen(false);
   };
 
   return (
     <nav className="nav-bar">
-  <div className="nav-inner">
 
-    {/* LEFT: BRAND */}
-    <Link href="/" className="nav-brand" onClick={closeMenu}>
-      <span className="nav-logo">SPIE</span>
-      <div className="nav-brand-text">
-        <span className="nav-title">Prodyog 2026</span>
+      <div className="nav-inner">
+        {/* BRAND */}
+        <Link href="/" className="nav-brand">
+          <span className="nav-logo">SPIE</span>
+          {/* <div className="nav-brand-text">
+            <span className="nav-title">Prodyog 2026</span>
+          </div> */}
+        </Link>
+
+        {/* NAV MENU */}
+        <div className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+          <Link href="/" className="nav-link" onClick={handleNavClick}>
+            Home
+          </Link>
+          <Link href="/prodyog" className="nav-link" onClick={handleNavClick}>
+            Prodyog
+          </Link>
+          <Link href="/events" className="nav-link" onClick={handleNavClick}>
+            Events
+          </Link>
+          <Link href="/team" className="nav-link" onClick={handleNavClick}>
+            Team
+          </Link>
+          <Link href="/gallery" className="nav-link" onClick={handleNavClick}>
+            Gallery
+          </Link>
+          <Link href="/contact" className="nav-link sparkle-hover" onClick={handleNavClick}>
+            Contact Us
+          </Link>
+          
+          {/* MOBILE: Join Button */}
+          <Link href="/register" className="btn primary small btn-heist nav-mobile-btn" onClick={handleNavClick}>
+            Join
+          </Link>
+        </div>
+
+        {/* DESKTOP: Join Button */}
+        <div className="nav-actions">
+          <Link href="/register" className="btn primary small btn-heist">
+            Join
+          </Link>
+        </div>
+
+        {/* HAMBURGER */}
+        <button
+          className={`hamburger ${isMenuOpen ? "active" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* OVERLAY */}
+        {isMenuOpen && (
+          <div className="nav-overlay" onClick={() => setIsMenuOpen(false)} />
+        )}
       </div>
-    </Link>
-
-    {/* CENTER: NAV LINKS */}
-    <div className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
-      <div className="nav-links">
-        <Link
-          className={`nav-link ${pathname === "/" ? "active" : ""}`}
-          href="/"
-          onClick={closeMenu}
-        >
-          Home
-        </Link>
-
-        <Link
-          className={`nav-link ${pathname.startsWith("/prodyog") ? "active" : ""}`}
-          href="/prodyog"
-          onClick={closeMenu}
-        >
-          Prodyog
-        </Link>
-
-        <Link
-          className={`nav-link ${pathname.startsWith("/events") ? "active" : ""}`}
-          href="/events"
-          onClick={closeMenu}
-        >
-          Events
-        </Link>
-
-        <Link
-          className={`nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
-          href="/team"
-          onClick={closeMenu}
-        >
-          Team
-        </Link>
-
-        <Link
-          className={`nav-link ${pathname.startsWith("/gallery") ? "active" : ""}`}
-          href="/gallery"
-          onClick={closeMenu}
-        >
-          Gallery
-        </Link>
-         <Link
-                className={`nav-link sparkle-hover ${pathname.startsWith("/contact") ? "active" : ""}`}
-                href="/contact"
-                onClick={closeMenu}
-              >
-                Contact Us
-              </Link>
-      </div>
-    </div>
-
-    {/* RIGHT: ACTION BUTTONS */}
-    <div className="nav-actions">
-      {/* <Link className="btn secondary small" href="/events" onClick={closeMenu}>
-        View Targets
-      </Link> */}
-      <Link className="btn primary small btn-heist" href="/register" onClick={closeMenu}>
-        Register
-      </Link>
-    </div>
-
-    {/* HAMBURGER */}
-    <button
-      className={`hamburger ${isMenuOpen ? "active" : ""}`}
-      onClick={toggleMenu}
-      aria-label="Toggle menu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    {isMenuOpen && <div className="nav-overlay" onClick={closeMenu} />}
-  </div>
-</nav>
+    </nav>
 
   );
 }
