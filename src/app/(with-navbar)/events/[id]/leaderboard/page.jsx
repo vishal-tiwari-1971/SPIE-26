@@ -39,57 +39,343 @@ export default function EventLeaderboardPage() {
     fetchData();
   }, [eventId]);
 
-  if (loading) return <p className="muted page-shell">Loading...</p>;
+  const getRankDisplay = (rank) => {
+    if (rank === 1) return '👑';
+    if (rank === 2) return '🥈';
+    if (rank === 3) return '🥉';
+    return `#${rank}`;
+  };
+
+  const getRankStyle = (rank) => {
+    if (rank === 1) {
+      return {
+        background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+        boxShadow: '0 0 20px rgba(255, 215, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3)',
+        border: '2px solid #FFD700',
+      };
+    }
+    if (rank === 2) {
+      return {
+        background: 'linear-gradient(135deg, #C0C0C0 0%, #808080 100%)',
+        boxShadow: '0 0 15px rgba(192, 192, 192, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2)',
+        border: '2px solid #C0C0C0',
+      };
+    }
+    if (rank === 3) {
+      return {
+        background: 'linear-gradient(135deg, #CD7F32 0%, #8B4513 100%)',
+        boxShadow: '0 0 15px rgba(205, 127, 50, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2)',
+        border: '2px solid #CD7F32',
+      };
+    }
+    return {
+      background: 'rgba(255, 183, 3, 0.05)',
+      border: '1px solid rgba(255, 183, 3, 0.2)',
+      boxShadow: 'none',
+    };
+  };
+
+  if (loading) return <p className="muted page-shell">DECRYPTING RANKINGS...</p>;
   if (!event) return <p className="muted page-shell">Event not found</p>;
 
   return (
     <main className="page-shell">
-      <section className="section-header" style={{ marginBottom: "1.5rem" }}>
+      {/* Classified Banner */}
+      <div className="confidential-banner">
+        ⚠ CLASSIFIED: MISSION RANKINGS ⚠
+      </div>
+      
+      <section className="section-header" style={{ marginBottom: "2rem" }}>
         <div>
-          <p className="chip">Leaderboard</p>
-          <h2 className="section-title">{event.title}</h2>
-          <p className="muted">Top performers for this event.</p>
+          <p className="chip" style={{ 
+            background: '#D90429', 
+            color: '#F5F3F4',
+            fontFamily: 'Bebas Neue, sans-serif',
+            letterSpacing: '2px'
+          }}>
+            TOP PERFORMERS
+          </p>
+          <h2 className="section-title" style={{ 
+            fontFamily: 'Bebas Neue, sans-serif',
+            color: '#FFB703',
+            fontSize: '3rem',
+            letterSpacing: '3px',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+          }}>
+            {event.title} - LEADERBOARD
+          </h2>
+          <p className="muted" style={{ 
+            fontFamily: 'Courier Prime, monospace',
+            fontSize: '1rem',
+            color: '#B1A7A6'
+          }}>
+            MISSION STATUS: ACTIVE // OPERATIVES RANKED BY PERFORMANCE
+          </p>
         </div>
       </section>
 
       {error && <p className="form-error">{error}</p>}
 
       {leaderboard.length === 0 ? (
-        <p className="muted">No leaderboard entries yet for this event.</p>
+        <div style={{
+          padding: '3rem',
+          textAlign: 'center',
+          background: 'rgba(217, 4, 41, 0.05)',
+          border: '1px dashed #D90429',
+          borderRadius: '12px',
+          fontFamily: 'Courier Prime, monospace'
+        }}>
+          <p className="muted" style={{ fontSize: '1.1rem' }}>
+            NO RANKINGS AVAILABLE // MISSION IN PROGRESS
+          </p>
+        </div>
       ) : (
-        <section className="section">
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--color-border)', backgroundColor: 'var(--color-bg-secondary)' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold' }}>Rank</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold' }}>Name</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold' }}>Registration Number</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 'bold' }}>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leaderboard.map((entry, index) => (
-                  <tr 
-                    key={entry.id} 
-                    style={{ 
-                      borderBottom: '1px solid var(--color-border)',
-                      backgroundColor: index % 2 === 0 ? 'transparent' : 'var(--color-bg-secondary)'
+        <section style={{ marginTop: '2rem' }}>
+          {/* Top 3 Podium */}
+          {leaderboard.length >= 3 && (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+              gap: '1rem',
+              marginBottom: '3rem',
+              flexWrap: 'wrap'
+            }}>
+              {/* 2nd Place */}
+              <div style={{
+                ...getRankStyle(2),
+                padding: '1.5rem',
+                borderRadius: '12px',
+                textAlign: 'center',
+                minWidth: '200px',
+                transform: 'translateY(20px)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(10px) scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(20px)';
+              }}>
+                <div style={{ 
+                  fontSize: '3rem',
+                  marginBottom: '0.5rem'
+                }}>{getRankDisplay(2)}</div>
+                <h3 style={{ 
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '1.5rem',
+                  color: '#0B090A',
+                  marginBottom: '0.5rem',
+                  letterSpacing: '1px',
+                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.35)'
+                }}>{leaderboard[1]?.name}</h3>
+                <p style={{ 
+                  fontFamily: 'Courier Prime, monospace',
+                  color: '#1E1E1E',
+                  fontSize: '0.9rem',
+                  marginBottom: '0.5rem'
+                }}>{leaderboard[1]?.registrationNumber || '—'}</p>
+                <div style={{
+                  background: 'rgba(0, 0, 0, 0.08)',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '8px',
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '1.8rem',
+                  color: '#0B090A',
+                  border: '1px solid rgba(0, 0, 0, 0.12)'
+                }}>
+                  {leaderboard[1]?.score} PTS
+                </div>
+              </div>
+
+              {/* 1st Place */}
+              <div style={{
+                ...getRankStyle(1),
+                padding: '2rem',
+                borderRadius: '12px',
+                textAlign: 'center',
+                minWidth: '220px',
+                transform: 'scale(1.1)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1.1)';
+              }}>
+                <div style={{ 
+                  fontSize: '4rem',
+                  marginBottom: '0.5rem',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }}>{getRankDisplay(1)}</div>
+                <h3 style={{ 
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '2rem',
+                  color: '#0B090A',
+                  marginBottom: '0.5rem',
+                  letterSpacing: '2px'
+                }}>{leaderboard[0]?.name}</h3>
+                <p style={{ 
+                  fontFamily: 'Courier Prime, monospace',
+                  color: '#2C1810',
+                  fontSize: '0.9rem',
+                  marginBottom: '0.5rem'
+                }}>{leaderboard[0]?.registrationNumber || '—'}</p>
+                <div style={{
+                  background: 'rgba(0, 0, 0, 0.2)',
+                  padding: '0.7rem 1.2rem',
+                  borderRadius: '8px',
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '2.2rem',
+                  color: '#0B090A'
+                }}>
+                  {leaderboard[0]?.score} PTS
+                </div>
+              </div>
+
+              {/* 3rd Place */}
+              <div style={{
+                ...getRankStyle(3),
+                padding: '1.5rem',
+                borderRadius: '12px',
+                textAlign: 'center',
+                minWidth: '200px',
+                transform: 'translateY(20px)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(10px) scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(20px)';
+              }}>
+                <div style={{ 
+                  fontSize: '3rem',
+                  marginBottom: '0.5rem'
+                }}>{getRankDisplay(3)}</div>
+                <h3 style={{ 
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '1.5rem',
+                  color: '#0B090A',
+                  marginBottom: '0.5rem',
+                  letterSpacing: '1px',
+                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.35)'
+                }}>{leaderboard[2]?.name}</h3>
+                <p style={{ 
+                  fontFamily: 'Courier Prime, monospace',
+                  color: '#1E1E1E',
+                  fontSize: '0.9rem',
+                  marginBottom: '0.5rem'
+                }}>{leaderboard[2]?.registrationNumber || '—'}</p>
+                <div style={{
+                  background: 'rgba(0, 0, 0, 0.08)',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '8px',
+                  fontFamily: 'Bebas Neue, sans-serif',
+                  fontSize: '1.8rem',
+                  color: '#0B090A',
+                  border: '1px solid rgba(0, 0, 0, 0.12)'
+                }}>
+                  {leaderboard[2]?.score} PTS
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Rest of the Rankings */}
+          {leaderboard.length > 3 && (
+            <div style={{ marginTop: '3rem' }}>
+              <h3 style={{
+                fontFamily: 'Bebas Neue, sans-serif',
+                color: '#FFB703',
+                fontSize: '1.8rem',
+                letterSpacing: '2px',
+                marginBottom: '1.5rem',
+                textAlign: 'center'
+              }}>
+                █ REMAINING OPERATIVES
+              </h3>
+              <div style={{ 
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
+              }}>
+                {leaderboard.slice(3).map((entry, index) => (
+                  <div 
+                    key={entry.id}
+                    style={{
+                      ...getRankStyle(entry.rank),
+                      padding: '1.2rem',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateX(5px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 183, 3, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateX(0)';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
-                    <td style={{ padding: '1rem', fontWeight: 'bold', color: entry.rank === 1 ? 'gold' : entry.rank === 2 ? 'silver' : entry.rank === 3 ? '#CD7F32' : 'inherit' }}>
-                      #{entry.rank}
-                    </td>
-                    <td style={{ padding: '1rem' }}>{entry.name}</td>
-                    <td style={{ padding: '1rem' }}>{entry.registrationNumber || '—'}</td>
-                    <td style={{ padding: '1rem' }}>{entry.score}</td>
-                  </tr>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      <div style={{
+                        fontFamily: 'Bebas Neue, sans-serif',
+                        fontSize: '1.8rem',
+                        color: '#FFB703',
+                        minWidth: '50px'
+                      }}>
+                        #{entry.rank}
+                      </div>
+                      <div>
+                        <h4 style={{
+                          fontFamily: 'Bebas Neue, sans-serif',
+                          fontSize: '1.3rem',
+                          color: '#F5F3F4',
+                          marginBottom: '0.2rem',
+                          letterSpacing: '1px'
+                        }}>
+                          {entry.name}
+                        </h4>
+                        <p style={{
+                          fontFamily: 'Courier Prime, monospace',
+                          fontSize: '0.85rem',
+                          color: '#B1A7A6'
+                        }}>
+                          ID: {entry.registrationNumber || 'CLASSIFIED'}
+                        </p>
+                      </div>
+                    </div>
+                    <div style={{
+                      background: 'rgba(255, 183, 3, 0.15)',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '6px',
+                      fontFamily: 'Bebas Neue, sans-serif',
+                      fontSize: '1.5rem',
+                      color: '#FFB703',
+                      border: '1px solid rgba(255, 183, 3, 0.3)'
+                    }}>
+                      {entry.score}
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </div>
+            </div>
+          )}
         </section>
       )}
+
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+      `}</style>
     </main>
   );
 }
