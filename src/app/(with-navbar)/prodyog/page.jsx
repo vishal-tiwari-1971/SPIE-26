@@ -80,7 +80,7 @@ export default function ProdyogPage() {
      
 {/* ================= GALLERY : PRODYOG ================= */}
 
-<section className="prodyog-gallery">
+<section className="prodyog-gallery flex flex-col items-center">
 
   <div className="gallery-header">
     <span className="gallery-tag">OPERATION ARCHIVE</span>
@@ -90,7 +90,7 @@ export default function ProdyogPage() {
     </p>
   </div>
 
-  <div className="gallery-snap-wrapper">
+  <div className="gallery-snap-wrapper w-full flex justify-center">
     <div className="gallery-snap-track">
 
       {[
@@ -188,13 +188,13 @@ export default function ProdyogPage() {
 
       
 {/* ================= PRODYOG EVENTS ================= */}
-<section className="prodyog-events">
+<section className="prodyog-events flex flex-col items-center">
 
-  <div className="events-header">
+  <div className="events-header text-center">
     <span className="events-tag">OPERATION BRIEFING</span>
     <h2 className="events-title">Prodyog Events</h2>
     <p className="events-subtitle">
-      Six high-intensity operations where creativity, logic, leadership, and execution are tested under pressure.
+      Seven high-intensity operations where creativity, logic, leadership, and execution are tested under pressure.
     </p>
   </div>
 

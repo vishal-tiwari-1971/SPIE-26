@@ -244,19 +244,9 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
   50% { opacity: 0.98; }
 }
 
-/* Security Timestamp */
+/* Security Timestamp: hide globally to keep surveillance images free of text overlays */
 .security-timestamp {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.75rem;
-  color: #D90429;
-  background: rgba(11, 9, 10, 0.8);
-  padding: 4px 8px;
-  border: 1px solid #D90429;
-  z-index: 3;
-  letter-spacing: 0.05em;
+  display: none !important;
 }
 
 /* Dali Mask Icon Style */
@@ -567,19 +557,9 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
   transition: filter 0.35s ease, transform 0.35s ease;
 }
 
-/* Hide timestamp smoothly */
+/* Timestamp markup is hidden by default; no visible camera labels on images */
 .security-timestamp {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-family: "Courier Prime", monospace;
-  font-size: 0.75rem;
-  color: #ff2e2e;
-  background: rgba(0, 0, 0, 0.65);
-  padding: 4px 8px;
-  border: 1px solid #d90429;
-  letter-spacing: 0.08em;
-  transition: opacity 0.25s ease;
+  display: none !important;
 }
 
 /* ===== ON HOVER: CLEAR FOOTAGE ===== */

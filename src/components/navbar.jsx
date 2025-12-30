@@ -19,6 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className="nav-bar">
+
       <div className="nav-inner">
         {/* BRAND */}
         <Link href="/" className="nav-brand">
@@ -68,6 +69,7 @@ export default function Navbar() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
+
           <span></span>
           <span></span>
           <span></span>
@@ -79,6 +81,7 @@ export default function Navbar() {
         )}
       </div>
     </nav>
+
   );
 }
 
