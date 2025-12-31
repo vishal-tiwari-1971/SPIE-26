@@ -81,6 +81,38 @@ export async function POST(req, { params }) {
       );
     }
 
+    // Fetch the leader's full details from the database
+    const leaderUser = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        name: true,
+        email: true,
+        registrationNumber: true
+      }
+    });
+
+    if (!leaderUser) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    // Extract registration number from email if not in database
+    const leaderRegNumber = leaderUser.registrationNumber || 
+      (leaderUser.email ? leaderUser.email.replace('@nitjsr.ac.in', '') : null);
+
+    // Prepare members array - replace first member (leader) with actual user data
+    const membersToCreate = [
+      // First member is the leader with actual data from database
+      {
+        name: leaderUser.name,
+        registrationNumber: leaderRegNumber
+      },
+      // Additional members from the form
+      ...additionalMembers.map(m => ({
+        name: m.name.trim(),
+        registrationNumber: m.registrationNumber || null
+      }))
+    ];
+
     // Create team with members
     const team = await prisma.team.create({
       data: {
@@ -88,10 +120,7 @@ export async function POST(req, { params }) {
         eventId: event.id,
         leaderId: user.id,
         members: {
-          create: validMembers.map(m => ({
-            name: m.name.trim(),
-            registrationNumber: m.registrationNumber || null
-          }))
+          create: membersToCreate
         }
       },
       include: {

@@ -19,15 +19,20 @@ export async function POST(req) {
     const googleUser = await verifyGoogleToken(token);
 
     // 3. Create or update user in DB
+    // Extract registration number from email by removing @nitjsr.ac.in
+    const registrationNumber = googleUser.email ? googleUser.email.replace('@nitjsr.ac.in', '') : null;
+    
     const user = await prisma.user.upsert({
       where: { email: googleUser.email },
       update: {
         name: googleUser.name,
+        registrationNumber: registrationNumber,
       },
       create: {
         email: googleUser.email,
         name: googleUser.name,
-        googleId: googleUser.googleId
+        googleId: googleUser.googleId,
+        registrationNumber: registrationNumber
       }
     });
 
@@ -39,6 +44,7 @@ export async function POST(req) {
       id: user.id,
       name: user.name,
       email: user.email,
+      registrationNumber: user.registrationNumber,
       avatar: user.avatar
     });
 

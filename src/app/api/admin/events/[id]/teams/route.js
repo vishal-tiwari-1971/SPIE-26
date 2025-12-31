@@ -33,7 +33,8 @@ export async function GET(req, { params }) {
           select: {
             id: true,
             name: true,
-            email: true
+            email: true,
+            registrationNumber: true
           }
         },
         members: true

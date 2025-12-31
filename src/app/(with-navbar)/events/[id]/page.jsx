@@ -104,7 +104,7 @@ export default function EventDetailPage() {
   // Fetch user's team if they registered for a group event
   useEffect(() => {
     async function fetchMyTeam() {
-      if (!userId || !event?.isGroupEvent || !registerSuccess) return;
+      if (!userId || !event?.isGroupEvent) return;
       
       setTeamLoading(true);
       setTeamError("");
@@ -152,7 +152,7 @@ export default function EventDetailPage() {
     }
 
     fetchMyTeam();
-  }, [userId, event, registerSuccess, id]);
+  }, [userId, event, id]);
 
   const addTeamMember = () => {
     setTeamMembers([...teamMembers, { name: "", registrationNumber: "" }]);
@@ -365,16 +365,20 @@ export default function EventDetailPage() {
                   <div style={{ background: "rgba(255, 183, 3, 0.05)", border: "1px solid rgba(255, 183, 3, 0.2)", borderRadius: "8px", padding: "1.5rem", marginBottom: "1.5rem" }}>
                     <h4 style={{ margin: "0 0 1rem 0", color: "#FFB703" }}>{myTeam.name}</h4>
                     <p style={{ margin: "0.5rem 0", color: "#B1A7A6" }}>
-                      <strong>Team Leader:</strong> {myTeam.leader?.name}
+                      <strong>Team Leader:</strong> {myTeam.leader?.name || 'Team Leader'}
                     </p>
                     <p style={{ margin: "0.5rem 0", color: "#B1A7A6" }}>
-                      <strong>Members:</strong> {myTeam.members?.length || 0} additional member{myTeam.members?.length !== 1 ? 's' : ''}
+                      <strong>Total Members:</strong> {myTeam.members?.length || 1} (1 leader + {(myTeam.members?.length || 1) - 1} additional)
                     </p>
-                    {myTeam.members && myTeam.members.length > 0 && (
+                    {(myTeam.members && myTeam.members.length > 0) || myTeam.leader && (
                       <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid rgba(255, 183, 3, 0.2)" }}>
-                        <p style={{ margin: "0 0 0.5rem 0", color: "#FFB703", fontSize: "0.9rem" }}>Team Members:</p>
+                        <p style={{ margin: "0 0 0.5rem 0", color: "#FFB703", fontSize: "0.9rem" }}>All Team Members:</p>
                         <ul style={{ margin: "0", paddingLeft: "1.5rem", color: "#B1A7A6" }}>
-                          {myTeam.members.map((m, idx) => (
+                          <li key="leader" style={{ marginBottom: "0.3rem" }}>
+                            👑 {myTeam.leader?.name || 'Team Leader'}
+                            {(myTeam.leader?.registrationNumber || (myTeam.leader?.email ? myTeam.leader.email.replace('@nitjsr.ac.in', '') : '')) && <span style={{ color: "#999", fontSize: "0.9rem" }}> ({myTeam.leader?.registrationNumber || myTeam.leader?.email.replace('@nitjsr.ac.in', '')})</span>}
+                          </li>
+                          {myTeam.members && myTeam.members.filter((m, idx) => idx > 0 || m.name !== (myTeam.leader?.name || 'Team Leader')).map((m, idx) => (
                             <li key={idx} style={{ marginBottom: "0.3rem" }}>
                               {m.name}
                               {m.registrationNumber && <span style={{ color: "#999", fontSize: "0.9rem" }}> ({m.registrationNumber})</span>}
@@ -517,6 +521,10 @@ export default function EventDetailPage() {
                     if (data.error === "Not an official email") {
                       showPopup("warning", "Invalid Email", "This is not an official mail ID. Please use your official email to register.");
                     } else if (res.ok) {
+                      // Store user data in localStorage
+                      localStorage.setItem('user', JSON.stringify(data));
+                      setUserId(data.id);
+                      
                       showPopup("success", "Success", "Successfully signed in! Registering for event...");
                       setTimeout(() => {
                         handleRegister();
@@ -633,13 +641,13 @@ export default function EventDetailPage() {
                     }}
                   />
                   {index === 0 && !member.name?.trim() && (
-                    <p style={{ margin: "0.3rem 0 0.5rem 0", color: "#D90429", fontSize: "0.8rem" }}>⚠️ Leader name not loaded. Please refresh the page.</p>
+                    <p style={{ margin: "0.3rem 0 0.5rem 0", color: "#FFB703", fontSize: "0.8rem" }}>ℹ️ No need to fill details of team leader - auto-filled</p>
                   )}
                   <input
                     type="text"
                     value={member.registrationNumber}
                     onChange={(e) => updateTeamMember(index, "registrationNumber", e.target.value)}
-                    placeholder="Registration Number (optional)"
+                    placeholder="Registration Number"
                     disabled={index === 0}
                     style={{
                       width: "100%",

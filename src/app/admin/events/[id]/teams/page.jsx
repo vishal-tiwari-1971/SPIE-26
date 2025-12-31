@@ -49,16 +49,26 @@ export default function EventTeamsPage() {
       return;
     }
 
-    // Prepare CSV data
-    let csv = 'Team Name,Leader Name,Leader Email,Total Members (incl. Leader),Member Names,Member Registration Numbers,Date Created\n';
+    // Prepare CSV data with detailed member info
+    let csv = 'Team Name,Leader Name,Leader Email,Leader Registration Number,Total Members,All Member Names,All Member Registration Numbers\n';
     
     teams.forEach(team => {
-      const memberNames = team.members.map(m => m.name).join(' | ');
-      const memberRegNums = team.members.map(m => m.registrationNumber || 'N/A').join(' | ');
-      const totalMembers = team.members.length + 1; // +1 for leader
-      const createdDate = new Date(team.createdAt).toLocaleDateString();
+      // Extract leader registration number from email if not in database
+      const leaderRegNum = team.leader.registrationNumber || 
+        (team.leader.email ? team.leader.email.replace('@nitjsr.ac.in', '') : 'N/A');
       
-      csv += `"${team.name}","${team.leader.name}","${team.leader.email}",${totalMembers},"${memberNames}","${memberRegNums}","${createdDate}"\n`;
+      // Filter out duplicate leader from members array (first member is usually the leader)
+      const uniqueMembers = team.members.filter((m, idx) => 
+        idx === 0 ? false : true // Skip first member as it's the leader
+      );
+      
+      // All members including leader (without duplicates)
+      const allMemberNames = [team.leader.name, ...uniqueMembers.map(m => m.name)].join(' | ');
+      const allMemberRegNums = [leaderRegNum, ...uniqueMembers.map(m => m.registrationNumber || 'N/A')].join(' | ');
+      
+      const totalMembers = 1 + uniqueMembers.length; // 1 leader + additional members
+      
+      csv += `"${team.name}","${team.leader.name}","${team.leader.email}","${leaderRegNum}",${totalMembers},"${allMemberNames}","${allMemberRegNums}"\n`;
     });
 
     // Show team info in alert
@@ -72,7 +82,7 @@ export default function EventTeamsPage() {
     const url = URL.createObjectURL(blob);
     
     link.setAttribute('href', url);
-    link.setAttribute('download', `teams-${event?.name || id}.csv`);
+    link.setAttribute('download', `${event?.title || 'event'}_registrations.csv`);
     link.style.visibility = 'hidden';
     
     document.body.appendChild(link);
@@ -207,6 +217,11 @@ export default function EventTeamsPage() {
                 </h3>
                 <p style={{ margin: '0.25rem 0', color: '#B1A7A6', fontSize: '0.9rem' }}>
                   👤 Leader: <strong>{team.leader.name}</strong> ({team.leader.email})
+                  {(team.leader.registrationNumber || team.leader.email) && (
+                    <span style={{ marginLeft: '0.5rem', color: '#FFB703' }}>
+                      Reg: {team.leader.registrationNumber || team.leader.email.replace('@nitjsr.ac.in', '')}
+                    </span>
+                  )}
                 </p>
                 <p style={{ margin: '0.25rem 0', color: '#B1A7A6', fontSize: '0.9rem' }}>
                   📅 Created: {new Date(team.createdAt).toLocaleDateString('en-IN')}

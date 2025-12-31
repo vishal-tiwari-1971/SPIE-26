@@ -171,9 +171,6 @@ export default function ProdyogPage() {
           <img src={`/gallery/${img}`} alt="Prodyog Gallery" />
 
           <div className="snap-overlay">
-            <span className="snap-label">
-              ACCESS GRANTED · LIVE FEED
-            </span>
           </div>
 
           <span className="laser"></span>
@@ -1091,8 +1088,13 @@ export default function ProdyogPage() {
   gap: 56px;
   padding: 0 12vw;
   width: max-content; 
-  animation: gallery-auto-slide 70s linear infinite;
+  animation: gallery-auto-slide 110s linear infinite;
   will-change: transform;
+}
+
+@keyframes gallery-auto-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .gallery-snap-wrapper:hover .gallery-snap-track,
