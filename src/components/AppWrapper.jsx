@@ -56,14 +56,16 @@ export default function AppWrapper({ children }) {
 
       {/* Homepage wrapper */}
       <motion.div
-        initial={{ filter: "blur(20px)", scale: 1.05 }}
+        initial={{ opacity: 0 }}
         animate={{
-          filter: loading ? "blur(20px)" : "blur(0px)",
-          scale: loading ? 1.05 : 1,
+          opacity: loading ? 0 : 1,
         }}
         transition={{
-          duration: 1.2,
+          duration: 0.8,
           ease: "easeOut",
+        }}
+        style={{ 
+          minHeight: "100vh",
         }}
       >
         {children}

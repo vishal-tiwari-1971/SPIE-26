@@ -14,11 +14,13 @@ export default function SiteShell({ children }) {
   }
 
   return (
-    <>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* <RecIndicator /> */}
       <Navbar />
-      {children}
+      <div style={{ flex: 1, marginTop: "100px" }}>
+        {children}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
