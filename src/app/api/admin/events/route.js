@@ -18,7 +18,10 @@ export async function POST(req) {
       date: new Date(data.date),
       venue: data.venue,
       status: data.status || 'UPCOMING',
-      image: data.image || null
+      image: data.image || null,
+      isGroupEvent: data.isGroupEvent || false,
+      minTeamSize: data.minTeamSize || null,
+      maxTeamSize: data.maxTeamSize || null
     }
   });
 

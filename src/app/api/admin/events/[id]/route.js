@@ -29,7 +29,10 @@ export async function PUT(req, { params }) {
       description: data.description,
       date: new Date(data.date),
       venue: data.venue,
-      status: data.status
+      status: data.status,
+      isGroupEvent: data.isGroupEvent,
+      minTeamSize: data.minTeamSize || null,
+      maxTeamSize: data.maxTeamSize || null
     }
   });
 

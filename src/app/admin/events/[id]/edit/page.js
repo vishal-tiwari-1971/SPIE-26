@@ -39,7 +39,10 @@ export default function EditEventPage() {
       description: e.target.description.value,
       date: e.target.date.value,
       venue: e.target.venue.value,
-      status: e.target.status.value
+      status: e.target.status.value,
+      isGroupEvent: e.target.isGroupEvent.checked,
+      minTeamSize: e.target.minTeamSize.value ? parseInt(e.target.minTeamSize.value) : null,
+      maxTeamSize: e.target.maxTeamSize.value ? parseInt(e.target.maxTeamSize.value) : null
     };
 
     const res = await fetch(`/api/admin/events/${id}`, {
@@ -132,6 +135,45 @@ export default function EditEventPage() {
                 <option value="ONGOING">Ongoing</option>
                 <option value="COMPLETED">Completed</option>
               </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                <input
+                  id="isGroupEvent"
+                  name="isGroupEvent"
+                  type="checkbox"
+                  defaultChecked={event.isGroupEvent}
+                  style={{ width: 'auto', cursor: 'pointer' }}
+                />
+                <span>Is Group Event (Team Registration)</span>
+              </label>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="minTeamSize">Minimum Team Size</label>
+              <input
+                id="minTeamSize"
+                name="minTeamSize"
+                type="number"
+                min="1"
+                className="form-input"
+                defaultValue={event.minTeamSize || ''}
+                placeholder="e.g., 2 (leave empty for no minimum)"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="maxTeamSize">Maximum Team Size</label>
+              <input
+                id="maxTeamSize"
+                name="maxTeamSize"
+                type="number"
+                min="1"
+                className="form-input"
+                defaultValue={event.maxTeamSize || ''}
+                placeholder="e.g., 5 (leave empty for no maximum)"
+              />
             </div>
 
             {error && <div className="form-error">{error}</div>}

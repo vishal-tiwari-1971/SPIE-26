@@ -49,7 +49,10 @@ export default function AddEventForm({ onAdd }) {
           date: form.date.value,
           venue: form.venue.value,
           status: form.status.value,
-          image: imageUrl
+          image: imageUrl,
+          isGroupEvent: form.isGroupEvent.checked,
+          minTeamSize: form.minTeamSize.value ? parseInt(form.minTeamSize.value) : null,
+          maxTeamSize: form.maxTeamSize.value ? parseInt(form.maxTeamSize.value) : null
         })
       });
 
@@ -155,6 +158,42 @@ export default function AddEventForm({ onAdd }) {
           <option value="ONGOING">Ongoing</option>
           <option value="COMPLETED">Completed</option>
         </select>
+      </div>
+
+      <div className="form-group">
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+          <input
+            id="isGroupEvent"
+            name="isGroupEvent"
+            type="checkbox"
+            style={{ width: 'auto', cursor: 'pointer' }}
+          />
+          <span>Is Group Event (Team Registration)</span>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="minTeamSize">Minimum Team Size</label>
+        <input
+          id="minTeamSize"
+          name="minTeamSize"
+          type="number"
+          min="1"
+          className="form-input"
+          placeholder="e.g., 2 (leave empty for no minimum)"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="maxTeamSize">Maximum Team Size</label>
+        <input
+          id="maxTeamSize"
+          name="maxTeamSize"
+          type="number"
+          min="1"
+          className="form-input"
+          placeholder="e.g., 5 (leave empty for no maximum)"
+        />
       </div>
 
       {error && <div className="form-error">{error}</div>}
