@@ -126,9 +126,8 @@ export default function EventsPage() {
                 {event.description}
               </p>
               <div className="muted" style={{ fontFamily: 'Courier Prime, monospace' }}>LOCATION: {event.venue}</div>
-              <div className="pill-row" style={{ marginTop: "0.8rem" }}>
-                <a className="btn secondary" href={`/events/${event.id}`}>Intel Report</a>
-                <a className="btn primary" href={`/events/${event.id}`}>Execute</a>
+              <div className="pill-row" style={{ marginTop: "0.8rem", justifyContent: "center" }}>
+                <a className="btn primary" href={`/events/${event.id}`}>Details</a>
               </div>
             </article>
           ))}

@@ -5,7 +5,7 @@ import React from 'react';
 export default function TeamPage() {
   const [teamMembers, setTeamMembers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [selectedFilter, setSelectedFilter] = React.useState('all');
+  const [selectedBatch, setSelectedBatch] = React.useState('2022');
   const [batches, setBatches] = React.useState([]);
   const [domains, setDomains] = React.useState([]);
 
@@ -90,6 +90,14 @@ export default function TeamPage() {
     'Oslo', 'Moscow', 'Stockholm', 'Lisbon', 'Marseille', 'Bogotá'
   ];
 
+  // Get headline based on batch
+  const getBatchHeadline = (batch) => {
+    if (batch === '2022') return 'Supercore';
+    if (batch === '2023') return 'Joint Core';
+    if (batch === '2024') return 'Coordinator';
+    return null;
+  };
+
   return (
     <main className="page-shell">
       {/* Header */}
@@ -134,11 +142,11 @@ export default function TeamPage() {
             █ OPERATIVES DATABASE
           </h3>
           
-          {/* Combined Filter Dropdown */}
-          {(batches.length > 0 || domains.length > 0) && (
+          {/* Batch Filter Dropdown */}
+          {batches.length > 0 && (
             <select 
-              value={selectedFilter} 
-              onChange={(e) => setSelectedFilter(e.target.value)}
+              value={selectedBatch} 
+              onChange={(e) => setSelectedBatch(e.target.value)}
               style={{
                 padding: '0.6rem 1rem',
                 borderRadius: '8px',
@@ -160,9 +168,8 @@ export default function TeamPage() {
                 e.target.style.borderColor = 'rgba(255, 183, 3, 0.3)';
               }}
             >
-              <option value="all" style={{ background: '#0B090A', color: '#F5F3F4' }}>ALL BATCH</option>
               {batches.map(batch => (
-                <option key={`batch-${batch}`} value={`batch-${batch}`} style={{ background: '#0B090A', color: '#F5F3F4' }}>
+                <option key={batch} value={batch} style={{ background: '#0B090A', color: '#F5F3F4' }}>
                   {batch}
                 </option>
               ))}
@@ -178,17 +185,29 @@ export default function TeamPage() {
             NO ACTIVE OPERATIVES // AWAITING RECRUITMENT
           </p>
         ) : (
-          <div className="card-grid">
-            {teamMembers
-              .filter(member => {
-                if (selectedFilter === 'all') return true;
-                if (selectedFilter.startsWith('batch-')) {
-                  return member.batch === selectedFilter.substring(6);
-                }
-                return true;
-              })
-              .sort((a, b) => (a.batch || '').localeCompare(b.batch || ''))
-              .map((member, index) => (
+          <>
+            {/* Batch Headline Section */}
+            {getBatchHeadline(selectedBatch) && (
+              <h3 style={{
+                fontFamily: 'Bebas Neue, sans-serif',
+                color: '#D90429',
+                fontSize: '2.5rem',
+                letterSpacing: '3px',
+                margin: '0 0 2rem 0',
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                borderBottom: '2px solid rgba(217, 4, 41, 0.3)',
+                paddingBottom: '1rem'
+              }}>
+                {getBatchHeadline(selectedBatch)}
+              </h3>
+            )}
+            <div className="card-grid">
+              {teamMembers
+                .filter(member => member.batch === selectedBatch)
+                .sort((a, b) => (a.batch || '').localeCompare(b.batch || ''))
+                .map((member, index) => {
+                  return (
               <article key={member.id} className="team-member-card">
                 {member.photograph && (
                   <div style={{ position: 'relative' }}>
@@ -224,23 +243,38 @@ export default function TeamPage() {
                   }}>
                     {member.name}
                   </h4>
-                  <p className="muted" style={{ 
-                    margin: "0 0 0.5rem 0",
-                    color: '#F5F3F4',
-                    fontSize: '0.9rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}>
-                    ROLE: {member.position}
-                  </p>
-                  {member.batch && (
-                    <div className="muted" style={{ 
-                      fontSize: '0.8rem', 
-                      marginBottom: '0.8rem',
-                      color: '#B1A7A6'
+                  {member.batch === '2024' && member.domain && (
+                    <p className="muted" style={{ 
+                      margin: "0 0 0.5rem 0",
+                      color: '#B1A7A6',
+                      fontSize: '0.85rem',
+                      textTransform: 'capitalize',
+                      letterSpacing: '0.5px'
                     }}>
-                      BATCH: {member.batch}
-                    </div>
+                      {member.domain}
+                    </p>
+                  )}
+                  {member.batch !== '2024' && (
+                    <>
+                      <p className="muted" style={{ 
+                        margin: "0 0 0.5rem 0",
+                        color: '#F5F3F4',
+                        fontSize: '0.9rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px'
+                      }}>
+                        ROLE: {member.position}
+                      </p>
+                      {member.batch && (
+                        <div className="muted" style={{ 
+                          fontSize: '0.8rem', 
+                          marginBottom: '0.8rem',
+                          color: '#B1A7A6'
+                        }}>
+                          BATCH: {member.batch}
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {/* Email and LinkedIn Icons */}
@@ -329,8 +363,10 @@ export default function TeamPage() {
                   </div>
                 </div>
               </article>
-            ))}
-          </div>
+                );
+              })}
+            </div>
+          </>
         )}
       </section>
 

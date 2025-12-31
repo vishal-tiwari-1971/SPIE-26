@@ -127,16 +127,17 @@ export default function GalleryGrid() {
             onClick={() => setActiveIndex(index)}
             className="
               crt-overlay group cursor-pointer
-              overflow-hidden rounded
+              overflow-hidden rounded-lg
               transition-all duration-300 ease-out
               hover:scale-[1.05]
               hover:-translate-y-1
-              hover:shadow-[0_0_25px_rgba(217,4,41,0.35)]
+              hover:shadow-[0_0_30px_rgba(255,183,3,0.4)]
             "
             style={{ 
-              border: '2px solid #D90429',
-              background: '#000',
+              border: '1px solid rgba(255, 183, 3, 0.3)',
+              background: 'linear-gradient(135deg, rgba(11, 9, 10, 0.8), rgba(20, 18, 19, 0.8))',
               position: 'relative',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 183, 3, 0.1)',
             }}
           >
             {/* Timestamp overlay removed to keep images clean (no labels) */}
@@ -154,7 +155,8 @@ export default function GalleryGrid() {
                   group-hover:filter-none
                 "
                 style={{
-                  filter: 'grayscale(30%) contrast(1.2) brightness(0.9)',
+                  filter: 'grayscale(25%) contrast(1.15) brightness(0.95)',
+                  aspectRatio: '16/11'
                 }}
                 priority={index < 3}
               />

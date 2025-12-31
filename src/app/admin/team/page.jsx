@@ -234,7 +234,7 @@ export default function AdminTeamPage() {
                   placeholder="Email Address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
+                  
                 />
               </div>
 
