@@ -1180,6 +1180,15 @@ export default function ProdyogPage() {
   z-index: 6;
 }
 
+@keyframes gallery-auto-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes laser-scan {
   0% {
     transform: translateX(-120%) rotate(-12deg);
