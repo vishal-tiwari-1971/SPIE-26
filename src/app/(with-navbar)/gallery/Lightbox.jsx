@@ -115,7 +115,7 @@ export default function Lightbox({ images, index, close, setIndex }) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className={`fixed inset-0 z-50 bg-black transition-opacity duration-200 ${
+      className={`fixed inset-0 z-[9999] bg-black transition-opacity duration-200 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
     >

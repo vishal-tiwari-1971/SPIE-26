@@ -178,16 +178,25 @@ export default function EventDetailPage() {
                 </button>
                 {openSection === rule.section && (
                   <div 
-                    className="muted" 
                     style={{ 
                       marginTop: "0.8rem", 
                       paddingTop: "0.8rem", 
                       borderTop: "1px solid rgba(255,255,255,0.1)",
                       whiteSpace: "pre-wrap",
-                      lineHeight: "1.6"
+                      lineHeight: "1.6",
+                      color: "#B1A7A6"
                     }}
                   >
-                    {rule.content}
+                    {rule.content.split(/(\*\*[^*]+\*\*)/g).map((part, idx) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return (
+                          <strong key={idx} style={{ color: "#FFB703", fontWeight: "700" }}>
+                            {part.slice(2, -2)}
+                          </strong>
+                        );
+                      }
+                      return <span key={idx}>{part}</span>;
+                    })}
                   </div>
                 )}
               </div>
