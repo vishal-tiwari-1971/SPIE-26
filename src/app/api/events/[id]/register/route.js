@@ -3,43 +3,63 @@ import { NextResponse } from 'next/server';
 import { getUserFromRequest } from '@/lib/auth';
 
 export async function POST(req, { params }) {
-  const user = getUserFromRequest(req);
-  const { id } = await params;
-
-  if (!id) {
-    return NextResponse.json(
-      { message: 'Event ID missing in URL' },
-      { status: 400 }
-    );
-  }
-
-  if (!user) {
-    return NextResponse.json(
-      { message: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
-
   try {
+    const user = getUserFromRequest(req);
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { id: eventId } = await params;
+
+    if (!eventId) {
+      return NextResponse.json(
+        { error: 'Event ID missing in URL' },
+        { status: 400 }
+      );
+    }
+    // Fetch event
+    const event = await prisma.event.findUnique({
+      where: { id: eventId },
+      select: { isGroupEvent: true }
+    });
+
+    if (!event) {
+      return NextResponse.json(
+        { error: 'Event not found' },
+        { status: 404 }
+      );
+    }
+
+    // Create registration for both individual and group events
+    // For group events, this marks the user as team leader
     const registration = await prisma.registration.create({
       data: {
         user: { connect: { id: user.id } },
-        event: { connect: { id } }
+        event: { connect: { id: eventId } }
       }
     });
 
-    return NextResponse.json(registration, { status: 201 });
+    return NextResponse.json({ 
+      message: event.isGroupEvent ? 'Registered as team leader' : 'Registered successfully',
+      registration,
+      isGroupEvent: event.isGroupEvent
+    }, { status: 201 });
   } catch (err) {
     // Duplicate registration
     if (err.code === 'P2002') {
       return NextResponse.json(
-        { message: 'Already registered' },
+        { error: 'Already registered' },
         { status: 409 }
       );
     }
 
+    console.error('Registration error:', err);
     return NextResponse.json(
-      { message: 'Registration failed' },
+      { error: 'Registration failed' },
       { status: 500 }
     );
   }

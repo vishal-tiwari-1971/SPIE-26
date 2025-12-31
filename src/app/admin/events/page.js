@@ -112,6 +112,14 @@ export default function AdminEvents() {
                         >
                           Rules
                         </Link>
+                        {event.isGroupEvent && (
+                          <Link
+                            className="btn secondary small"
+                            href={`/admin/events/${event.id}/teams`}
+                          >
+                            Teams
+                          </Link>
+                        )}
                         <Link
                           className="btn secondary small"
                           href={`/admin/events/${event.id}/leaderboard`}

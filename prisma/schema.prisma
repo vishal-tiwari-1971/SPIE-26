@@ -20,6 +20,10 @@ model Event {
   registrations Registration[]
    rules       EventRule[]
   leaderboard Leaderboard[]
+  isGroupEvent  Boolean  @default(false)
+  minTeamSize   Int?
+  maxTeamSize   Int?
+  teams         Team[]
 
 }
 
@@ -58,7 +62,7 @@ model User {
   role      Role     @default(USER)
   createdAt DateTime @default(now())
   registrations Registration[]
- 
+  teams     Team[]
 }
 
 model Registration {
@@ -88,17 +92,42 @@ model Leaderboard {
 
 }
 
-model TeamMember {
+model CoreTeamMember {
   id              String   @id @default(uuid())
   name            String
   position        String
   batch           String?
   domain          String?
-  email           String
+  email           String?
   linkedinProfile String?
   photograph      String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+model Team {
+  id        String   @id @default(uuid())
+  name      String
+  eventId   String
+  leaderId  String
+  createdAt DateTime @default(now())
+
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  leader  User  @relation(fields: [leaderId], references: [id])
+
+  members TeamMember[]
+
+  @@unique([eventId, leaderId]) // one team per leader per event
+}
+
+model TeamMember {
+  id                 String   @id @default(uuid())
+  teamId             String?
+  name               String
+  registrationNumber String?
+  userId             String?   // optional (external participant)
+  
+  team Team? @relation(fields: [teamId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
