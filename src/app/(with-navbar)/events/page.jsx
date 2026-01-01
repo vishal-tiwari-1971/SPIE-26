@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { formatDateDDMMYYYY } from '@/lib/date';
+import { formatDateDDMMYYYY, formatTime12h } from '@/lib/date';
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -93,7 +93,7 @@ export default function EventsPage() {
               )}
               
               <div className="dossier-header">
-                TARGET FILE #{event.id.toString().padStart(4, '0')}
+                TARGET FILE #{String(event.id || "").replace(/[^a-zA-Z0-9]/g, '').padStart(12, '0').toUpperCase()}
               </div>
               
               {event.image && (
@@ -107,18 +107,20 @@ export default function EventsPage() {
               )}
               <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem" }}>
                 <div className="chip" style={{ 
-                  backgroundColor: '#D90429',
-                  color: '#0B090A',
-                  fontWeight: 'bold'
+                  backgroundColor: 'rgba(255, 183, 3, 0.12)',
+                  color: '#FFB703',
+                  border: '1px solid rgba(255, 183, 3, 0.5)',
+                  fontWeight: '700'
                 }}>
                   {formatDateDDMMYYYY(event.date)}
                 </div>
                 <div className="chip" style={{ 
-                  backgroundColor: event.status === 'UPCOMING' ? '#666' : event.status === 'ONGOING' ? '#D90429' : '#FFB703',
-                  color: '#0B090A',
-                  fontWeight: 'bold'
+                  backgroundColor: 'rgba(217, 4, 41, 0.12)',
+                  color: '#F5F3F4',
+                  border: '1px solid rgba(217, 4, 41, 0.5)',
+                  fontWeight: '700'
                 }}>
-                  {event.status}
+                  {formatTime12h(event.date)}
                 </div>
               </div>
               <h3 style={{ margin: "0 0 0.4rem 0", fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.08em', color: '#FFB703' }}>{event.title}</h3>
