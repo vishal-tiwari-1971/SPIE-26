@@ -265,7 +265,7 @@ export default function TeamPage() {
                       }}>
                         ROLE: {member.position}
                       </p>
-                      {member.batch && (
+                      {member.batch && member.batch !== '2022' && member.batch !== '2023' && (
                         <div className="muted" style={{ 
                           fontSize: '0.8rem', 
                           marginBottom: '0.8rem',
