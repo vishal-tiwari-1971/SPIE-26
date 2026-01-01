@@ -49,8 +49,24 @@ import "./heist-theme.css";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 export const metadata = {
-  title: "OPERATION SPIE-2026",
-  description: "Classified heist operation dashboard",
+  title: "SPIE",
+  description: "Society of Production & Industrial Engineering",
+  icons: {
+    icon: [
+      { url: "/spie-logo.png", type: "image/png", sizes: "512x512" },
+      { url: "/spie-logo.png", type: "image/png", sizes: "256x256" },
+      { url: "/spie-logo.png", rel: "icon" },
+    ],
+    shortcut: [
+      { url: "/spie-logo.png", rel: "shortcut icon" },
+    ],
+    apple: [
+      { url: "/spie-logo.png", rel: "apple-touch-icon", sizes: "180x180" },
+    ],
+    other: [
+      { rel: "mask-icon", url: "/spie-logo.png" },
+    ],
+  },
   other: {
     // This is a workaround - Google Fonts import handled via CSS
   },
