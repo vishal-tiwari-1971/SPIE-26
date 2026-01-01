@@ -259,6 +259,23 @@ export default function EventDetailPage() {
     setRegisterError("");
     setRegisterSuccess(false);
     setRegistering(true);
+    
+    // Check if user is authenticated before making API call
+    try {
+      const authCheck = await fetch('/api/auth/me');
+      if (!authCheck.ok) {
+        setRegisterError("Please sign in to register.");
+        setShowGoogleLogin(true);
+        setRegistering(false);
+        return;
+      }
+    } catch (err) {
+      setRegisterError("Please sign in to register.");
+      setShowGoogleLogin(true);
+      setRegistering(false);
+      return;
+    }
+    
     try {
       const res = await fetch(`/api/events/${id}/register`, {
         method: "POST",

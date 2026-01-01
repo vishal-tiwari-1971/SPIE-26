@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET(req, { params }) {
   const { id } = await params;
 
-  const teamMember = await prisma.teamMember.findUnique({
+  const teamMember = await prisma.coreTeamMember.findUnique({
     where: { id }
   });
 
@@ -22,7 +22,7 @@ export async function PUT(req, { params }) {
   const { id } = await params;
   const data = await req.json();
 
-  const updated = await prisma.teamMember.update({
+  const updated = await prisma.coreTeamMember.update({
     where: { id },
     data: {
       name: data.name,
@@ -48,7 +48,7 @@ export async function DELETE(req, { params }) {
     );
   }
 
-  await prisma.teamMember.delete({
+  await prisma.coreTeamMember.delete({
     where: { id }
   });
 

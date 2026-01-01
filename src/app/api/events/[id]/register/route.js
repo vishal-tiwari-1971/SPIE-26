@@ -21,6 +21,19 @@ export async function POST(req, { params }) {
         { status: 400 }
       );
     }
+    
+    // Verify user exists in database
+    const dbUser = await prisma.user.findUnique({
+      where: { id: user.id }
+    });
+    
+    if (!dbUser) {
+      return NextResponse.json(
+        { error: 'User not found. Please sign in again.' },
+        { status: 401 }
+      );
+    }
+    
     // Fetch event
     const event = await prisma.event.findUnique({
       where: { id: eventId },
