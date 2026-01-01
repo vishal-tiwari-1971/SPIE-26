@@ -14,8 +14,9 @@ export default function Prodyog() {
       WebkitTextFillColor: "transparent",
       textShadow: "0 0 25px rgba(248,113,113,0.5)",
     }} >PRODYOG 2026</h2>
-          <p className="prodyog-subtitle">9th jan - 11th jan</p>
-          <p className="prodyog-subtitle">The Ultimate Technical Fest of SPIE</p>
+          <p className="prodyog-subtitle">9th Jan - 11th Jan</p>
+          {/* <p className="prodyog-subtitle">The Ultimate Technical Fest of SPIE</p> */}
+            <h3 className="prodyog-tagline">Annual Technical Fest of Production and Industrial Engineering Department</h3>
           <div className="prodyog-hero-image">
             <Image
               src="/gallery/prodyog-25/IMG_1194.JPG"
@@ -40,7 +41,7 @@ export default function Prodyog() {
         </div>
 
         <div className="prodyog-content">
-          <div className="prodyog-info">
+          {/* <div className="prodyog-info">
             <div className="info-section">
               <h3>Annual Technical Fest of SPIE</h3>
               
@@ -48,14 +49,14 @@ export default function Prodyog() {
 
             
 
-          </div>
+          </div> */}
 
-          <div className="prodyog-visual">
+          {/* <div className="prodyog-visual">
             <div className="gradient-orb orb-3"></div>
             <div className="prodyog-illustration">
               
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
