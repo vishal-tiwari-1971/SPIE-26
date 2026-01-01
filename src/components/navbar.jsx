@@ -23,7 +23,11 @@ export default function Navbar() {
       <div className="nav-inner">
         {/* BRAND */}
         <Link href="/" className="nav-brand">
-          <span className="nav-logo">SPIE</span>
+          <img
+            src="/spie-logo.png"
+            alt="SPIE logo"
+            className="nav-logo"
+          />
           {/* <div className="nav-brand-text">
             <span className="nav-title">Prodyog 2026</span>
           </div> */}

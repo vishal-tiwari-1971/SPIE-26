@@ -4,17 +4,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8 px-4 md:px-8">
+    <footer className="bg-gray-900 text-gray-300 py-5 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         {/* FOOTER TOP */}
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-5">
           {/* SPIE Branding - Far Left */}
           <div className="flex-shrink-0">
-            <div className="flex items-center gap-4">
-              <img src="/globe.svg" alt="SPIE Logo" className="h-12 w-auto rounded" />
+            <div className="flex items-center gap-3">
+              <img src="/spie-logo.png" alt="SPIE Logo" className="h-10 w-auto rounded" />
               <div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-wide">SPIE</h3>
-                <p className="text-sm text-gray-400 leading-tight">
+                {/* <h3 className="text-xl font-bold text-white uppercase tracking-wide">SPIE</h3> */}
+                <p className="text-xs text-gray-200 font-bold leading-tight">
                   Society of Production & Industrial Engineering<br />
                   NIT Jamshedpur
                 </p>
@@ -24,11 +24,11 @@ export default function Footer() {
 
           {/* Right Side Content - Shifted Right */}
           <div className="md:ml-12 flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* EXPLORE */}
               <div>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">Explore</h4>
-                <ul className="space-y-2">
+                <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Explore</h4>
+                <ul className="space-y-1">
                   <li>
                     <Link href="/about" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
                       About Us
@@ -49,8 +49,8 @@ export default function Footer() {
 
               {/* EVENTS */}
               <div>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">Events</h4>
-                <ul className="space-y-2">
+                <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Events</h4>
+                <ul className="space-y-1">
                   <li>
                     <Link href="/prodyog" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
                       PRODYOG 2026
@@ -66,8 +66,8 @@ export default function Footer() {
 
               {/* CONTACT */}
               <div>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">Contact</h4>
-                <ul className="space-y-2">
+                <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Contact</h4>
+                <ul className="space-y-1">
                   <li>
                     <Link href="/privacy" className="text-gray-400 hover:text-red-500 transition-colors duration-200">
                       Privacy Policy
@@ -90,14 +90,14 @@ export default function Footer() {
         </div>
 
         {/* FOOTER DIVIDER */}
-        <div className="border-t border-gray-700 my-6"></div>
+        <div className="border-t border-gray-700 my-4"></div>
 
         {/* FOOTER BOTTOM */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-gray-400">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+          <div className="text-xs text-gray-400">
             © {currentYear} <span className="text-red-500 font-semibold">SPIE™</span>, NIT Jamshedpur. All rights reserved.
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <a
               href="https://www.instagram.com/prodyog_nitjsr/"
               target="_blank"

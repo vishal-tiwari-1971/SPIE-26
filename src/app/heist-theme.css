@@ -379,10 +379,10 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
   box-shadow: 0 4px 20px rgba(217, 4, 41, 0.5) !important;
 }
 
-/* Nav logo update */
+/* Nav logo: keep image clean */
 .nav-logo {
-  background: linear-gradient(135deg, #D90429, #FFB703) !important;
-  box-shadow: 0 0 20px rgba(217, 4, 41, 0.6) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Card hover effects */

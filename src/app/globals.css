@@ -1790,6 +1790,20 @@ section {
   opacity: 0.75; /* improves hierarchy */
 }
 
+.prodyog-tagline {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
 .prodyog-hero-image {
   text-align: center;
   margin: 1.6rem 0 2rem 0; /* reduced vertical spacing */
@@ -2799,26 +2813,19 @@ section {
 
 /* === SQUARE SPIE LOGO (ROUNDED, CLEAN) === */
 .nav-logo {
-  width: 44px;
-  height: 44px;
+  width: 72px;
+  height: 72px;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.18em;
-  color: #0B090A;
-
-  background: linear-gradient(135deg, #D90429, #FFB703);
-  border-radius: 10px;
-
-  box-shadow:
-    0 0 12px rgba(217, 4, 41, 0.8),
-    0 0 28px rgba(255, 183, 3, 0.4);
-
-  text-transform: uppercase;
+/* Remove old overlay/pseudo effects for the image logo */
+.nav-logo::before {
+  content: none;
 }
 /* === Vision + Mission Combined Block === */
 .vision-mission-combined {
@@ -2939,5 +2946,64 @@ section {
 .author-role {
   font-size: 0.85rem;
   opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    margin-top: 3.5rem;
+  }
+
+  .testimonials-title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .testimonial-row,
+  .testimonial-row.reverse {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .testimonial-row.reverse .testimonial-content {
+    order: 2;
+  }
+
+  .testimonial-row.reverse .testimonial-image {
+    order: 1;
+  }
+
+  .testimonial-image img {
+    width: 85%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  .testimonial-author-pill {
+    width: fit-content;
+    padding: 0.55rem 1rem;
+    gap: 0.7rem;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .author-name {
+    font-size: 0.95rem;
+  }
+
+  .author-role {
+    font-size: 0.8rem;
+  }
+
+  .testimonial-content {
+    text-align: center;
+  }
 }
 
