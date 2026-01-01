@@ -114,7 +114,7 @@ export default function ProdyogPage() {
         "gallery9.jpg",
         "gallery10.jpg",
         "gallery11.jpg",
-        "gallery12.jpg",
+        // "gallery12.jpg",
         "gallery13.jpg",
         "gallery14.jpg",
 
@@ -130,7 +130,7 @@ export default function ProdyogPage() {
         "gallery9.jpg",
         "gallery10.jpg",
         "gallery11.jpg",
-        "gallery12.jpg",
+        // "gallery12.jpg",
         "gallery13.jpg",
         "gallery14.jpg",
 
@@ -146,7 +146,7 @@ export default function ProdyogPage() {
         "gallery9.jpg",
         "gallery10.jpg",
         "gallery11.jpg",
-        "gallery12.jpg",
+        // "gallery12.jpg",
         "gallery13.jpg",
         "gallery14.jpg",
 
@@ -162,7 +162,7 @@ export default function ProdyogPage() {
         "gallery9.jpg",
         "gallery10.jpg",
         "gallery11.jpg",
-        "gallery12.jpg",
+        // "gallery12.jpg",
         "gallery13.jpg",
         "gallery14.jpg",
 
@@ -180,9 +180,9 @@ export default function ProdyogPage() {
     </div>
   </div>
 
-  <div className="gallery-hint">
+  {/* <div className="gallery-hint">
     ← Swipe to browse mission footage →
-  </div>
+  </div> */}
 
 </section>
 
