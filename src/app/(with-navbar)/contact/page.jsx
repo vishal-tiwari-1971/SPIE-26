@@ -27,11 +27,47 @@ export default function ContactPage() {
             </p>
             <p className="contact-info">
               <span className="contact-icon">✉️</span>
-              Email: president@spie-nitjsr.ac.in
+              Email: 2022ugpi037@nitjsr.ac.in
             </p>
             <p className="contact-info">
               <span className="contact-icon">📞</span>
-              Phone: +91 XXXXX XXXXX
+              Phone: +91 8434818576
+            </p>
+          </div>
+        </div>
+
+         <div className="contact-box">
+          <div className="contact-person">
+            <h3 className="contact-name">General Secretary</h3>
+            <p className="contact-info">
+              <span className="contact-icon">👤</span>
+              Name: Mavuri Gowri Prasanna
+            </p>
+            <p className="contact-info">
+              <span className="contact-icon">✉️</span>
+              Email: mavurigp@gmail.com
+            </p>
+            <p className="contact-info">
+              <span className="contact-icon">📞</span>
+              Phone: +91  9182306921
+            </p>
+          </div>
+        </div>
+
+         <div className="contact-box">
+          <div className="contact-person">
+            <h3 className="contact-name">General Secretary</h3>
+            <p className="contact-info">
+              <span className="contact-icon">👤</span>
+              Name: Athrav Pratap Singh
+            </p>
+            <p className="contact-info">
+              <span className="contact-icon">✉️</span>
+              Email: 2022ugpi055@nitjsr.ac.in
+            </p>
+            <p className="contact-info">
+              <span className="contact-icon">📞</span>
+              Phone: +91 9532271235
             </p>
           </div>
         </div>
@@ -41,15 +77,15 @@ export default function ContactPage() {
             <h3 className="contact-name">Treasurer</h3>
             <p className="contact-info">
               <span className="contact-icon">👤</span>
-              Name: [Treasurer Name]
+              Name: Ankit Oraon
             </p>
             <p className="contact-info">
               <span className="contact-icon">✉️</span>
-              Email: treasurer@spie-nitjsr.ac.in
+              Email: ankitoraon75419608@gmail.com
             </p>
             <p className="contact-info">
               <span className="contact-icon">📞</span>
-              Phone: +91 XXXXX XXXXX
+              Phone: +91 6203281703
             </p>
           </div>
         </div>
