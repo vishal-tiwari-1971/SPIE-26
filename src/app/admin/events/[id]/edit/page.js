@@ -11,6 +11,8 @@ export default function EditEventPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageUploading, setImageUploading] = useState(false);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -34,6 +36,31 @@ export default function EditEventPage() {
     setError('');
     setSaving(true);
 
+    // Handle image upload first if there's a file
+    const fileInput = document.getElementById('imageFile');
+    const file = fileInput?.files?.[0];
+    let imageUrl = event.image || null;
+
+    if (file) {
+      try {
+        setImageUploading(true);
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('folder', 'spie/events');
+        const uploadRes = await fetch('/api/uploads/image', { method: 'POST', body: fd });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.error || 'Image upload failed');
+        imageUrl = uploadData.url;
+      } catch (err) {
+        setError(err.message || 'Image upload failed');
+        setSaving(false);
+        setImageUploading(false);
+        return;
+      } finally {
+        setImageUploading(false);
+      }
+    }
+
     const payload = {
       title: e.target.title.value,
       description: e.target.description.value,
@@ -42,7 +69,8 @@ export default function EditEventPage() {
       status: e.target.status.value,
       isGroupEvent: e.target.isGroupEvent.checked,
       minTeamSize: e.target.minTeamSize.value ? parseInt(e.target.minTeamSize.value) : null,
-      maxTeamSize: e.target.maxTeamSize.value ? parseInt(e.target.maxTeamSize.value) : null
+      maxTeamSize: e.target.maxTeamSize.value ? parseInt(e.target.maxTeamSize.value) : null,
+      image: imageUrl
     };
 
     const res = await fetch(`/api/admin/events/${id}`, {
@@ -120,6 +148,43 @@ export default function EditEventPage() {
                 defaultValue={event.venue}
                 placeholder="Venue"
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="imageFile">Event Image</label>
+              <input
+                id="imageFile"
+                name="imageFile"
+                type="file"
+                accept="image/*"
+                className="form-input"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = () => setImagePreview(reader.result);
+                    reader.readAsDataURL(file);
+                  } else {
+                    setImagePreview(null);
+                  }
+                }}
+              />
+              {(imagePreview || event.image) && (
+                <div style={{ marginTop: '0.75rem' }}>
+                  <img 
+                    src={imagePreview || event.image} 
+                    alt="Preview" 
+                    style={{ 
+                      width: '100%', 
+                      maxHeight: 250, 
+                      objectFit: 'cover', 
+                      borderRadius: 8,
+                      border: '1px solid var(--panel-strong)'
+                    }} 
+                  />
+                </div>
+              )}
+              {imageUploading && <p className="muted" style={{ marginTop: '0.5rem' }}>Uploading image...</p>}
             </div>
 
             <div className="form-group">

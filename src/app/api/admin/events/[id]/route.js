@@ -32,7 +32,8 @@ export async function PUT(req, { params }) {
       status: data.status,
       isGroupEvent: data.isGroupEvent,
       minTeamSize: data.minTeamSize || null,
-      maxTeamSize: data.maxTeamSize || null
+      maxTeamSize: data.maxTeamSize || null,
+      image: data.image || null
     }
   });
 
