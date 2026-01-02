@@ -210,17 +210,19 @@ export default function TeamPage() {
                   return (
               <article key={member.id} className="team-member-card">
                 {member.photograph && (
-                  <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'relative', paddingBottom: '100%', overflow: 'hidden', borderRadius: '0', marginBottom: '1rem', background: '#000' }}>
                     <img
                       src={member.photograph}
                       alt={member.name}
                       className="team-member-image"
                       style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
                         width: '100%',
-                        height: '250px',
+                        height: '100%',
                         objectFit: 'cover',
                         borderRadius: '0',
-                        marginBottom: '1rem',
                       }}
                     />
                     <div className="team-codename">
