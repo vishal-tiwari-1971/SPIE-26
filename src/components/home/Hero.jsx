@@ -1,3 +1,4 @@
+import Link  from "next/link";
 export default function Hero() {
   return (
     <section className="hero-section" style={{
@@ -9,7 +10,7 @@ export default function Hero() {
       overflow: 'hidden'
     }}>
       <div className="hero-content" style={{ zIndex: 2, maxWidth: '700px' }}>
-        <div className="hero-badge" style={{
+        {/* <div className="hero-badge" style={{
           background: '#D90429',
           color: '#F5F3F4',
           fontFamily: 'Bebas Neue, sans-serif',
@@ -20,8 +21,8 @@ export default function Hero() {
           border: '2px solid #FFB703',
           boxShadow: '0 0 20px rgba(217, 4, 41, 0.5)'
         }}>
-          ⚠ OPERATION: Prodyog'26
-        </div>
+          
+        </div> */}
         <h1 className="hero-title" style={{
           fontFamily: 'Bebas Neue, sans-serif',
           fontSize: '4rem',
@@ -49,12 +50,12 @@ export default function Hero() {
           lineHeight: '1.8',
           marginBottom: '2rem'
         }}>
-          CLASSIFIED // The official covert operations unit of PIE Department, NIT Jamshedpur. 
-          Mission: Forge technically elite, industry-ready operatives with unmatched leadership capabilities.
+          The Society of Production & Industrial Engineering (SPIE) is the academic and professional forum of the PIE Department at NIT Jamshedpur.
+          SPIE works to bridge the gap between academia and industry through technical events, workshops, competitions, guest lectures, and hands-on initiatives that prepare students for real-world engineering and management challenges.
         </p>
         
         <div className="hero-actions" style={{ display: 'flex', gap: '1rem', marginBottom: '3rem' }}>
-          <a href="#about" className="btn-primary" style={{
+          <Link href="/register" className="btn-primary" style={{
             background: '#D90429',
             color: '#F5F3F4',
             padding: '1rem 2rem',
@@ -69,12 +70,12 @@ export default function Hero() {
             transition: 'all 0.3s ease',
             boxShadow: '0 0 20px rgba(217, 4, 41, 0.5)'
           }}>
-            <span>DECODE MISSION</span>
+            <span>Join SPIE</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
-          </a>
-          <a href="/events" className="btn-secondary" style={{
+          </Link>
+          {/* <a href="/events" className="btn-secondary" style={{
             background: 'transparent',
             color: '#FFB703',
             padding: '1rem 2rem',
@@ -86,7 +87,7 @@ export default function Hero() {
             transition: 'all 0.3s ease'
           }}>
             VIEW TARGETS
-          </a>
+          </a> */}
         </div>
 
         {/* <div className="hero-stats" style={{

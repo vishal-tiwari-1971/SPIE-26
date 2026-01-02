@@ -1,29 +1,50 @@
 ﻿export default function Authority() {
   const missions = [
-    { icon: "🌈", title: "Bridge Academia & Industry", desc: "Connect theoretical knowledge with real-world applications" },
-    { icon: "🛠️", title: "Hands-On Learning", desc: "Practical experience through workshops and competitions" },
-    { icon: "👥", title: "Leadership Development", desc: "Build professional skills and entrepreneurial mindset" },
-    { icon: "💡", title: "Innovation Focus", desc: "Foster creative thinking and problem-solving approach" },
+    {
+      icon: "🏭",
+      title: "Industry-Oriented Exposure",
+      desc: "Expose students to real-world industrial challenges through case studies, simulations, and expert-led sessions."
+    },
+    {
+      icon: "📊",
+      title: "Analytical & Decision-Making Skills",
+      desc: "Strengthen problem-solving, data interpretation, and strategic thinking required in modern production systems."
+    },
+    {
+      icon: "🤝",
+      title: "Collaboration & Teamwork",
+      desc: "Promote interdisciplinary collaboration and teamwork through competitive and cooperative technical events."
+    },
+    {
+      icon: "🚀",
+      title: "Professional Readiness",
+      desc: "Prepare students for careers in manufacturing, consulting, analytics, and operations management."
+    },
   ];
 
   return (
     <section id="about" className="authority-section">
       <div className="authority-container">
+
+        {/* HEADER */}
         <div className="authority-header">
           <span className="section-badge">About SPIE</span>
-          <h2 className="section-title">Our Vision & Mission</h2>
+          <h2 className="section-title">Vision, Mission & Purpose</h2>
           <p className="section-description">
-            Empowering the next generation of engineers through innovation, collaboration, and excellence
+            The academic and professional body of the Production & Industrial Engineering Department,
+            NIT Jamshedpur, dedicated to technical excellence and industry alignment.
           </p>
         </div>
 
+        {/* VISION & MISSION */}
         <div className="vision-mission-combined">
           <div className="vm-header">
             <span className="vm-icon">🎯</span>
             <h3>Our Vision</h3>
             <p>
-              To develop technically sound, industry-ready engineers with exceptional
-              leadership, ethical values, and innovative mindset.
+              To establish SPIE as a platform that nurtures technically competent,
+              industry-ready engineers capable of leading innovation in production,
+              operations, and industrial systems.
             </p>
           </div>
 
@@ -33,15 +54,17 @@
             <span className="vm-icon">🚀</span>
             <h3>Our Mission</h3>
             <p>
-              Foster technical excellence, bridge the gap between academia and industry,
-              and cultivate future leaders through experiential learning and professional
-              development.
+              To bridge academia and industry by organizing technical events,
+              workshops, flagship competitions, and professional interactions that
+              enhance practical knowledge, leadership skills, and ethical
+              engineering practices.
             </p>
           </div>
         </div>
 
-
-        {/* <div className="missions-grid">
+        {/* OPTIONAL MISSIONS GRID (READY IF NEEDED) */}
+        {/*
+        <div className="missions-grid">
           {missions.map((mission, idx) => (
             <div key={idx} className="mission-item">
               <div className="mission-icon">{mission.icon}</div>
@@ -49,23 +72,25 @@
               <p>{mission.desc}</p>
             </div>
           ))}
-        </div> */}
+        </div>
+        */}
 
+        {/* TESTIMONIALS */}
         <div className="testimonials">
-          <h3 className="testimonials-title">What They Say</h3>
+          <h3 className="testimonials-title">Faculty Perspectives</h3>
 
+          {/* HOD */}
           <div className="testimonial-row">
-            {/* LEFT IMAGE */}
             <div className="testimonial-image">
               <img src="/gallery/leader-image/hod.png" alt="Head of Department" />
             </div>
 
-            {/* RIGHT CONTENT */}
             <div className="testimonial-content">
               <p className="testimonial-text">
-                “Welcome to the Society of Production and Industrial Engineering, NIT Jamshedpur,
-                where excellence meets innovation. With expert faculty and accomplished alumni,
-                we foster cutting-edge research and transformative education.”
+                “The Society of Production and Industrial Engineering plays a vital role
+                in complementing academic learning with industry exposure. Through Prodyog
+                and other initiatives, SPIE encourages students to apply engineering
+                principles to practical and societal challenges.”
               </p>
 
               <div className="testimonial-author-pill">
@@ -75,13 +100,14 @@
             </div>
           </div>
 
+          {/* VICE CHAIRMAN */}
           <div className="testimonial-row reverse">
-            {/* LEFT CONTENT */}
             <div className="testimonial-content">
               <p className="testimonial-text">
-                “Join the Society of Production and Industrial Engineering at NIT Jamshedpur to gain
-                skills, industry exposure, and a vibrant community. Engage in events, competitions,
-                and activities from B.Tech to Ph.D. levels.”
+                “SPIE provides students with opportunities beyond the classroom by
+                fostering participation in technical events, competitions, and
+                leadership activities. These experiences help students develop
+                confidence, clarity, and professional competence.”
               </p>
 
               <div className="testimonial-author-pill">
@@ -90,9 +116,11 @@
               </div>
             </div>
 
-            {/* RIGHT IMAGE */}
             <div className="testimonial-image">
-              <img src="/gallery/leader-image/vice-chairman.png" alt="Vice Chairman" />
+              <img
+                src="/gallery/leader-image/vice-chairman.png"
+                alt="Vice Chairman"
+              />
             </div>
           </div>
         </div>
