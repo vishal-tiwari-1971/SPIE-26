@@ -61,6 +61,24 @@ export async function POST(req) {
   } catch (error) {
     console.error('Google Auth Error:', error.message);
 
+    // Handle specific error codes
+    if (error.code === 'NOT_SPIE_MEMBER') {
+      return NextResponse.json(
+        { 
+          message: error.message || 'You are not a SPIE member',
+          redirectUrl: error.redirectUrl
+        },
+        { status: 403 }
+      );
+    }
+
+    if (error.code === 'INVALID_EMAIL_DOMAIN') {
+      return NextResponse.json(
+        { message: error.message || 'Please use your official college email ID' },
+        { status: 403 }
+      );
+    }
+
     return NextResponse.json(
       { message: error.message || 'Authentication failed' },
       { status: 401 }

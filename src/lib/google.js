@@ -32,10 +32,12 @@ export async function verifyGoogleToken(idToken) {
   }
 
   // Check if user has SPIE membership (PI members don't qualify)
-  if (email.includes('PI')) {
+  // Registration number format: YYYYPIXXXX (e.g., 2022pi3456)
+  const registrationNumber = email.replace('@nitjsr.ac.in', '').toLowerCase();
+  if (!registrationNumber.includes('pi')) {
     const error = new Error('You are not a SPIE member');
     error.code = 'NOT_SPIE_MEMBER';
-    error.redirectUrl = process.env.SPIE_REGISTRATION_FORM_URL;
+    error.redirectUrl = process.env.SPIE_REGISTRATION_FORM_URL || 'https://forms.google.com/your-form-url';
     throw error;
   }
 
