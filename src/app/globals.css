@@ -181,12 +181,32 @@ body {
   flex-shrink: 0;
 }
 
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 3px rgba(255, 183, 3, 0.6)) brightness(1.15);
+}
+
 @media (max-width: 768px) {
   .nav-logo {
     width: 50px;
     height: 50px;
     border: 1.5px solid rgba(217, 4, 41, 0.35);
     box-shadow: 0 0 16px rgba(255, 183, 3, 0.15), 0 6px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-logo-img {
+    width: 50px;
+    height: 50px;
   }
 }
 
