@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function AdminNavbar() {
   const pathname = usePathname();
@@ -33,9 +34,15 @@ export default function AdminNavbar() {
     <nav className="nav-bar">
       <div className="nav-inner">
         <div className="nav-brand">
-          <div className="nav-logo">SP</div>
+          <Link href="/admin/dashboard" className="nav-logo-link">
+           <img
+            src="/spie-logo.png"
+            alt="SPIE logo"
+            className="nav-logo"
+          />
+          </Link>
           <div className="nav-brand-text">
-            <span className="nav-title">SPIE Admin</span>
+            {/* <span className="nav-title">SPIE Admin</span> */}
             <span className="nav-sub">Management Portal</span>
           </div>
         </div>
