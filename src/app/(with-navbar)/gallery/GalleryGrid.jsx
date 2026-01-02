@@ -149,6 +149,10 @@ export default function GalleryGrid() {
                 alt={`Surveillance footage ${index + 1}`}
                 width={500}
                 height={350}
+                quality={75}
+                loading={index < 6 ? "eager" : "lazy"}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmQA/9k="
                 className="
                   crt-image w-full h-full object-cover
                   transition-all duration-300
@@ -158,7 +162,6 @@ export default function GalleryGrid() {
                   filter: 'grayscale(25%) contrast(1.15) brightness(0.95)',
                   aspectRatio: '16/11'
                 }}
-                priority={index < 3}
               />
 
           </div>

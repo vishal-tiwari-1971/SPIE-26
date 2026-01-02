@@ -169,8 +169,13 @@ export default function Lightbox({ images, index, close, setIndex }) {
             alt="preview"
             width={900}
             height={600}
+            quality={85}
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwABmQA/9k="
             onLoadingComplete={() => setLoading(false)}
             className="max-h-[80vh] w-auto rounded-lg shadow-xl"
+            loading="eager"
           />
         </div>
       </div>
@@ -178,14 +183,18 @@ export default function Lightbox({ images, index, close, setIndex }) {
       {/* 🧱 THUMBNAILS */}
       <div className="flex gap-2 p-3 overflow-x-auto border-t border-white/20 bg-black">
         {images.map((src, i) => (
-          <img
+          <Image
             key={i}
             src={src}
+            alt={`Thumbnail ${i + 1}`}
+            width={64}
+            height={64}
+            quality={60}
             onClick={() => {
               setLoading(true);
               setIndex(i);
             }}
-            className={`h-16 rounded cursor-pointer transition ${
+            className={`h-16 w-16 object-cover rounded cursor-pointer transition ${
               i === index ? "ring-2 ring-white" : "opacity-50 hover:opacity-100"
             }`}
           />
