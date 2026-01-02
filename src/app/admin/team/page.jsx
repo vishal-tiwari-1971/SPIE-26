@@ -347,8 +347,8 @@ export default function AdminTeamPage() {
             ) : teamMembers.length === 0 ? (
               <p className="muted" style={{ marginTop: '1rem' }}>No team members yet.</p>
             ) : (
-              <div style={{ marginTop: '1rem', overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <div className="users-table">
+                <table style={{ minWidth: '700px' }}>
                   <thead>
                     <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                       <th style={{ padding: '0.75rem', textAlign: 'left' }}>Name</th>
