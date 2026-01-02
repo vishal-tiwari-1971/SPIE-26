@@ -40,13 +40,21 @@ export default function RegisterPage() {
       })
     }).then(async (res) => {
       const data = await res.json();
-      if (data.error === "Not an official email") {
-        showPopup("warning", "Invalid Email", "This is not an official mail ID. Please use your official email to register.");
-      } else if (res.ok) {
+      if (res.ok) {
         showPopup("success", "Success", "Successfully signed in! Redirecting...");
         setTimeout(() => {
           window.location.href = "/events";
         }, 1500);
+      } else if (data.message && data.message.includes('not a SPIE member')) {
+        // Redirect to Google Form for PI students
+        showPopup("warning", "Not a SPIE Member", "You need to register for SPIE membership first. Redirecting to registration form...");
+        setTimeout(() => {
+          window.location.href = data.redirectUrl || "https://forms.google.com/your-form-url";
+        }, 2000);
+      } else if (data.message && data.message.includes('official college email')) {
+        showPopup("warning", "Invalid Email", "Please use your official @nitjsr.ac.in email to register.");
+      } else {
+        showPopup("error", "Registration Failed", data.message || "An error occurred during registration.");
       }
     }).catch((error) => {
       showPopup("error", "Google Auth Error", error.message);
