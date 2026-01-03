@@ -12,7 +12,7 @@ model Event {
   id          String   @id @default(uuid())
   title       String
   image       String?
-  description String
+  description String?
   date        DateTime
   venue       String
   status      Status   @default(UPCOMING)
