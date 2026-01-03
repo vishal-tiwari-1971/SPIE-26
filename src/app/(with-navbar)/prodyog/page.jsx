@@ -193,16 +193,23 @@ export default function ProdyogPage() {
 
 
       
-{/* ================= PRODYOG EVENTS ================= */}
-<section className="prodyog-events flex flex-col items-center">
-
-  <div className="events-header text-center">
+{/* ================= PRODYOG EVENTS ================= */} 
+<div className=" text-center">
     <span className="events-tag">OPERATION BRIEFING</span>
     <h2 className="events-title">Prodyog Events</h2>
     <p className="events-subtitle">
       Seven high-intensity operations where creativity, logic, leadership, and execution are tested under pressure.
     </p>
   </div>
+<section className="prodyog-events flex flex-col items-center">
+
+  {/* <div className="events-header text-center">
+    <span className="events-tag">OPERATION BRIEFING</span>
+    <h2 className="events-title">Prodyog Events</h2>
+    <p className="events-subtitle">
+      Seven high-intensity operations where creativity, logic, leadership, and execution are tested under pressure.
+    </p>
+  </div> */}
 
   <div className="events-container">
 
