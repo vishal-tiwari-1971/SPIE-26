@@ -204,44 +204,8 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
   overflow: hidden;
 }
 
-.crt-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 2;
-  animation: scanline 8s linear infinite;
-}
-
-.crt-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-@keyframes scanline {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
-}
-
 .crt-image {
   filter: contrast(1.1) brightness(0.95);
-  animation: flicker 0.15s infinite;
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.98; }
 }
 
 /* Security Timestamp: hide globally to keep surveillance images free of text overlays */
@@ -552,10 +516,7 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
   margin-bottom: 0.5rem;
 }
 /* ===== Surveillance Default State ===== */
-.crt-image {
-  filter: grayscale(30%) contrast(1.2) brightness(0.9) blur(2px);
-  transition: filter 0.35s ease, transform 0.35s ease;
-}
+/* Removed initial filter to prevent fade effect */
 
 /* Timestamp markup is hidden by default; no visible camera labels on images */
 .security-timestamp {
@@ -569,11 +530,6 @@ h1, h2, h3, h4, h5, h6, .section-title, .hero-title, .nav-title {
 
 /* Hide CAM text on hover */
 .group:hover .security-timestamp {
-  opacity: 0;
-}
-/* 🔓 Remove CRT scanlines ONLY on hovered image */
-.group:hover::before,
-.group:hover::after {
   opacity: 0;
 }
 

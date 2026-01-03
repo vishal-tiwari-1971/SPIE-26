@@ -19,7 +19,7 @@ export default function Prodyog() {
             <h3 className="prodyog-tagline">Annual Technical Fest of Production and Industrial Engineering Department</h3>
           <div className="prodyog-hero-image">
             <Image
-              src="/gallery/prodyog-25/IMG_1194.JPG"
+              src="/gallery/prodyog-25/IMG_2228.JPG"
               alt="Prodyog 2026 Hero"
               width={1000}
               height={600}

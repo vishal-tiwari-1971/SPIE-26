@@ -1820,6 +1820,14 @@ section {
   border-radius: 16px;
 }
 
+@media (max-width: 768px) {
+  .prodyog-hero-image img {
+    width: 90%;
+    max-width: none;
+    max-height: none;
+  }
+}
+
 .prodyog-hero-buttons {
   display: flex;
   gap: 1.6rem; /* reduced */
