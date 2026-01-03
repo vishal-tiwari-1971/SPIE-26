@@ -223,6 +223,8 @@ export default function TeamPage() {
                         height: '100%',
                         objectFit: 'cover',
                         borderRadius: '0',
+                        filter: 'saturate(1.2) contrast(1.05)',
+                        transition: 'filter 0.3s ease'
                       }}
                     />
                     <div className="team-codename">
