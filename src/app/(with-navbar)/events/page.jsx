@@ -36,7 +36,7 @@ export default function EventsPage() {
       
       <section className="section-header" style={{ marginBottom: "1.5rem", marginTop: "1.5rem" }}>
         <div>
-          <p className="chip" style={{ backgroundColor: '#D90429', color: '#0B090A', fontWeight: 'bold' }}>TARGET DOSSIERS</p>
+          {/* <p className="chip" style={{ backgroundColor: '#D90429', color: '#0B090A', fontWeight: 'bold' }}>TARGET DOSSIERS</p> */}
           <h2 className="section-title" style={{ fontFamily: 'Bebas Neue, sans-serif', color: '#FFB703' }}>Operation Prodyog26: Mission Objectives</h2>
           <p className="muted" style={{ maxWidth: "640px", fontFamily: 'Courier Prime, monospace' }}>
             Classified intelligence on upcoming infiltration operations, tactical workshops, and strategic briefings. Each target represents a high-value opportunity.

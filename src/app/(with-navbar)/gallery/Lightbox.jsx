@@ -12,6 +12,8 @@ import {
   ArrowUturnRightIcon,
   ShareIcon,
   ArrowPathIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
 export default function Lightbox({ images, index, close, setIndex }) {
@@ -24,25 +26,6 @@ export default function Lightbox({ images, index, close, setIndex }) {
   const imageRef = useRef(null);
 
   const touchStart = useRef({ x: 0, y: 0, dist: 0 });
-
-  /* 🔹 OPEN ANIMATION */
-  useEffect(() => {
-    setVisible(true);
-  }, []);
-
-  /* 🔹 KEYBOARD SHORTCUTS */
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "+") zoomIn();
-      if (e.key === "-") zoomOut();
-      if (e.key === "Escape") handleClose();
-    };
-
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  });
 
   const prev = () =>
     setIndex((index - 1 + images.length) % images.length);
@@ -111,6 +94,25 @@ export default function Lightbox({ images, index, close, setIndex }) {
     setTimeout(close, 200);
   };
 
+  /* 🔹 OPEN ANIMATION */
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
+  /* 🔹 KEYBOARD SHORTCUTS */
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "+") zoomIn();
+      if (e.key === "-") zoomOut();
+      if (e.key === "Escape") handleClose();
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  });
+
   return (
     <div
       ref={overlayRef}
@@ -150,6 +152,24 @@ export default function Lightbox({ images, index, close, setIndex }) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
+        {/* Previous Button */}
+        <button
+          onClick={prev}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity duration-200 z-10"
+          title="Previous Image"
+        >
+          <ChevronLeftIcon className="w-6 h-6" />
+        </button>
+
+        {/* Next Button */}
+        <button
+          onClick={next}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full opacity-0 hover:opacity-100 transition-opacity duration-200 z-10"
+          title="Next Image"
+        >
+          <ChevronRightIcon className="w-6 h-6" />
+        </button>
+
         {/* Skeleton */}
         {loading && (
           <div className="absolute w-72 h-48 bg-white/10 animate-pulse rounded-lg" />
