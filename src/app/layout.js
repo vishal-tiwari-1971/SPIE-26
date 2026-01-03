@@ -53,7 +53,6 @@ export const metadata = {
   description: "Society of Production & Industrial Engineering",
   icons: {
     icon: [
-      { url: "/spie-logo.png", type: "image/png", sizes: "512x512" },
       { url: "/spie-logo.png", type: "image/png", sizes: "256x256" },
       { url: "/spie-logo.png", rel: "icon" },
     ],
@@ -61,7 +60,7 @@ export const metadata = {
       { url: "/spie-logo.png", rel: "shortcut icon" },
     ],
     apple: [
-      { url: "/spie-logo.png", rel: "apple-touch-icon", sizes: "180x180" },
+      { url: "/spie-logo.png", rel: "apple-touch-icon" },
     ],
     other: [
       { rel: "mask-icon", url: "/spie-logo.png" },
