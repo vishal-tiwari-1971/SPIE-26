@@ -1,4 +1,5 @@
 import Link  from "next/link";
+import ProdyogUHD from "@/components/home/ProdyogUHD";
 export default function Hero() {
   return (
     <section className="hero-section" style={{
@@ -90,82 +91,10 @@ export default function Hero() {
           </a> */}
         </div>
 
-        {/* <div className="hero-stats" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
-          fontFamily: 'Courier Prime, monospace'
-        }}>
-          <div className="stat-item" style={{ textAlign: 'center' }}>
-            <div className="stat-number" style={{
-              fontSize: '2.5rem',
-              fontFamily: 'Bebas Neue, sans-serif',
-              color: '#D90429',
-              marginBottom: '0.3rem'
-            }}>1000+</div>
-            <div className="stat-label" style={{ color: '#B1A7A6', fontSize: '0.9rem' }}>
-              ACTIVE OPERATIVES
-            </div>
-          </div>
-          <div className="stat-item" style={{ textAlign: 'center' }}>
-            <div className="stat-number" style={{
-              fontSize: '2.5rem',
-              fontFamily: 'Bebas Neue, sans-serif',
-              color: '#FFB703',
-              marginBottom: '0.3rem'
-            }}>50+</div>
-            <div className="stat-label" style={{ color: '#B1A7A6', fontSize: '0.9rem' }}>
-              OPERATIONS ANNUALLY
-            </div>
-          </div>
-          <div className="stat-item" style={{ textAlign: 'center' }}>
-            <div className="stat-number" style={{
-              fontSize: '2.5rem',
-              fontFamily: 'Bebas Neue, sans-serif',
-              color: '#D90429',
-              marginBottom: '0.3rem'
-            }}>10+</div>
-            <div className="stat-label" style={{ color: '#B1A7A6', fontSize: '0.9rem' }}>
-              YEARS UNDERGROUND
-            </div>
-          </div>
-        </div> */}
 
        </div> 
 
-      <div className="hero-visual" style={{
-        position: 'absolute',
-        right: '5%',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        zIndex: 1,
-        opacity: 0.3
-      }}>
-        <div style={{ position: 'relative', width: '400px', height: '400px' }}>
-          {/* Dali Mask SVG */}
-          <div style={{
-            position: 'absolute',
-            top: '20%',
-            left: '10%',
-            fontSize: '150px',
-            filter: 'drop-shadow(0 0 40px rgba(217, 4, 41, 0.8))',
-            animation: 'float 6s ease-in-out infinite'
-          }}>
-            🎭
-          </div>
-          {/* Mechanical Gear */}
-          <div style={{
-            position: 'absolute',
-            bottom: '20%',
-            right: '10%',
-            fontSize: '120px',
-            filter: 'drop-shadow(0 0 30px rgba(255, 183, 3, 0.8))',
-            animation: 'rotate 20s linear infinite'
-          }}>
-            ⚙️
-          </div>
-        </div>
-      </div>
+      <ProdyogUHD />
     </section>
   );
 }
