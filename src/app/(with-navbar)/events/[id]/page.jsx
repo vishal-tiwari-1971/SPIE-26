@@ -323,6 +323,66 @@ export default function EventDetailPage() {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const linkifyText = (text, parentIdx) => {
+    const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+    const nodes = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(text)) !== null) {
+      // Add text before the URL
+      if (match.index > lastIndex) {
+        nodes.push(
+          <span key={`t-${parentIdx}-${lastIndex}`}>
+            {text.substring(lastIndex, match.index)}
+          </span>
+        );
+      }
+
+      // Add the URL as a link
+      const url = match[0];
+      const href = url.startsWith('http') ? url : `https://${url}`;
+      nodes.push(
+        <a
+          key={`l-${parentIdx}-${match.index}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#FFB703", textDecoration: "underline" }}
+        >
+          {url}
+        </a>
+      );
+
+      lastIndex = match.index + url.length;
+    }
+
+    // Add remaining text after the last URL
+    if (lastIndex < text.length) {
+      nodes.push(
+        <span key={`t-${parentIdx}-${lastIndex}`}>
+          {text.substring(lastIndex)}
+        </span>
+      );
+    }
+
+    return nodes.length > 0 ? nodes : <span key={`empty-${parentIdx}`}>{text}</span>;
+  };
+
+  const renderRuleContent = (content) => {
+    const parts = content.split(/(\*\*[^*]+\*\*)/g);
+    return parts.flatMap((part, idx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={`b-${idx}`} style={{ color: "#FFB703", fontWeight: "700" }}>
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      return linkifyText(part, idx);
+    });
+  };
+
   return (
     <main className="page-shell">
       <section className="section-header" style={{ marginBottom: "1.5rem" }}>
@@ -500,16 +560,7 @@ export default function EventDetailPage() {
                       color: "#B1A7A6"
                     }}
                   >
-                    {rule.content.split(/(\*\*[^*]+\*\*)/g).map((part, idx) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        return (
-                          <strong key={idx} style={{ color: "#FFB703", fontWeight: "700" }}>
-                            {part.slice(2, -2)}
-                          </strong>
-                        );
-                      }
-                      return <span key={idx}>{part}</span>;
-                    })}
+                    {renderRuleContent(rule.content)}
                   </div>
                 )}
               </div>
