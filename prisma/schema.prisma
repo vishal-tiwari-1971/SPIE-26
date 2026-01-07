@@ -48,6 +48,7 @@ enum RuleSection {
   DURATION 
   PRIZE
   PRECAUTION
+  CONNECT
 }
 
 

@@ -14,7 +14,8 @@ const SECTION_LABELS = {
   JUDGING_CRITERIA: 'Judging Criteria',
   DURATION: 'Duration',
   PRIZE: 'Prize',
-  PRECAUTION: 'Precaution'
+  PRECAUTION: 'Precaution',
+  CONNECT: 'Connect'
 };
 
 export default function EventDetailPage() {

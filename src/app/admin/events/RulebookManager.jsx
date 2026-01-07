@@ -10,7 +10,8 @@ const RULE_SECTIONS = [
   'JUDGING_CRITERIA',
   'DURATION',
   'PRIZE',
-  'PRECAUTION'
+  'PRECAUTION',
+  'CONNECT'
 ];
 
 const SECTION_LABELS = {
@@ -21,7 +22,8 @@ const SECTION_LABELS = {
   JUDGING_CRITERIA: 'Judging Criteria',
   DURATION: 'Duration',
   PRIZE: 'Prize',
-  PRECAUTION: 'Precaution'
+  PRECAUTION: 'Precaution',
+  CONNECT: 'Connect'
 };
 
 export default function RulebookManager({ eventId }) {
