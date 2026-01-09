@@ -99,8 +99,8 @@ export default function ContactPage() {
               <span className="link-icon">🌐</span>
               Website
             </h3>
-            <a href="https://www.spie-nitjsr.org" target="_blank" rel="noopener noreferrer" className="link-url">
-              https://www.spie-nitjsr.org
+            <a href="https://www.spienitjsr.in" target="_blank" rel="noopener noreferrer" className="link-url">
+              https://www.spienitjsr.in
             </a>
           </div>
         </div>
@@ -123,8 +123,8 @@ export default function ContactPage() {
               <span className="link-icon">📷</span>
               Instagram
             </h3>
-            <a href="https://instagram.com/spie_nitjsr" target="_blank" rel="noopener noreferrer" className="link-url">
-              @spie_nitjsr
+            <a href="https://www.instagram.com/prodyog_nitjsr/" target="_blank" rel="noopener noreferrer" className="link-url">
+              @prodyog_nitjsr
             </a>
           </div>
         </div>
