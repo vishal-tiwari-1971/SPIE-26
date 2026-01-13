@@ -182,6 +182,18 @@ export default function EventLeaderboardPage() {
                   }}>🥈</div>
                   {rank2Group.map((entry, idx) => (
                     <div key={entry.id} style={{ marginBottom: idx < rank2Group.length - 1 ? '1rem' : '0' }}>
+                      {entry.teamName && (
+                        <p style={{ 
+                          fontFamily: 'Bebas Neue, sans-serif',
+                          fontSize: 'clamp(0.85rem, 3vw, 1rem)',
+                          color: '#0B090A',
+                          marginBottom: '0.2rem',
+                          letterSpacing: '1px',
+                          opacity: 0.8
+                        }}>
+                          {entry.teamName}
+                        </p>
+                      )}
                       <h3 style={{ 
                         fontFamily: 'Bebas Neue, sans-serif',
                         fontSize: 'clamp(1.1rem, 4vw, 1.5rem)',
@@ -189,27 +201,44 @@ export default function EventLeaderboardPage() {
                         marginBottom: '0.3rem',
                         letterSpacing: '1px',
                         textShadow: '0 1px 2px rgba(255, 255, 255, 0.35)'
-                      }}>{entry.name}</h3>
+                      }}>{entry.name || entry.teamName || 'N/A'}</h3>
                       <p style={{ 
                         fontFamily: 'Courier Prime, monospace',
                         color: '#1E1E1E',
                         fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)',
                         marginBottom: idx < rank2Group.length - 1 ? '0.3rem' : '0'
                       }}>{entry.registrationNumber || '—'}</p>
+                      {entry.teamMembers && entry.teamMembers.length > 0 && (
+                        <div style={{ 
+                          marginTop: '0.5rem',
+                          paddingTop: '0.5rem',
+                          borderTop: '1px solid rgba(0,0,0,0.1)',
+                          fontSize: 'clamp(0.7rem, 2vw, 0.8rem)',
+                          color: '#2C1810'
+                        }}>
+                          {entry.teamMembers.map((member, mIdx) => (
+                            <div key={mIdx} style={{ marginBottom: '0.2rem' }}>
+                              • {member.name} {member.registrationNumber && `(${member.registrationNumber})`}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
-                  <div style={{
-                    background: 'rgba(0, 0, 0, 0.08)',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '8px',
-                    fontFamily: 'Bebas Neue, sans-serif',
-                    fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
-                    color: '#0B090A',
-                    border: '1px solid rgba(0, 0, 0, 0.12)',
-                    marginTop: '0.5rem'
-                  }}>
-                    {rank2Group[0]?.score} PTS
-                  </div>
+                  {rank2Group[0]?.score !== null && rank2Group[0]?.score !== undefined && (
+                    <div style={{
+                      background: 'rgba(0, 0, 0, 0.08)',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '8px',
+                      fontFamily: 'Bebas Neue, sans-serif',
+                      fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
+                      color: '#0B090A',
+                      border: '1px solid rgba(0, 0, 0, 0.12)',
+                      marginTop: '0.5rem'
+                    }}>
+                      {rank2Group[0]?.score} PTS
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -247,6 +276,18 @@ export default function EventLeaderboardPage() {
                   }}>👑</div>
                   {rank1Group.map((entry, idx) => (
                     <div key={entry.id} style={{ marginBottom: idx < rank1Group.length - 1 ? '1rem' : '0' }}>
+                      {entry.teamName && (
+                        <p style={{ 
+                          fontFamily: 'Bebas Neue, sans-serif',
+                          fontSize: 'clamp(0.9rem, 3.5vw, 1.1rem)',
+                          color: '#0B090A',
+                          marginBottom: '0.2rem',
+                          letterSpacing: '1.5px',
+                          opacity: 0.8
+                        }}>
+                          {entry.teamName}
+                        </p>
+                      )}
                       <h3 style={{ 
                         fontFamily: 'Bebas Neue, sans-serif',
                         fontSize: 'clamp(1.3rem, 5vw, 2rem)',
@@ -260,19 +301,36 @@ export default function EventLeaderboardPage() {
                         fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)',
                         marginBottom: idx < rank1Group.length - 1 ? '0.3rem' : '0'
                       }}>{entry.registrationNumber || '—'}</p>
+                      {entry.teamMembers && entry.teamMembers.length > 0 && (
+                        <div style={{ 
+                          marginTop: '0.5rem',
+                          paddingTop: '0.5rem',
+                          borderTop: '1px solid rgba(0,0,0,0.15)',
+                          fontSize: 'clamp(0.75rem, 2.5vw, 0.85rem)',
+                          color: '#2C1810'
+                        }}>
+                          {entry.teamMembers.map((member, mIdx) => (
+                            <div key={mIdx} style={{ marginBottom: '0.2rem' }}>
+                              • {member.name} {member.registrationNumber && `(${member.registrationNumber})`}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
-                  <div style={{
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    padding: '0.7rem 1.2rem',
-                    borderRadius: '8px',
-                    fontFamily: 'Bebas Neue, sans-serif',
-                    fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
-                    color: '#0B090A',
-                    marginTop: '0.5rem'
-                  }}>
-                    {rank1Group[0]?.score} PTS
-                  </div>
+                  {rank1Group[0]?.score !== null && rank1Group[0]?.score !== undefined && (
+                    <div style={{
+                      background: 'rgba(0, 0, 0, 0.2)',
+                      padding: '0.7rem 1.2rem',
+                      borderRadius: '8px',
+                      fontFamily: 'Bebas Neue, sans-serif',
+                      fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
+                      color: '#0B090A',
+                      marginTop: '0.5rem'
+                    }}>
+                      {rank1Group[0]?.score} PTS
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -309,6 +367,18 @@ export default function EventLeaderboardPage() {
                   }}>🥉</div>
                   {rank3Group.map((entry, idx) => (
                     <div key={entry.id} style={{ marginBottom: idx < rank3Group.length - 1 ? '1rem' : '0' }}>
+                      {entry.teamName && (
+                        <p style={{ 
+                          fontFamily: 'Bebas Neue, sans-serif',
+                          fontSize: 'clamp(0.85rem, 3vw, 1rem)',
+                          color: '#0B090A',
+                          marginBottom: '0.2rem',
+                          letterSpacing: '1px',
+                          opacity: 0.8
+                        }}>
+                          {entry.teamName}
+                        </p>
+                      )}
                       <h3 style={{ 
                         fontFamily: 'Bebas Neue, sans-serif',
                         fontSize: 'clamp(1.1rem, 4vw, 1.5rem)',
@@ -316,27 +386,44 @@ export default function EventLeaderboardPage() {
                         marginBottom: '0.3rem',
                         letterSpacing: '1px',
                         textShadow: '0 1px 2px rgba(255, 255, 255, 0.35)'
-                      }}>{entry.name}</h3>
+                      }}>{entry.name || entry.teamName || 'N/A'}</h3>
                       <p style={{ 
                         fontFamily: 'Courier Prime, monospace',
                         color: '#1E1E1E',
                         fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)',
                         marginBottom: idx < rank3Group.length - 1 ? '0.3rem' : '0'
                       }}>{entry.registrationNumber || '—'}</p>
+                      {entry.teamMembers && entry.teamMembers.length > 0 && (
+                        <div style={{ 
+                          marginTop: '0.5rem',
+                          paddingTop: '0.5rem',
+                          borderTop: '1px solid rgba(0,0,0,0.1)',
+                          fontSize: 'clamp(0.7rem, 2vw, 0.8rem)',
+                          color: '#2C1810'
+                        }}>
+                          {entry.teamMembers.map((member, mIdx) => (
+                            <div key={mIdx} style={{ marginBottom: '0.2rem' }}>
+                              • {member.name} {member.registrationNumber && `(${member.registrationNumber})`}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
-                  <div style={{
-                    background: 'rgba(0, 0, 0, 0.08)',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '8px',
-                    fontFamily: 'Bebas Neue, sans-serif',
-                    fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
-                    color: '#0B090A',
-                    border: '1px solid rgba(0, 0, 0, 0.12)',
-                    marginTop: '0.5rem'
-                  }}>
-                    {rank3Group[0]?.score} PTS
-                  </div>
+                  {rank3Group[0]?.score !== null && rank3Group[0]?.score !== undefined && (
+                    <div style={{
+                      background: 'rgba(0, 0, 0, 0.08)',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '8px',
+                      fontFamily: 'Bebas Neue, sans-serif',
+                      fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
+                      color: '#0B090A',
+                      border: '1px solid rgba(0, 0, 0, 0.12)',
+                      marginTop: '0.5rem'
+                    }}>
+                      {rank3Group[0]?.score} PTS
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -395,6 +482,17 @@ export default function EventLeaderboardPage() {
                         #{entry.rank}
                       </div>
                       <div>
+                        {entry.teamName && (
+                          <p style={{
+                            fontFamily: 'Bebas Neue, sans-serif',
+                            fontSize: '0.75rem',
+                            color: '#B1A7A6',
+                            marginBottom: '0.2rem',
+                            opacity: 0.8
+                          }}>
+                            {entry.teamName}
+                          </p>
+                        )}
                         <h4 style={{
                           fontFamily: 'Bebas Neue, sans-serif',
                           fontSize: '1.3rem',
@@ -402,7 +500,7 @@ export default function EventLeaderboardPage() {
                           marginBottom: '0.2rem',
                           letterSpacing: '1px'
                         }}>
-                          {entry.name}
+                          {entry.name || entry.teamName || 'N/A'}
                         </h4>
                         <p style={{
                           fontFamily: 'Courier Prime, monospace',
@@ -411,19 +509,36 @@ export default function EventLeaderboardPage() {
                         }}>
                           ID: {entry.registrationNumber || 'CLASSIFIED'}
                         </p>
+                        {entry.teamMembers && entry.teamMembers.length > 0 && (
+                          <div style={{ 
+                            marginTop: '0.4rem',
+                            paddingTop: '0.4rem',
+                            borderTop: '1px solid rgba(255,255,255,0.2)',
+                            fontSize: '0.8rem',
+                            color: '#B1A7A6'
+                          }}>
+                            {entry.teamMembers.map((member, mIdx) => (
+                              <div key={mIdx} style={{ marginBottom: '0.1rem' }}>
+                                • {member.name} {member.registrationNumber && `(${member.registrationNumber})`}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div style={{
-                      background: 'rgba(255, 183, 3, 0.15)',
-                      padding: '0.5rem 1rem',
-                      borderRadius: '6px',
-                      fontFamily: 'Bebas Neue, sans-serif',
-                      fontSize: '1.5rem',
-                      color: '#FFB703',
-                      border: '1px solid rgba(255, 183, 3, 0.3)'
-                    }}>
-                      {entry.score}
-                    </div>
+                    {entry.score !== null && entry.score !== undefined && (
+                      <div style={{
+                        background: 'rgba(255, 183, 3, 0.15)',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '6px',
+                        fontFamily: 'Bebas Neue, sans-serif',
+                        fontSize: '1.5rem',
+                        color: '#FFB703',
+                        border: '1px solid rgba(255, 183, 3, 0.3)'
+                      }}>
+                        {entry.score}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

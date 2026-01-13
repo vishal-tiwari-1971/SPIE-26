@@ -13,7 +13,8 @@ export default function LeaderboardManagementPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({ rank: '', name: '', registrationNumber: '', score: '' });
+  const [formData, setFormData] = useState({ rank: '', name: '', registrationNumber: '', score: '', teamName: '', teamMembers: [] });
+  const [memberInput, setMemberInput] = useState({ name: '', registrationNumber: '' });
 
   useEffect(() => {
     async function fetchData() {
@@ -55,8 +56,10 @@ export default function LeaderboardManagementPage() {
         body: JSON.stringify({
           rank: parseInt(formData.rank),
           name: formData.name,
-          registrationNumber: formData.registrationNumber,
-          score: parseInt(formData.score)
+          registrationNumber: formData.registrationNumber || null,
+          score: formData.score ? parseInt(formData.score) : null,
+          teamName: formData.teamName || null,
+          teamMembers: formData.teamMembers.length > 0 ? formData.teamMembers : null
         })
       });
 
@@ -67,7 +70,8 @@ export default function LeaderboardManagementPage() {
 
       const newEntry = await res.json();
       setLeaderboard([...leaderboard, newEntry].sort((a, b) => a.rank - b.rank));
-      setFormData({ rank: '', name: '', registrationNumber: '', score: '' });
+      setFormData({ rank: '', name: '', registrationNumber: '', score: '', teamName: '', teamMembers: [] });
+      setMemberInput({ name: '', registrationNumber: '' });
     } catch (err) {
       setError(err.message || 'Failed to add entry');
     }
@@ -85,8 +89,10 @@ export default function LeaderboardManagementPage() {
         body: JSON.stringify({
           rank: parseInt(formData.rank),
           name: formData.name,
-          registrationNumber: formData.registrationNumber,
-          score: parseInt(formData.score)
+          registrationNumber: formData.registrationNumber || null,
+          score: formData.score ? parseInt(formData.score) : null,
+          teamName: formData.teamName || null,
+          teamMembers: formData.teamMembers.length > 0 ? formData.teamMembers : null
         })
       });
 
@@ -97,7 +103,8 @@ export default function LeaderboardManagementPage() {
       const updated = await res.json();
       setLeaderboard(leaderboard.map(e => e.id === entryId ? updated : e).sort((a, b) => a.rank - b.rank));
       setEditingId(null);
-      setFormData({ rank: '', name: '', registrationNumber: '', score: '' });
+      setFormData({ rank: '', name: '', registrationNumber: '', score: '', teamName: '', teamMembers: [] });
+      setMemberInput({ name: '', registrationNumber: '' });
     } catch (err) {
       setError(err.message || 'Failed to update entry');
     }
@@ -129,13 +136,34 @@ export default function LeaderboardManagementPage() {
       rank: entry.rank.toString(),
       name: entry.name,
       registrationNumber: entry.registrationNumber || '',
-      score: entry.score.toString()
+      score: entry.score?.toString() || '',
+      teamName: entry.teamName || '',
+      teamMembers: entry.teamMembers || []
     });
   }
 
   function cancelEdit() {
     setEditingId(null);
-    setFormData({ rank: '', name: '', registrationNumber: '', score: '' });
+    setFormData({ rank: '', name: '', registrationNumber: '', score: '', teamName: '', teamMembers: [] });
+    setMemberInput({ name: '', registrationNumber: '' });
+  }
+
+  function handleAddMember(e) {
+    e.preventDefault();
+    if (memberInput.name.trim()) {
+      setFormData({
+        ...formData,
+        teamMembers: [...formData.teamMembers, { ...memberInput }]
+      });
+      setMemberInput({ name: '', registrationNumber: '' });
+    }
+  }
+
+  function handleRemoveMember(index) {
+    setFormData({
+      ...formData,
+      teamMembers: formData.teamMembers.filter((_, i) => i !== index)
+    });
   }
 
   if (loading) return <p className="muted page-shell">Loading...</p>;
@@ -179,14 +207,14 @@ export default function LeaderboardManagementPage() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Name {event?.isGroupEvent ? '(optional)' : '(required)'}</label>
               <input
                 id="name"
                 className="form-input"
                 placeholder="Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
+                required={!event?.isGroupEvent}
               />
             </div>
 
@@ -202,7 +230,7 @@ export default function LeaderboardManagementPage() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="score">Score</label>
+              <label htmlFor="score">Score (optional)</label>
               <input
                 id="score"
                 type="number"
@@ -210,9 +238,86 @@ export default function LeaderboardManagementPage() {
                 placeholder="Score"
                 value={formData.score}
                 onChange={(e) => setFormData({ ...formData, score: e.target.value })}
-                required
               />
             </div>
+
+            {event?.isGroupEvent && (
+              <>
+                <div className="form-group">
+                  <label htmlFor="teamName">Team Name (optional)</label>
+                  <input
+                    id="teamName"
+                    className="form-input"
+                    placeholder="Team Name"
+                    value={formData.teamName}
+                    onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Team Members</label>
+                  <div style={{ border: '1px solid #333', padding: '1rem', borderRadius: '8px', marginBottom: '0.5rem' }}>
+                    {formData.teamMembers.length === 0 ? (
+                      <p className="muted" style={{ margin: 0, fontSize: '0.9rem' }}>No team members added yet</p>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {formData.teamMembers.map((member, index) => (
+                          <div key={index} style={{ 
+                            display: 'flex', 
+                            justifyContent: 'space-between', 
+                            alignItems: 'center',
+                            padding: '0.5rem',
+                            background: 'rgba(255, 183, 3, 0.05)',
+                            borderRadius: '4px'
+                          }}>
+                            <div>
+                              <strong>{member.name}</strong>
+                              {member.registrationNumber && (
+                                <span className="muted" style={{ marginLeft: '0.5rem' }}>
+                                  ({member.registrationNumber})
+                                </span>
+                              )}
+                            </div>
+                            <button
+                              type="button"
+                              className="btn secondary small"
+                              onClick={() => handleRemoveMember(index)}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <input
+                      className="form-input"
+                      placeholder="Member Name"
+                      value={memberInput.name}
+                      onChange={(e) => setMemberInput({ ...memberInput, name: e.target.value })}
+                      style={{ flex: '1', minWidth: '150px' }}
+                    />
+                    <input
+                      className="form-input"
+                      placeholder="Registration No."
+                      value={memberInput.registrationNumber}
+                      onChange={(e) => setMemberInput({ ...memberInput, registrationNumber: e.target.value })}
+                      style={{ flex: '1', minWidth: '150px' }}
+                    />
+                    <button
+                      type="button"
+                      className="btn secondary"
+                      onClick={handleAddMember}
+                      disabled={!memberInput.name.trim()}
+                    >
+                      Add Member
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
 
             {error && <div className="form-error">{error}</div>}
 
@@ -273,10 +378,34 @@ export default function LeaderboardManagementPage() {
                       </div>
                     </div>
                     <h3 style={{ margin: '0.4rem 0' }}>{entry.name}</h3>
+                    {entry.teamName && (
+                      <p className="muted" style={{ margin: '0 0 0.3rem 0', fontStyle: 'italic' }}>
+                        Team: {entry.teamName}
+                      </p>
+                    )}
                     <p className="muted" style={{ margin: '0 0 0.6rem 0' }}>
                       {entry.registrationNumber || 'No registration number'}
                     </p>
-                    <div className="muted">Score: {entry.score}</div>
+                    {entry.score !== null && entry.score !== undefined && (
+                      <div className="muted">Score: {entry.score}</div>
+                    )}
+                    {entry.teamMembers && entry.teamMembers.length > 0 && (
+                      <div style={{ marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid #333' }}>
+                        <p style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.4rem' }}>Team Members:</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                          {entry.teamMembers.map((member, idx) => (
+                            <div key={idx} style={{ fontSize: '0.85rem', paddingLeft: '0.5rem' }}>
+                              • {member.name}
+                              {member.registrationNumber && (
+                                <span className="muted" style={{ marginLeft: '0.3rem' }}>
+                                  ({member.registrationNumber})
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </article>
                 ))}
             </div>
