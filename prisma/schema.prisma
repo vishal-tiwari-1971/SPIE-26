@@ -83,15 +83,26 @@ model Leaderboard {
   id        String   @id @default(uuid())
   eventId   String
   rank      Int
-  name      String
+  name      String?
   registrationNumber String?
-  score     Int
+  score     Int?
+  teamName  String? // for group events
+  teamMembers TeamMemberInfo[] // for group events
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
 
+}
+
+model TeamMemberInfo {
+  id                 String   @id @default(uuid())
+  leaderboardId      String
+  name               String
+  registrationNumber String?
+  
+  leaderboard Leaderboard @relation(fields: [leaderboardId], references: [id], onDelete: Cascade)
 }
 
 model CoreTeamMember {
