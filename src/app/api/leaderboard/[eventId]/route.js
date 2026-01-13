@@ -6,6 +6,9 @@ export async function GET(req, { params }) {
 
   const leaderboard = await prisma.leaderboard.findMany({
     where: { eventId },
+    include: {
+      teamMembers: true
+    },
     orderBy: { rank: 'asc' }
   });
 
@@ -20,9 +23,16 @@ export async function POST(req, { params }) {
     data: {
       eventId,
       rank: data.rank,
-      name: data.name,
+      name: data.name || null,
       registrationNumber: data.registrationNumber,
-      score: data.score
+      score: data.score,
+      teamName: data.teamName,
+      teamMembers: data.teamMembers ? {
+        create: data.teamMembers
+      } : undefined
+    },
+    include: {
+      teamMembers: true
     }
   });
 
