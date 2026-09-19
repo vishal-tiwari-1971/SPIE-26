@@ -109,7 +109,7 @@ export default function EventLeaderboardPage() {
             fontSize: '1rem',
             color: '#B1A7A6'
           }}>
-            MISSION STATUS: ACTIVE // OPERATIVES RANKED BY PERFORMANCE
+            MISSION STATUS:AQUIRED // OPERATIVES RANKED BY PERFORMANCE
           </p>
         </div>
       </section>
